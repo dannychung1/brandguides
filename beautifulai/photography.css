@@ -1,0 +1,331 @@
+/* ============================================================
+   Beautiful.ai — Brand Guidelines
+   PHOTOGRAPHY — real photo backing + directional-light language
+   ============================================================ */
+
+/* ── Art-direction production blocks ──────────────────────────── */
+.pp-lead{margin:0 0 14px;font-size:var(--text-body-l,1.125rem);line-height:var(--text-body-lh,1.5);color:var(--neutral-dark);max-width:70ch}
+.pp-lead:last-child{margin-bottom:0}
+.ad-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gut-l);margin:var(--gut-l) 0 clamp(32px,4vw,56px)}
+.ad-cards-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ad-card{padding:24px 26px;border-radius:12px;border:1px solid color-mix(in oklch,currentColor 14%,transparent);background:color-mix(in oklch,currentColor 4%,transparent)}
+.ad-card p{margin:12px 0 0;font-size:var(--text-body-m,1rem);line-height:var(--text-body-lh,1.5);color:var(--neutral-dark);text-wrap:pretty}
+.ad-card code{font-family:var(--mono);font-size:0.92em}
+.ad-when{margin-top:16px;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--blue-darker)}
+.ad-table{margin:var(--gut-l) 0 0;border-top:1px solid color-mix(in oklch,currentColor 16%,transparent)}
+.ad-row{display:grid;grid-template-columns:minmax(120px,0.8fr) minmax(70px,0.4fr) minmax(0,1.3fr) minmax(0,1.3fr);gap:clamp(12px,2vw,28px);padding:14px 0;border-bottom:1px solid color-mix(in oklch,currentColor 12%,transparent);font-size:var(--text-body-m,1rem);line-height:1.45;color:var(--neutral-dark)}
+.ad-row > span:first-child{color:var(--ink,var(--color-neutral-darkest));font-weight:500}
+.ad-head{font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--neutral);padding:0 0 12px}
+.ad-head > span:first-child{color:var(--neutral);font-weight:400}
+.ad-slots .ad-row{grid-template-columns:minmax(120px,0.5fr) minmax(0,3fr)}
+.ad-slots .ad-row:has(> span:nth-child(4)){grid-template-columns:minmax(90px,0.5fr) minmax(90px,0.5fr) minmax(0,1fr) minmax(0,1.4fr)}
+.ad-note{margin:18px 0 0;font-size:var(--text-body-m,1rem);line-height:var(--text-body-lh,1.5);color:var(--neutral-dark);max-width:70ch}
+.ad-step{display:block;margin:clamp(28px,3.4vw,44px) 0 12px}
+/* copyable prompt block — same affordance as the colour swatches */
+.copy-block{position:relative;border-radius:12px;border:1px solid color-mix(in oklch,currentColor 14%,transparent);background:color-mix(in oklch,currentColor 5%,transparent);overflow:auto}
+.copy-block pre{margin:0;padding:22px 64px 22px 24px;font-family:var(--mono);font-size:12.5px;line-height:1.65;color:var(--ink,var(--color-neutral-darkest));white-space:pre-wrap;overflow-wrap:break-word;tab-size:2}
+.copy-block .copy-btn{position:absolute;top:12px;right:12px;appearance:none;cursor:pointer;font:inherit;font-size:13px;line-height:1;white-space:nowrap;padding:9px 16px;border-radius:999px;background:var(--white);color:var(--ink,var(--color-neutral-darkest));border:1px solid var(--opacity-neutral-darkest-15);box-shadow:0 2px 10px var(--opacity-neutral-darkest-20);opacity:0;pointer-events:none;transition:opacity .16s ease}
+.copy-block:hover .copy-btn,.copy-block .copy-btn:focus-visible{opacity:1;pointer-events:auto}
+.copy-block .copy-btn:hover,.copy-block .copy-btn.is-copied{background:var(--cream)}
+@media (hover:none){.copy-block .copy-btn{opacity:1;pointer-events:auto}}
+.prompt-result{margin:0 0 var(--gut-2xl);display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3fr);gap:var(--gut-l);align-items:end}
+.prompt-result img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:var(--radius-l,12px)}
+.prompt-result figcaption{max-width:40ch;font-size:var(--text-body-m,1rem);line-height:var(--text-body-lh,1.5);color:var(--neutral-dark);text-wrap:pretty}
+@media (max-width:900px){.prompt-result{grid-template-columns:minmax(0,1fr)}}
+.ad-check{margin:var(--gut-l) 0 0;padding:0;list-style:none;display:grid;gap:0;max-width:80ch}
+.ad-check li{position:relative;padding:13px 0 13px 34px;border-bottom:1px solid color-mix(in oklch,currentColor 12%,transparent);font-size:var(--text-body-m,1rem);line-height:1.45;color:var(--neutral-dark)}
+.ad-check li:first-child{border-top:1px solid color-mix(in oklch,currentColor 16%,transparent)}
+.ad-check li::before{content:"";position:absolute;left:0;top:16px;width:15px;height:15px;border-radius:var(--radius-xs);border:1.5px solid var(--blue)}
+@media (max-width:900px){
+  .ad-cards,.ad-cards-3{grid-template-columns:minmax(0,1fr)}
+  .ad-row,.ad-slots .ad-row,.ad-slots .ad-row:has(> span:nth-child(4)){grid-template-columns:minmax(0,1fr);gap:4px;padding:16px 0}
+  .ad-head{display:none}
+}
+
+
+/* ── The governing principle: directional light ── */
+/* the statement now stands alone; the light trio runs full width beneath it */
+.photo-principle {
+  display: block;
+  margin-bottom: 40px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.photo-principle > div { max-width: 70ch; }
+.photo-principle .pp-statement {
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: var(--fw-heading);
+  letter-spacing: -0.025em;
+  line-height: 1.08;
+  color: var(--white);
+  margin: 14px 0 0;
+  max-width: 24ch;
+}
+.photo-principle .pp-statement em {
+  font-style: normal;
+  color: var(--blue-light);
+}
+.pp-rules{display:grid;margin:0 0 var(--gut-2xl);max-width:80ch;border-top:1px solid color-mix(in oklch,currentColor 16%,transparent)}
+.pp-rules .r{display:grid;grid-template-columns:40px minmax(0,1fr);gap:var(--gut-s,16px);padding:16px 0;border-bottom:1px solid color-mix(in oklch,currentColor 12%,transparent)}
+.pp-rules .n{font-family:var(--mono);font-size:12px;letter-spacing:0.08em;line-height:1.9;color:var(--blue-darker)}
+.pp-rules .x{font-size:var(--text-body-m,1rem);line-height:var(--text-body-lh,1.5);color:var(--neutral-dark);text-wrap:pretty}
+.pp-rules .x b{color:var(--ink,var(--color-neutral-darkest));font-weight:var(--fw-heading)}
+.pp-lead+.sub-title,.pp-lead+.pp-lead+.sub-title{margin-top:var(--gut-2xl)}
+
+/* light-demonstration trio */
+.photo-light-row {
+  margin-bottom: var(--gut-2xl);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.lit-frame {
+  position: relative;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--neutral-darkest);
+  isolation: isolate;
+}
+.lit-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.lit-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, color-mix(in oklch,var(--color-neutral-darkest) 82%,transparent) 0%, color-mix(in oklch,var(--color-neutral-darkest) 25%,transparent) 40%, transparent 68%);
+}
+.lit-frame .cap {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  z-index: 2;
+  padding: 16px 16px 15px;
+}
+.lit-frame .cap .t {
+  font-size: 15px;
+  font-weight: var(--fw-heading);
+  letter-spacing: -0.01em;
+  color: var(--white);
+  line-height: 1.18;
+}
+.lit-frame .cap .d {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--opacity-white-60);
+  margin-top: 6px;
+}
+
+/* ── Real photos inside the cinematic (brand) frames ── */
+.cinematic-frame.has-photo::before {
+  /* swap the colored glow for a directional scrim that keeps text legible */
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  background: linear-gradient(157deg,
+      color-mix(in oklch,var(--color-neutral-darkest) 55%,transparent) 0%,
+      var(--opacity-neutral-darkest-10) 30%,
+      var(--opacity-neutral-darkest-5) 52%,
+      color-mix(in oklch,var(--color-neutral-darkest) 82%,transparent) 100%);
+}
+.cinematic-frame .cf-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* ── Real photos inside the content (role) slots ── */
+.role-slot .rs-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+/* strengthen the existing bottom scrim for caption legibility over photos */
+.role-slot.has-photo::before {
+  background: linear-gradient(180deg, var(--opacity-neutral-darkest-15) 0%, transparent 35%, color-mix(in oklch,var(--color-neutral-darkest) 78%,transparent) 100%);
+}
+
+@media (max-width: 900px) {
+  .photo-principle { gap: 32px; }
+  .photo-light-row { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ─────────────────────────────────────────────
+   SETTINGS & APPLICATIONS — the range gallery
+   ───────────────────────────────────────────── */
+.range-hero {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  aspect-ratio: 3 / 2;
+  margin-top: 28px;
+  background: var(--neutral-darkest);
+  isolation: isolate;
+}
+.range-hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.range-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(108deg, color-mix(in oklch,var(--color-neutral-darkest) 74%,transparent) 0%, var(--opacity-neutral-darkest-30) 40%, color-mix(in oklch,var(--color-neutral-darkest) 2%,transparent) 68%);
+}
+.range-hero .rh-cap {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 32px 34px;
+  max-width: 56%;
+}
+.range-hero .rh-cap .tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+}
+.range-hero .rh-cap .t {
+  font-size: clamp(22px, 2.3vw, 30px);
+  font-weight: var(--fw-heading);
+  letter-spacing: -0.025em;
+  color: var(--white);
+  margin-top: 10px;
+  line-height: 1.1;
+}
+.range-hero .rh-cap .d {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--neutral-lighter);
+  margin-top: 10px;
+  max-width: 40ch;
+}
+
+.range-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+.range-card .rc-frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  background: var(--neutral-darkest);
+  isolation: isolate;
+}
+.range-card .rc-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.range-card .rc-corner {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in oklch,var(--color-white) 96%,transparent);
+  background: var(--opacity-neutral-darkest-60);
+  padding: 5px 9px;
+  border-radius: var(--radius-xs);
+}
+.range-card .rc-meta { margin-top: 13px; }
+.range-card .rc-meta .s {
+  font-size: 15px;
+  font-weight: var(--fw-heading);
+  letter-spacing: -0.01em;
+  color: var(--white);
+}
+.range-card .rc-meta .a {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  margin-top: 5px;
+}
+
+@media (max-width: 640px) {
+  .range-grid { grid-template-columns: 1fr !important; }
+  .photo-light-row { grid-template-columns: 1fr !important; }
+  .range-hero .rh-cap { max-width: 100%; }
+}
+
+@media (max-width: 900px) {
+  .range-grid { grid-template-columns: repeat(2, 1fr); }
+  .range-hero { aspect-ratio: 4 / 3; }
+  .range-hero .rh-cap { max-width: 82%; }
+}
+
+/* FPO slide frames — placeholders until real slide captures land */
+.slide-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,2.4vw,32px)}
+.slide-fpo{position:relative;border-radius:var(--radius-l);aspect-ratio:16/9;padding:16px;display:block;background:var(--opacity-white-5);border:1px dashed var(--opacity-white-30)}
+.slide-cap{margin-top:14px}
+.slide-cap .role{font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-light);margin-bottom:6px}
+.slide-cap .who{font-size:19px;line-height:1.15;letter-spacing:-0.02em;color:var(--white)}
+
+@media (max-width:640px){.slide-grid{grid-template-columns:1fr}}
+.slide-fpo .fpo-mark{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:12px;letter-spacing:0.18em;color:color-mix(in oklch,var(--color-white) 34%,transparent)}
+.slide-fpo .rs-num{font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--opacity-white-50)}
+.slide-fpo .rs-bottom .role{font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--blue-light);margin-bottom:6px}
+.slide-fpo .rs-bottom .who{font-size:19px;line-height:1.15;letter-spacing:-0.02em;color:var(--white)}
+
+/* Portraits — sub-section inside the brand layer */
+.layer-block .layer-sub{grid-column:1/-1;margin-top:56px;padding-top:32px;border-top:1px solid var(--opacity-white-15)}
+.layer-block .layer-sub .sub-title h4{color:var(--white);margin:0}
+.layer-sub-note{color:var(--neutral-lighter);margin:14px 0 28px;max-width:62ch}
+
+/* ── Hero: 3 slideshows on the 12-col grid, 4 columns each ── */
+.bento-shows{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);margin:var(--gut-2xl) 0 clamp(48px,6vw,80px)}
+.show{position:relative;margin:0;aspect-ratio:3/4;border-radius:var(--radius-l,12px);overflow:hidden;background:var(--cream)}
+.show-track,.show-slide{position:absolute;inset:0}
+.show-slide.on-gradient{background:var(--blue-deepest) url("assets/brand-gradient.avif") center/cover no-repeat}.show-slide.on-gradient image-slot{background:transparent}
+.show-slide{opacity:0;transition:opacity .9s ease;pointer-events:none}
+.show-slide.is-on{opacity:1;pointer-events:auto}
+.show-slide image-slot{display:block;width:100%;height:100%}
+.show-tag{position:absolute;top:16px;left:16px;z-index:2;padding:8px 14px;border-radius:999px;background:var(--ink,var(--color-neutral-darkest));color:var(--white);font-size:var(--text-body-s,0.875rem);font-weight:500;line-height:1;pointer-events:none}
+.show-dots{position:absolute;left:50%;bottom:16px;z-index:2;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:var(--ink,var(--color-neutral-darkest))}
+.show-dots button{appearance:none;border:0;padding:0;width:8px;height:8px;border-radius:50%;background:var(--white);opacity:.5;cursor:pointer;transition:opacity .2s ease,width .2s ease}
+.show-dots button.is-on{opacity:1;width:24px;border-radius:999px}
+@media (max-width:900px){.bento-shows{grid-template-columns:minmax(0,1fr)}.show{aspect-ratio:4/3}}
+@media (prefers-reduced-motion:reduce){.show-slide{transition:none}}
+
+/* ── Before it ships: checklist beside the ideal shot, linked on hover ── */
+.ship-check{display:grid;grid-template-columns:7fr 5fr;gap:var(--gut-2xl);align-items:start}
+.ship-check .ad-check li{cursor:default;transition:color .2s ease}
+.ship-check .ad-check li.is-hot{color:var(--ink,var(--color-neutral-darkest))}
+.ship-check .ad-check li.is-hot::before{border-color:var(--blue);background:var(--blue)}
+.ship-shot{position:relative;margin:0;display:grid;gap:14px}
+.ship-shot image-slot{display:block;width:100%;aspect-ratio:4/5}
+.ship-shot figcaption{font-size:var(--text-body-s,0.875rem);color:var(--neutral-dark)}
+.ship-pin{position:absolute;z-index:2;transform:translate(-50%,-50%) scale(.9);width:28px;height:28px;border-radius:50%;border:1.5px solid var(--white);background:var(--ink,var(--color-neutral-darkest));color:var(--white);font:inherit;font-size:12px;font-weight:500;line-height:1;cursor:pointer;box-shadow:0 2px 8px var(--opacity-neutral-darkest-30);opacity:.8;transition:transform .2s ease,opacity .2s ease,background .2s ease}
+.ship-pin:hover,.ship-pin.is-hot{opacity:1;transform:translate(-50%,-50%) scale(1.15);background:var(--blue);color:var(--ink,var(--color-neutral-darkest));border-color:var(--ink,var(--color-neutral-darkest))}
+.ship-shot:has(.ship-pin.is-hot) .ship-pin:not(.is-hot){opacity:.35}
+@media (max-width:900px){.ship-check{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.ship-pin{transition:none}}
