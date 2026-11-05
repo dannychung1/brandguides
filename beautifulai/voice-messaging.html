@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Voice &amp; messaging — Beautiful.ai Brand Guidelines</title>
+<meta name="description" content="Guidance for setting the new standard for AI presentations.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Voice &amp; messaging — Beautiful.ai Brand Guidelines">
+<meta property="og:description" content="Guidance for setting the new standard for AI presentations.">
+<meta property="og:url" content="https://dannychung1.github.io/beautiful-ai/">
+<meta property="og:image" content="https://dannychung1.github.io/beautiful-ai/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Beautiful.ai Brand Guidelines cover">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="colors_and_type.css?v=213">
+<link rel="stylesheet" href="styles.css?v=213">
+<link rel="stylesheet" href="photography.css?v=200">
+<link rel="stylesheet" href="white-ground.css?v=213">
+<link rel="stylesheet" href="ds-restyle.css?v=302">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0">
+<style>
+/* Voice & messaging: a text-led chapter. Every block sits on the 12-column grid with the guide gutter.
+   Cards follow the DS light card: white on Gallery Grey, no keyline, shadow-xxsmall, radius by span. */
+#vm{--vm-ink:var(--color-neutral-darkest);--vm-2:var(--color-neutral-dark)}
+#vm .vm-block{margin-top:var(--space-12,48px)}
+#vm .sub-title+.vm-block,#vm .sub-title+.tov-grid{margin-top:var(--space-12,48px)}
+#vm .vm-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut)}
+#vm .vm-card{background:var(--color-white);border-radius:var(--radius-l);box-shadow:var(--shadow-xxsmall);padding:var(--content-padding-medium,32px);display:flex;flex-direction:column;gap:var(--space-4,16px);min-width:0}
+#vm .vm-card.s6{grid-column:span 6;border-radius:var(--radius-xl)}
+#vm .vm-card.s3{grid-column:span 3}
+#vm .vm-card.s12{grid-column:1/-1;border-radius:var(--radius-xxl);padding:var(--content-padding-large,48px)}
+#vm .vm-eyebrow,#vm .vm-card p.vm-eyebrow{margin:0;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--vm-2)}
+#vm .vm-card p.vm-title,#vm .vm-title{margin:0;font-size:var(--text-h6-size,1.5rem);font-weight:500;line-height:1.1;letter-spacing:-0.02em;color:var(--vm-ink)}
+#vm .vm-card p{margin:0;font-size:var(--text-body-m,1rem);line-height:1.5;color:var(--vm-2);max-width:70ch;text-wrap:pretty}
+#vm .vm-card p.vm-lead{color:var(--vm-ink)}
+#vm .vm-tile{width:48px;height:48px;border-radius:var(--radius-m);background:var(--color-neutral-lightest);display:grid;place-items:center;color:var(--vm-ink)}
+#vm .vm-tile .material-symbols-outlined{font-size:24px;font-variation-settings:'wght' 300}
+
+/* statement: the positioning line, set large */
+#vm .vm-statement p.vm-big{font-size:clamp(1.5rem,2.4vw,2.3125rem);line-height:1.2;font-weight:500;letter-spacing:-0.02em;color:var(--vm-ink);max-width:32ch;text-wrap:balance}
+#vm .vm-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut);margin-top:var(--space-4,16px)}
+#vm .vm-facts p:not(.vm-eyebrow){color:var(--vm-ink);font-size:var(--text-body-l,1.125rem)}
+
+/* label rail: label takes 3 of 12 columns, content takes 9 */
+#vm .vm-rail{display:grid;gap:var(--space-2,8px)}
+#vm .vm-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:var(--space-2,8px);background:var(--color-white);border-radius:var(--radius-l);box-shadow:var(--shadow-xxsmall);padding:var(--content-padding-regular,24px) var(--content-padding-medium,32px)}
+#vm .vm-row>p.vm-label{grid-column:1/span 3;margin:0;font-size:var(--text-body-l,1.125rem);font-weight:500;line-height:1.3;color:var(--vm-ink)}
+#vm .vm-row>p.vm-label small{display:block;margin-top:6px;font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--vm-2)}
+#vm .vm-row>.vm-body{grid-column:4/-1;display:grid;gap:var(--space-3,12px);min-width:0}
+#vm .vm-row p{margin:0;font-size:var(--text-body-m,1rem);line-height:1.5;color:var(--vm-2);max-width:70ch;text-wrap:pretty}
+#vm .vm-row p.vm-copy{font-size:var(--text-body-l,1.125rem);color:var(--vm-ink)}
+#vm .vm-ex{font-size:var(--text-body-m,1rem);line-height:1.4;color:var(--vm-ink);background:var(--color-neutral-lightest);border-radius:var(--radius-m);padding:var(--space-3,12px) var(--space-4,16px);justify-self:start}
+
+/* old way / new way */
+#vm .vm-pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--gut)}
+#vm .vm-pair>div{display:grid;gap:var(--space-2,8px);align-content:start}
+#vm .vm-pair .old p{text-decoration:none;color:var(--vm-2)}
+#vm .vm-pair .new p{color:var(--vm-ink);font-weight:500}
+
+/* say / don't say lists */
+#vm .vm-list{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3,12px)}
+#vm .vm-list li{display:grid;grid-template-columns:20px minmax(0,1fr);gap:10px;align-items:start;font-size:var(--text-body-m,1rem);line-height:1.45;color:var(--vm-ink)}
+#vm .vm-list .material-symbols-outlined{font-size:20px;line-height:1.2;font-variation-settings:'wght' 300}
+#vm .vm-list.yes .material-symbols-outlined{color:var(--color-green-ink,var(--green))}
+#vm .vm-list.no .material-symbols-outlined{color:var(--color-neutral)}
+#vm .vm-list.no li span+span{color:var(--vm-2)}
+
+/* quotes */
+#vm .vm-quote blockquote{margin:0;font-size:var(--text-h6-size,1.5rem);line-height:1.3;font-weight:500;letter-spacing:-0.015em;color:var(--vm-ink);text-wrap:pretty}
+
+/* words table: spacing and grounds separate rows, never rules */
+#vm .vm-words{display:grid;gap:var(--space-2,8px)}
+#vm .vm-words .wr{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);row-gap:6px;align-items:baseline;background:var(--color-white);border-radius:var(--radius-l);padding:var(--space-4,16px) var(--content-padding-medium,32px);box-shadow:var(--shadow-xxsmall)}
+#vm .vm-words .wr.hd{background:none;box-shadow:none;padding-top:0;padding-bottom:0}
+#vm .vm-words .wr>*{margin:0;min-width:0}
+#vm .vm-words .wr>:nth-child(1){grid-column:1/span 3;font-weight:500;color:var(--vm-ink)}
+#vm .vm-words .wr>:nth-child(2){grid-column:4/span 4;color:var(--vm-2)}
+#vm .vm-words .wr>:nth-child(3){grid-column:8/span 5;color:var(--vm-2)}
+#vm .vm-words .wr.hd>*{font-size:11px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--vm-2)}
+
+#vm .vm-card.s4{grid-column:span 4;justify-content:space-between}
+#vm .vm-quote figcaption{display:grid;gap:4px}
+#vm .vm-card p.vm-who{color:var(--vm-ink);font-weight:500}
+#vm .vm-quote blockquote{font-size:var(--text-body-xl,1.25rem)!important}
+@media (max-width:1100px){#vm .vm-card.s4{grid-column:1/-1}#vm .vm-card.s3{grid-column:span 6}#vm .vm-facts{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){
+  #vm .vm-card.s3,#vm .vm-card.s6{grid-column:1/-1}
+  #vm .vm-row>.vm-label,#vm .vm-row>.vm-body{grid-column:1/-1}
+  #vm .vm-pair{grid-template-columns:minmax(0,1fr)}
+  #vm .vm-words .wr>:nth-child(n){grid-column:1/-1}
+  #vm .vm-words .wr.hd{display:none}
+  #vm .vm-card.s12{padding:var(--content-padding-medium,32px)}
+}
+#vm .vm-row>p.vm-label small.vol{display:flex;align-items:center;gap:4px}
+#vm .vm-row>p.vm-label small.vol .material-symbols-outlined{font-size:18px;letter-spacing:0;text-transform:none;color:var(--color-neutral-darkest,#001A24)}
+</style>
+<script src="image-slot.js?v=130"></script>
+</head>
+<body class="subpage">
+<button class="nav-fab" aria-label="Toggle navigation" onclick="toggleNav()"><span class="fab-label">Contents</span><span class="nav-burger"><i></i><i></i></span></button>
+<header class="sidenav collapsed">
+  <nav>
+    <a href="index.html">Introduction</a>
+    <a href="01-foundation.html">Foundation</a>
+    <a href="voice-messaging.html" class="active" aria-current="page">Voice &amp; messaging</a>
+    <a href="02-logos.html">Logos</a>
+    <a href="03-typography.html">Typography</a>
+    <a href="04-color.html">Color</a>
+    <a href="05-art-direction.html">Art direction</a>
+    <a href="06-brand-in-use.html">Brand gallery</a>
+    <a class="nav-tool" href="05-art-direction.html#make"><span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>Photo prompt builder</a>
+  </nav>
+  <div class="nav-version">Brand Guidelines · Updated 5/26</div>
+</header>
+
+<section class="section" id="vm" data-screen-label="08 Voice and messaging">
+  <div class="chapter-hero"><div class="wrap"><div class="ch-head"><div><h2>Voice &amp; messaging</h2></div></div></div></div>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="lede">Our voice is how we sound, and our messaging is what we say. This chapter gives everyone who writes for Beautiful.ai 1 story and 1 voice to tell it in.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════ VOICE ═══════════ -->
+  <div class="wrap"><div class="sub-head"><h2>Voice</h2></div></div>
+  <div class="wrap">
+
+    <div class="sub-title st-row"><h3>Our voice</h3><p class="st-rule">We sound like a trusted colleague who has built a thousand decks.</p><div class="st-body"><p>Foundation sets our personality as the <a href="01-foundation.html#archetype">Working Sage</a>. Our voice is how that personality sounds in words. We bring wit when it helps the point land and drop it when it gets in the way.</p></div></div>
+
+    <div class="tov-grid vm-block">
+      <div class="tov-card">
+        <div class="title">Plainspoken</div>
+        <p class="desc">We say it straight and cut every word that doesn't help professionals get their work done. We use their own vocabulary and start from what they already know.</p>
+        <div class="example">
+          <div class="row"><span class="icon yes material-symbols-outlined" aria-hidden="true">check</span><span class="yes">Paste your notes and get a first draft of your deck in minutes.</span></div>
+          <div class="row"><span class="icon no material-symbols-outlined" aria-hidden="true">close</span><span class="no">Unlock next-level storytelling with our revolutionary AI-powered solution!</span></div>
+        </div>
+      </div>
+      <div class="tov-card">
+        <div class="title">Declarative</div>
+        <p class="desc">We promise an outcome and state it with confidence. We say the direct thing once and let it stand, so professionals know exactly what they get.</p>
+        <div class="example">
+          <div class="row"><span class="icon yes material-symbols-outlined" aria-hidden="true">check</span><span class="yes">Your deck is on brand before you share it.</span></div>
+          <div class="row"><span class="icon no material-symbols-outlined" aria-hidden="true">close</span><span class="no">Beautiful.ai may help you create decks that could look more professional.</span></div>
+        </div>
+      </div>
+      <div class="tov-card">
+        <div class="title">Empathetic</div>
+        <p class="desc">We write to professionals with respect, the way a trusted colleague would. We understand the problem behind their work before we suggest solutions.</p>
+        <div class="example">
+          <div class="row"><span class="icon yes material-symbols-outlined" aria-hidden="true">check</span><span class="yes">Board meeting tomorrow? Start from your outline and keep your evening.</span></div>
+          <div class="row"><span class="icon no material-symbols-outlined" aria-hidden="true">close</span><span class="no">Still building slides by hand? It's time to get with the program.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-title st-row"><h3>Tone</h3><p class="st-rule">Our voice never changes. Our tone turns up or down with the room.</p><div class="st-body"><p>A product label and a launch post come from the same voice. The label has room for 3 words at low volume, and the post has room for a story at high volume.</p></div></div>
+
+    <div class="vm-rail vm-block">
+      <div class="vm-row"><p class="vm-label">Product<small class="vol"><span class="material-symbols-outlined" aria-hidden="true">volume_mute</span>Low volume</small></p><div class="vm-body"><p class="vm-copy">Short, verb-led labels and plain status messages. Wit never slows a task down.</p><span class="vm-ex">Create with AI · Your outline is ready.</span></div></div>
+      <div class="vm-row"><p class="vm-label">Help and support<small class="vol"><span class="material-symbols-outlined" aria-hidden="true">volume_mute</span>Low volume</small></p><div class="vm-body"><p class="vm-copy">Calm and specific. We name the fix first and the reason second.</p><span class="vm-ex">Turn on Preserve exact text to keep your wording on every slide.</span></div></div>
+      <div class="vm-row"><p class="vm-label">Website<small class="vol"><span class="material-symbols-outlined" aria-hidden="true">volume_down</span>Medium volume</small></p><div class="vm-body"><p class="vm-copy">A clear promise up top, then proof underneath. Headlines run 2 to 5 words.</p><span class="vm-ex">Work-ready slides in minutes.</span></div></div>
+      <div class="vm-row"><p class="vm-label">Sales and enablement<small class="vol"><span class="material-symbols-outlined" aria-hidden="true">volume_down</span>Medium volume</small></p><div class="vm-body"><p class="vm-copy">Lead with the professional's problem, and back every claim with a number or a customer.</p><span class="vm-ex">Reps build on-brand decks without waiting on design.</span></div></div>
+      <div class="vm-row"><p class="vm-label">Social and campaigns<small class="vol"><span class="material-symbols-outlined" aria-hidden="true">volume_up</span>High volume</small></p><div class="vm-body"><p class="vm-copy">The most room for story and wit, always with a real point underneath.</p><span class="vm-ex">The deck in your head, on every slide.</span></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ MESSAGING ═══════════ -->
+  <div class="wrap"><div class="sub-head"><h2>Messaging</h2></div></div>
+  <div class="wrap">
+
+    <div class="sub-title st-row"><h3>Positioning</h3><p class="st-rule">We are the presentation platform for professionals.</p><div class="st-body"><p>Professionals present for a living, and their decks stand in for their credibility. The default slide tools ask them to design by hand, and AI-first tools hand them decks they can't send to a client. We sit between the two. AI drafts the story with them, and Smart Slides lay out every slide as they work.</p></div></div>
+
+    <div class="vm-grid vm-block">
+      <div class="vm-card s12 vm-statement">
+        <p class="vm-eyebrow">Positioning statement</p>
+        <p class="vm-big">For professionals who present for work, Beautiful.ai is the presentation platform that turns ideas into work-ready decks in minutes.</p>
+        <div class="vm-facts">
+          <div><p class="vm-eyebrow">Category</p><p>Presentation platform</p></div>
+          <div><p class="vm-eyebrow">For</p><p>Professionals and the teams they present with</p></div>
+          <div><p class="vm-eyebrow">Compared with</p><p>The old way of building decks, and AI tools that feel like toys</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sub-title st-row"><h3>Brand promise</h3><p class="st-rule">Work ready.</p><div class="st-body"><p>We took a product descriptor, work-ready presentations, and dropped the hyphen to turn it into a promise to professionals. Work ready speaks to the person: ready for the work and ready for the room. With the hyphen, work-ready describes what they make and the product they make it in.</p></div></div>
+
+    <div class="vm-rail vm-block">
+      <div class="vm-row"><p class="vm-label">Work ready<small>The promise</small></p><div class="vm-body"><p class="vm-copy">No hyphen. It speaks to professionals and calls them to the work. Use it on its own or as a headline.</p><span class="vm-ex">Work ready.</span></div></div>
+      <div class="vm-row"><p class="vm-label">work-ready<small>The descriptor</small></p><div class="vm-body"><p class="vm-copy">Hyphenated. It describes the decks professionals make and the platform they make them in. Use it before a noun.</p><span class="vm-ex">Work-ready slides in minutes.</span></div></div>
+      <div class="vm-row"><p class="vm-label">The beautiful way<small>The frame</small></p><div class="vm-body"><p class="vm-copy">A frame, never a headline. It always sits above a work-ready claim.</p><span class="vm-ex">The beautiful way to build a deck. Work-ready slides in minutes.</span></div></div>
+    </div>
+
+    <div class="sub-title st-row"><h3>Boilerplate</h3><p class="st-rule">Use this paragraph as written.</p><div class="st-body"><p>It closes every press release and partner page. Shorten it freely, and never add a claim it doesn't make.</p></div></div>
+
+    <div class="vm-rail vm-block">
+      <div class="vm-row"><p class="vm-label">Boilerplate</p><div class="vm-body"><p class="vm-copy">Beautiful.ai is the presentation platform for modern professionals. It combines design automation and AI to help anyone create on-brand, work-ready presentations in minutes. Professionals at over 100,000 companies use Beautiful.ai to pitch and present. Founded in 2016 and headquartered in San Francisco, Beautiful.ai is backed by Trinity Ventures, First Round Capital and General Catalyst.</p></div></div>
+    </div>
+
+    <div class="sub-title st-row"><h3>Proof</h3><p class="st-rule">Every claim has a source.</p><div class="st-body"><p>We use numbers our customers reported and quotes from our published customer stories, always with the person's name and company. A number without a source stays out of the copy, however good it sounds. Our scale line is “Trusted by professionals at over 100,000 companies,” the same number the site uses.</p></div></div>
+
+    <div class="vm-grid vm-block">
+      <figure class="vm-card s4 vm-quote" style="margin:0"><blockquote>“With Beautiful.ai, we were able to get the time down by 75%, so they could focus on the core message, the story, and the content, and not the design.”</blockquote><figcaption><p class="vm-who">McNeel Keenan</p><p class="vm-eyebrow">VP of Product Management, Cvent</p></figcaption></figure>
+      <figure class="vm-card s4 vm-quote" style="margin:0"><blockquote>“Using Beautiful.ai in our production process, the time to production of a deck has been going down. We've probably given hours if not days back to the analyst.”</blockquote><figcaption><p class="vm-who">Hugh Ujhazy</p><p class="vm-eyebrow">VP of Research Technical Operations, IDC</p></figcaption></figure>
+      <figure class="vm-card s4 vm-quote" style="margin:0"><blockquote>“The time savings with Beautiful.ai has been huge. I would say anywhere from 50-75% reduction in time.”</blockquote><figcaption><p class="vm-who">Brenda Ramsey</p><p class="vm-eyebrow">Creative Director, Paciolan</p></figcaption></figure>
+    </div>
+  </div>
+
+  <!-- ═══════════ WRITING ═══════════ -->
+  <div class="wrap"><div class="sub-head"><h2>Writing</h2></div></div>
+  <div class="wrap">
+
+    <div class="sub-title st-row"><h3>Writing rules</h3><p class="st-rule">These 3 rules catch our most common slips.</p><div class="st-body"><p>They hold for headlines, product labels, sales decks and this guide. When a draft breaks one, rewrite the sentence instead of patching the word.</p></div></div>
+
+    <div class="tov-grid vm-block">
+      <div class="tov-card"><div class="title">Never hedge</div><p class="desc">A guideline that hedges isn't a guideline. We state it and let it stand.</p><div class="example"><div class="row"><span class="icon yes material-symbols-outlined" aria-hidden="true">check</span><span class="yes">Build your sales deck in minutes.</span></div><div class="row"><span class="icon no material-symbols-outlined" aria-hidden="true">close</span><span class="no">Beautiful.ai can potentially help speed up your deck workflow.</span></div></div></div>
+      <div class="tov-card"><div class="title">Break the triad</div><p class="desc">3 parallel fragments in a row is our old habit. We rewrite it every time.</p><div class="example"><div class="row"><span class="icon yes material-symbols-outlined" aria-hidden="true">check</span><span class="yes">Start from your outline, and Create with AI builds the first draft.</span></div><div class="row"><span class="icon no material-symbols-outlined" aria-hidden="true">close</span><span class="no">Faster. Smarter. More beautiful.</span></div></div></div>
+      <div class="tov-card"><div class="title">Name the customer</div><p class="desc">We put professionals and their work in the sentence. They are never users or folks.</p><div class="example"><div class="row"><span class="icon yes material-symbols-outlined" aria-hidden="true">check</span><span class="yes">Sales leaders send on-brand pitch decks without waiting on design.</span></div><div class="row"><span class="icon no material-symbols-outlined" aria-hidden="true">close</span><span class="no">Users can generate on-brand outputs.</span></div></div></div>
+    </div>
+
+    <div class="sub-title st-row"><h3>Words we use</h3><p class="st-rule">We use the same word for the same thing, every time.</p><div class="st-body"><p>Consistent names teach professionals how the product fits together. Swap a term mid-journey and they assume it means something new.</p></div></div>
+
+    <div class="vm-words vm-block">
+      <div class="wr hd"><p>We say</p><p>Instead of</p><p>Why</p></div>
+      <div class="wr"><p>professionals, pros, teams, leaders</p><p>users, folks, people who</p><p>We name who the work is for.</p></div>
+      <div class="wr"><p>presentation platform</p><p>AI presentation maker, Presentation Systems, Smart Design Systems</p><p>AI is already in our name, and the platform does more than generate. Search terms like presentation software stay on search pages and never name the category.</p></div>
+      <div class="wr"><p>Smart Slide layout</p><p>Smart Slide template</p><p>A template is a whole deck, and a layout is 1 slide.</p></div>
+      <div class="wr"><p>presentation template</p><p>slide template</p><p>Templates are multi-slide starting decks.</p></div>
+      <div class="wr"><p>AI paired with what it does, such as on-brand slides or time saved</p><p>AI on its own, magic, one-click decks</p><p>AI never travels alone. Magic promises an output, and professionals want control.</p></div>
+      <div class="wr"><p>Create with AI</p><p>Generate with AI, DesignerBot</p><p>Create with AI replaced both.</p></div>
+      <div class="wr"><p>the old way</p><p>PowerPoint, Google Slides, Gamma</p><p>We name the problem and never the tool.</p></div>
+      <div class="wr"><p>Beautiful.ai</p><p>Beautiful, BAI, Beautiful AI</p><p>The name always includes .ai in public copy.</p></div>
+      <div class="wr"><p>use, has, holds</p><p>carry, leverage, unlock, elevate</p><p>Plain words read faster and claim less.</p></div>
+    </div>
+
+    <div class="sub-title st-row"><h3>Mechanics</h3><p class="st-rule">We write in sentence case and use numerals for every number.</p><div class="st-body"><p>Headings, buttons and labels all use sentence case. We write 3 slides, never three slides. We use no emoji and no exclamation marks in brand or product copy, and we keep em dashes rare.</p></div></div>
+  </div>
+</section>
+
+<nav class="chapter-nav" aria-label="Chapter navigation">
+  <a class="cn-cell cn-prev" href="01-foundation.html">
+    <span class="cn-dir">Previous</span>
+    <span class="cn-title">Foundation</span>
+    <span class="cn-arrow material-symbols-outlined" aria-hidden="true">arrow_back</span>
+  </a>
+  <a class="cn-cell cn-next" href="02-logos.html">
+    <span class="cn-dir">Next</span>
+    <span class="cn-title">Logos</span>
+    <span class="cn-arrow material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+  </a>
+</nav>
+<footer class="footer" data-screen-label="16 Footer">
+  <div class="footer-grid">
+    <div>
+      <img src="assets/beautifulai-logo-white.svg" alt="Beautiful.ai" style="height:22px;margin-bottom:20px">
+      <p style="font-size:var(--text-body-s,0.875rem);color:var(--neutral-light);max-width:38ch;margin:0">
+        The Beautiful.ai brand is the property of Beautiful.ai, Inc. These
+        guidelines are for internal and partner use. Questions, requests for
+        partnership assets, or co-marketing approvals — brand@beautiful.ai.
+      </p>
+    </div>
+    <div>
+      <h5>Contents</h5>
+      <ul>
+        <li><a href="index.html">Introduction</a></li>
+        <li><a href="01-foundation.html">Foundation</a></li>
+        <li><a href="voice-messaging.html">Voice &amp; messaging</a></li>
+        <li><a href="02-logos.html">Logos</a></li>
+        <li><a href="03-typography.html">Typography</a></li>
+        <li><a href="04-color.html">Color</a></li>
+        <li><a href="05-art-direction.html">Art direction</a></li>
+        <li><a href="06-brand-in-use.html">Brand gallery</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h5>Contact</h5>
+      <ul>
+        <li>brand@beautiful.ai</li>
+        <li>partnerships@beautiful.ai</li>
+        <li>press@beautiful.ai</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Beautiful.ai, Inc.</span>
+    <span>Brand Guidelines · Updated 5/26</span>
+  </div>
+</footer>
+<script src="site.js?v=150"></script>
+<script src="ch-spots.js?v=26"></script>
+<script src="rhythm.js?v=13"></script>
+<script src="site-reveal.js?v=1"></script>
+</body>
+</html>

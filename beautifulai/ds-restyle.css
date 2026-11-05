@@ -467,8 +467,8 @@ body.subpage:has(#practice) .chapter-nav .cn-cell:hover :is(.cn-dir,.cn-num,.cn-
 #logo .spec-grid{align-items:stretch}
 #logo .donts .spec-wide .preview{aspect-ratio:auto!important;flex:1 1 auto!important;min-height:0}
 #logo .donts .dont .label{padding:0!important;min-height:0!important;font-size:var(--text-body-s);color:var(--color-neutral-dark)}
-#logo .donts:not(.dos)>.dont:nth-child(8) .preview{box-shadow:none!important}
-#logo .donts:not(.dos)>.dont:nth-child(8) .preview img{width:84cqw!important}
+#logo .donts:not(.dos)>.dont:nth-child(7) .preview{box-shadow:none!important}
+#logo .donts:not(.dos)>.dont:nth-child(7) .preview img{width:84cqw!important}
 /* Logo page: every sub-section is a 3-column card grid */
 #logo .spec-wide{grid-column:span 2}
 @media (max-width:760px){#logo .spec-wide{grid-column:auto}}
