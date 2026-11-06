@@ -844,3 +844,9 @@ html body .bd .bd-out .bd-btn:hover{border-color:var(--color-white)!important}ht
 /* Side nav: 1 step down the type scale (Body XL), so 9 chapters and the builder fit without crowding */
 .sidenav nav a{font-size:var(--text-body-xl,1.25rem);line-height:1.3;padding-block:4px}
 .sidenav nav a.nav-tool{font-size:var(--text-body-m,1rem)}
+
+/* Inline <style> blocks can sit between the chapter menu and the first content block;
+   carry the menu's clearance past them so the first heading never butts the rule. */
+.wrap:has(>.ch-subnav)+style+*,.wrap:has(>.ch-subnav)+style+style+*{padding-top:var(--padding-section-medium)!important;margin-top:0!important}
+@media (max-width:767px){.wrap:has(>.ch-subnav)+style+*,.wrap:has(>.ch-subnav)+style+style+*{padding-top:var(--padding-section-small)!important}}
+.wrap:has(>.ch-subnav)+style+.wrap>:first-child,.wrap:has(>.ch-subnav)+style+style+.wrap>:first-child{margin-top:0!important;border-top:0!important;padding-top:0!important}
