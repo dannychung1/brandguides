@@ -3274,11 +3274,11 @@ body.subpage>section~section>.sub-head:first-child,body.subpage>section~section>
 .story-builder{display:grid;gap:var(--gut,24px)}
 .sb-toggles{display:flex;flex-wrap:wrap;gap:12px}
 .sb-tog{appearance:none;font:inherit;font-size:var(--text-body-m,1rem);font-weight:var(--fw-medium,500);display:inline-flex;align-items:center;gap:10px;padding:12px 20px 12px 14px;min-height:48px;border-radius:var(--radius-s,6px);border:1px solid var(--scheme5-border,var(--opacity-neutral-darkest-15));background:var(--white);color:var(--ink,var(--color-neutral-darkest));cursor:pointer;transition:background .2s ease,border-color .2s ease}
-.material-symbols-outlined.sb-tog-box{font-size:24px;line-height:1;width:24px;height:24px;color:var(--blue-light);font-variation-settings:"FILL" 0,"wght" 400,"GRAD" 0,"opsz" 24;transition:color .2s ease}
+.material-symbols-outlined.sb-tog-box{font-size:24px;line-height:1;width:24px;height:24px;color:var(--blue-light);font-variation-settings:"FILL" 0,"wght" 300,"GRAD" 0,"opsz" 24;transition:color .2s ease}
 .sb-tog:hover{border-color:var(--blue-dark)}
 .sb-tog:focus-visible{outline:2px solid var(--blue-dark);outline-offset:2px}
 .sb-tog[aria-pressed="true"]{background:var(--blue-lightest);border-color:var(--blue-dark)}
-.sb-tog[aria-pressed="true"] .material-symbols-outlined.sb-tog-box{color:var(--blue-dark);font-variation-settings:"FILL" 1,"wght" 400,"GRAD" 0,"opsz" 24}
+.sb-tog[aria-pressed="true"] .material-symbols-outlined.sb-tog-box{color:var(--blue-dark);font-variation-settings:"FILL" 1,"wght" 300,"GRAD" 0,"opsz" 24}
 .sb-hint{margin:0;min-height:1.5em;font-size:var(--text-body-s,.875rem);color:var(--neutral-dark)}
 .sb-stage{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:var(--gut-2xl,64px);align-items:center;padding:var(--gut,24px);background:var(--white);border:1px solid var(--scheme5-border,var(--opacity-neutral-darkest-15));border-radius:var(--radius-xl,18px)}
 .sb-media{position:relative;aspect-ratio:16/10;border-radius:var(--radius-l,12px);overflow:hidden;background:var(--scheme5-bg,var(--color-neutral-lightest))}

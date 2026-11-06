@@ -54,7 +54,7 @@ function toggleNav(){document.querySelector('.sidenav').classList.toggle('collap
   var hero=document.querySelector('.chapter-hero');if(!hero||hero.closest('#introduction'))return;
   var items=[].slice.call(document.querySelectorAll('.sub-head,[data-nav-top]'));
   var pick=function(el){return el.dataset.navLabel?{textContent:el.dataset.navLabel}:(el.querySelector('h2')||el.querySelector('h3'))};
-  if(items.length<2){items=[].slice.call(document.querySelectorAll('.sub-title:not(.st-nested),[data-nav-label]')).filter(function(el){return !el.closest('[hidden]')&&(el.dataset.navLabel||el.querySelector('h3'))});pick=function(el){return el.dataset.navLabel?{textContent:el.dataset.navLabel}:el.querySelector('h3')};}
+  if(items.length<2){items=[].slice.call(document.querySelectorAll('.sub-title:not(.st-nested):not([data-nav-skip]),[data-nav-label]')).filter(function(el){return !el.closest('[hidden]')&&(el.dataset.navLabel||el.querySelector('h3'))});pick=function(el){return el.dataset.navLabel?{textContent:el.dataset.navLabel}:el.querySelector('h3')};}
   if(items.length<2){
     // no chapter menu (Brand gallery): intro joins the title banner, and the page below rises over it
     var nx0=hero.nextElementSibling,in0=nx0&&nx0.firstElementChild;
@@ -74,7 +74,7 @@ function toggleNav(){document.querySelector('.sidenav').classList.toggle('collap
   var name=document.createElement('p');name.className='csn-name sh-label';name.textContent='In this chapter';
   var list=document.createElement('ul');if(items.length>6)list.classList.add('csn-cols');
   var nested=items.some(function(el){return !!el.querySelector('h2')});
-  var subs=nested?[].slice.call(document.querySelectorAll('.sub-title:not(.st-nested),[data-nav-label]')).filter(function(el){return !el.closest('[hidden]')&&(el.dataset.navLabel||el.querySelector('h3'))}):[];
+  var subs=nested?[].slice.call(document.querySelectorAll('.sub-title:not(.st-nested):not([data-nav-skip]),[data-nav-label]')).filter(function(el){return !el.closest('[hidden]')&&(el.dataset.navLabel||el.querySelector('h3'))}):[];
   if(nested)list.classList.add('csn-nested');
   items.forEach(function(el,i){
     var t=pick(el).textContent.trim();if(!el.id)el.id='s-'+slug(t);
@@ -114,7 +114,7 @@ function toggleNav(){document.querySelector('.sidenav').classList.toggle('collap
   var cur=document.querySelector('.sidenav nav a.active');if(!cur)return;
   var slug=function(t){return t.toLowerCase().replace(/&amp;|&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')};
   var idOf=function(el,h){if(!el.id)el.id='s-'+slug(h.textContent.trim());return el.id};
-  var h3s=[].slice.call(document.querySelectorAll('.sub-title:not(.st-nested),[data-nav-label]')).filter(function(el){return !el.closest('[hidden]')&&(el.dataset.navLabel||el.querySelector('h3'))});
+  var h3s=[].slice.call(document.querySelectorAll('.sub-title:not(.st-nested):not([data-nav-skip]),[data-nav-label]')).filter(function(el){return !el.closest('[hidden]')&&(el.dataset.navLabel||el.querySelector('h3'))});
   var mk=function(cls,href,txt){var a=document.createElement('a');a.className=cls;a.href=href;a.textContent=txt;return a};
   var subs=[],n=cur.nextElementSibling;while(n&&n.classList.contains('sub')){subs.push(n);n=n.nextElementSibling}
   var heads=[].slice.call(document.querySelectorAll('.sub-head,[data-nav-top]')).filter(function(el){return el.querySelector('h2')||el.hasAttribute('data-nav-top')});
