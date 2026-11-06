@@ -43,13 +43,13 @@ body.pb-solo.roi{background:var(--color-neutral-darkest);color:var(--color-white
 </style>
 </head>
 <body class="subpage pb-solo roi">
-<header class="pb-top"><div class="pb-head"></div><a class="pb-back" href="05-art-direction.html#make">Back to the art direction guide</a></header>
+<header class="pb-top"><div class="pb-head"></div><a class="pb-back" href="05-art-direction.html">Back to Imagery</a></header>
 <section class="roi-hero"><h1>Build an on-brand photo prompt</h1><p>Pick the details, then send the prompt to ChatGPT or Figma.</p></section><main class="pb-main" id="photography"></main>
 <script>
 (function(){
   var V='?v=181',G='?v=231';
   function load(src){return new Promise(function(r){var s=document.createElement('script');s.src=src;s.onload=r;s.onerror=r;document.body.appendChild(s)})}
-  fetch('05-art-direction.html',{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
+  fetch('Prompt builder.html',{cache:'no-store'}).then(function(r){return r.text()}).then(function(t){
     var doc=new DOMParser().parseFromString(t,'text/html');
     var head=doc.getElementById('make'),bd=doc.querySelector('[data-builder]');
     if(head&&!head.hasAttribute('data-builder'))document.querySelector('.pb-head').appendChild(document.importNode(head,true)).removeAttribute('id');

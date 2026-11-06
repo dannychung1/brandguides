@@ -840,3 +840,7 @@ html body .bd .bd-out .bd-btn:hover{border-color:var(--color-white)!important}ht
 /* Hangline: the h3 stands alone; the right-hand paragraph hangs from the rule line under it,
    so the rule and the body share one top line. Wide screens only — below 1100 the body stacks. */
 @media (min-width:1101px){.sub-title.st-row>.st-body{grid-row:2/span 2;margin-top:var(--sp-rule,12px)}.sub-title.st-row>.st-body p{line-height:1.45}}
+
+/* Side nav: 1 step down the type scale (Body XL), so 9 chapters and the builder fit without crowding */
+.sidenav nav a{font-size:var(--text-body-xl,1.25rem);line-height:1.3;padding-block:4px}
+.sidenav nav a.nav-tool{font-size:var(--text-body-m,1rem)}
