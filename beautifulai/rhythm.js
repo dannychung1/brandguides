@@ -2,7 +2,7 @@
 // Heights snap to the 8px vertical grid. Vertical 9:16 motion and product UI screenshots keep their own shape.
 (function(){
   var FULL=3840/2336,GRID=8;
-  var SKIP='.bu-static,#color .donts,#logo .donts:not(.dos),#archetype,.pr-card,.pr-img,.ad-mosaic,[data-mosaic],.cover,.chapter-hero,header,nav,footer,.sidenav,.wr-stage,.bd,.copy-hex,.mini-slide,.ldm-vp,.sys-dot,.pair,.minsize,#brand-shape,[data-rhythm="off"]';
+  var SKIP='.bu-static,#color .donts,#logo .donts:not(.dos),#archetype,.pr-card,.pr-img,.ad-mosaic,[data-mosaic],.cover,.chapter-hero,header,nav,footer,.sidenav,.wr-stage,.bd,.copy-hex,.mini-slide,.ldm-vp,.sys-dot,.pair,.minsize,#brand-shape,.ly,.sbd,[data-rhythm="off"]';
   var isUI=function(s){return /prod-ui/i.test(s||'')};
   function frameOf(m){
     var el=m.parentElement;

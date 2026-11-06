@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="styles.css?v=213">
 <link rel="stylesheet" href="photography.css?v=200">
 <link rel="stylesheet" href="white-ground.css?v=213">
-<link rel="stylesheet" href="ds-restyle.css?v=301">
+<link rel="stylesheet" href="ds-restyle.css?v=304">
 <link rel="stylesheet" href="ad-v2.css?v=300">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0">
 <script src="image-slot.js?v=130"></script>
@@ -49,28 +49,179 @@
     </div>
   </div>
   <div class="wrap"><div class="sub-head"><h2>Imagery</h2></div></div>
+  <div class="wrap"><div class="section-head im-intro"><p class="lede">We keep professionals and their ideas in their best light. Our approach is documentary storytelling made ready for commercial use: real people doing real work, and the ideas they build in our product, each lit so it looks its best.</p><p class="im-map">Story beats sets what each frame focuses on. Layering shows how the person, the product and the work fit together. How we look holds the rules for every image.</p></div></div>
+  <style>#photography .im-intro .im-map{margin:16px 0 0;max-width:60ch;font-size:var(--text-body-l,1.125rem);line-height:1.5;color:var(--color-neutral-dark,#4C5255)}</style>
   <div class="wrap"><div class="ad-mosaic" data-mosaic aria-label="Our imagery at a glance"><div class="am-tile am-1"></div><div class="am-tile am-2"></div><div class="am-tile am-3"></div><div class="am-tile am-4"></div><div class="am-tile am-5"></div></div></div>
   <div class="wrap">
-    <div class="sub-title st-row"><h3>In their best light</h3><p class="st-rule">Our approach is documentary storytelling made ready for commercial use.</p></div>
-    <div class="pr-pair"><article class="pr-card"><figure class="pr-img"><img src="assets/photo-group-cafe.webp" style="object-position:50% 30%" alt="A professional in sharp focus explains an idea to their team at a sunlit table while colleagues listen"></figure><div class="pr-card-body"><h4>Professionals at work</h4><p class="pp-lead">We document professionals’ moments of flow at home, the office, and everywhere else they work. Shown in clear, crisp light, they are active, mid-task, and rarely posed.</p></div></article><article class="pr-card"><figure class="pr-img pr-crop-light" style="background:var(--white)"><img src="assets/product-floating-light.webp?v=2" alt="Our editor in a thin glass frame floating over Gallery Grey with soft Azul and Rose light, 2 teammates editing a revenue chart together"></figure><div class="pr-card-body"><h4>Product in the light</h4><p class="pp-lead">We show our real, live product interface in our brand light. Brand colors subtly spotlight and frame the platform, showing off our work-ready features.<br></p></div></article><article class="pr-card"><figure class="pr-img" style="background:url('assets/brand-gradient.avif') center/cover var(--blue-deepest)"><img style="transform:scale(1.5);transform-origin:72% 38%;width:100%;height:100%;object-fit:cover" src="assets/hero-content-fan.webp" alt="A deck of thin slides flying through an open Base Blue space lit with soft Azul and magenta"></figure><div class="pr-card-body"><h4>Presentations in focus</h4><p class="pp-lead">Decks are hero in abstract space, with nothing in the frame slides and brand spotlights. The background is brand backgrounds or a neutral picked from the slide content.</p></div></article></div>
+    <div class="sub-title st-row"><h3>Story beats</h3><p class="st-rule">Every story moves through 3 beats, and every frame has 1 hero: the professional or her idea.</p><div class="st-body"><p>Read across a row to follow the story, and down a column to compare the 2 heroes in the same beat. Each beat sets what we look at first, where the light falls and how much of the product we show.</p></div></div>
+    <style>
+    #photography .sbd{background:#fff;border-radius:var(--radius-xl,18px);box-shadow:var(--shadow-xxsmall);padding:clamp(20px,2.8vw,40px);margin:0 0 96px}
+    #photography .sbd .swipe{display:none}
+    #photography .sbd .sb{display:grid;grid-template-columns:132px repeat(3,minmax(0,1fr));gap:24px var(--gut,32px);align-items:start}
+    #photography .sbd .lab{margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral,#7F8486)}
+    #photography .sbd .colh .t{display:block;font-size:clamp(1.25rem,1.9vw,1.75rem);font-weight:500;line-height:1.15;letter-spacing:-.01em;margin-top:8px;color:#001A24}
+    #photography .sbd .rowh{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral,#7F8486);padding-top:8px}
+    #photography .sbd .rowh.hero{font-size:1.125rem;font-weight:500;line-height:1.25;letter-spacing:0;text-transform:none;color:#001A24;padding-top:0}
+    #photography .sbd .fr{position:relative;aspect-ratio:16/10;border-radius:var(--radius-m,8px);overflow:hidden;background:#F0F3F5;margin:0}
+    #photography .sbd .fr img{width:100%;height:100%;object-fit:cover;display:block}
+    #photography .sbd .mk{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:500;background:#001A24;color:#fff;box-shadow:0 0 0 2px #fff,0 2px 6px rgba(0,26,36,.25)}
+    #photography .sbd .mk.two{background:#fff;color:#001A24;box-shadow:inset 0 0 0 2px #001A24,0 2px 6px rgba(0,26,36,.2)}
+    #photography .sbd .slot{display:grid;place-items:center;text-align:center;padding:8%}
+    #photography .sbd .slot .lab{margin-bottom:8px}#photography .sbd .slot p{margin:0;font-size:.875rem;line-height:1.45;color:#4C5255;max-width:34ch}
+    #photography .sbd .cap{margin-top:12px;display:grid;gap:6px;font-size:.875rem;line-height:1.45;color:#001A24}
+    #photography .sbd .cap div{display:grid;grid-template-columns:20px 1fr;gap:8px;align-items:start}#photography .sbd .cap div:first-child{font-weight:500}#photography .sbd .cap div+div{color:#4C5255}
+    #photography .sbd .n{width:18px;height:18px;border-radius:50%;font-size:10px;font-weight:500;display:grid;place-items:center;background:#001A24;color:#fff;margin-top:1px}
+    #photography .sbd .n.two{background:#fff;color:#001A24;box-shadow:inset 0 0 0 1.5px #001A24}
+    #photography .sbd .pres{display:flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral,#7F8486);margin-top:4px}
+    #photography .sbd .meter{display:inline-flex;gap:3px}#photography .sbd .meter i{width:14px;height:6px;border-radius:2px;background:#D8DADA}#photography .sbd .meter i.on{background:#001A24}
+    #photography .sbd .flow{grid-column:2/-1;position:relative;height:16px}
+    #photography .sbd .flow::before{content:"";position:absolute;left:0;right:12px;top:7px;border-top:1px solid #D8DADA}
+    #photography .sbd .flow::after{content:"";position:absolute;right:2px;top:2px;border:6px solid transparent;border-left-color:#B2B5B6}
+    #photography .sbd .sep{grid-column:1/-1;border-top:1px solid #D8DADA;margin:16px 0 8px}
+    #photography .sbd .nuc{font-size:.9375rem;line-height:1.45;color:#001A24}
+    #photography .sbd .nuc p{margin:0 0 10px}#photography .sbd .nuc p:last-child{margin:0}
+    #photography .sbd .nuc em{display:block;font-style:normal;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral,#7F8486);margin-bottom:2px}
+    @media(max-width:860px){
+     #photography .sbd{padding:20px 0 20px 16px}
+     #photography .sbd .swipe{display:block;margin:0 0 16px;font-size:.875rem;color:#4C5255}
+     #photography .sbd .sb{grid-template-columns:76px repeat(3,76vw);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:76px;padding-right:16px;scrollbar-width:none}
+     #photography .sbd .sb::-webkit-scrollbar{display:none}
+     #photography .sbd .sb>.cell,#photography .sbd .sb>.colh,#photography .sbd .sb>.nuc{scroll-snap-align:start}
+     #photography .sbd .rowh,#photography .sbd .sb-corner{position:sticky;left:0;z-index:3;background:#fff;align-self:stretch;font-size:10px;padding-right:8px}
+     #photography .sbd .rowh.hero{font-size:.8125rem;line-height:1.25}
+    }
+    </style>
+    <div class="sbd"><p class="swipe">Swipe to move through the beats →</p><div class="sb"><div class="sb-corner"></div><div class="colh"><span class="lab">Beat 1</span><span class="t">Shape it with AI</span></div><div class="colh"><span class="lab">Beat 2</span><span class="t">Craft it together</span></div><div class="colh"><span class="lab">Beat 3</span><span class="t">Present and share</span></div><div class="rowh hero">Professional as hero</div><div class="cell"><figure class="fr"><img src="assets/sb-pro-shape.webp" alt="A professional at a sunlit desk, deep in thought over her laptop" loading="lazy"><span class="mk" style="left:34%;top:22%">1</span><span class="mk two" style="left:14%;top:80%">2</span></figure><div class="cap"><div><span class="n">1</span><span>Her in flow, thinking and creating</span></div><div><span class="n two">2</span><span>Her idea on her screen, soft</span></div><span class="pres">Product presence <span class="meter"><i class="on"></i><i class="on"></i><i></i></span></span></div></div><div class="cell"><div class="fr slot"><div><p class="lab">Asset to make</p><p>A tight crop inside the product. Her cursor is large and glowing, with her manager’s smaller cursor beside it on the same element.</p></div></div><div class="cap"><div><span class="n">1</span><span>Her cursor, large and brightest</span></div><div><span class="n two">2</span><span>Her manager’s smaller cursor beside hers</span></div><span class="pres">Product presence <span class="meter"><i class="on"></i><i class="on"></i><i></i></span></span></div></div><div class="cell"><figure class="fr"><img src="assets/sb-pro-present.webp" alt="A professional presenting in a sunlit office, mid-gesture" loading="lazy"><span class="mk" style="left:34%;top:17%">1</span><span class="mk two" style="left:86%;top:40%">2</span></figure><div class="cap"><div><span class="n">1</span><span>Her, showing up ready</span></div><div><span class="n two">2</span><span>The room, soft around her</span></div><span class="pres">Product presence <span class="meter"><i class="on"></i><i></i><i></i></span></span></div></div><div></div><div class="flow" aria-hidden="true"></div><div class="rowh hero">Idea as hero</div><div class="cell"><figure class="fr"><img src="assets/sb-idea-shape.webp" alt="A draft outline taking shape in Create with AI" loading="lazy"><span class="mk" style="left:44%;top:42%">1</span><span class="mk two" style="left:60%;top:52%">2</span></figure><div class="cap"><div><span class="n">1</span><span>The idea in its soft clay state: a draft outline</span></div><div><span class="n two">2</span><span>Trace of her: her cursor</span></div><span class="pres">Product presence <span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div></div><div class="cell"><figure class="fr"><img src="assets/sb-idea-craft.webp" alt="One Smart Slide diagram selected, with 2 teammates’ cursors on it" loading="lazy"><span class="mk" style="left:24%;top:64%">1</span><span class="mk two" style="left:12%;top:74%">2</span></figure><div class="cap"><div><span class="n">1</span><span>1 Smart Slide element, selected and in focus</span></div><div><span class="n two">2</span><span>Trace of her: her cursor, with a teammate’s</span></div><span class="pres">Product presence <span class="meter"><i class="on"></i><i class="on"></i><i class="on"></i></span></span></div></div><div class="cell"><figure class="fr"><img src="assets/sb-idea-present.webp" alt="A finished pharma pitch title slide, full frame" loading="lazy"><span class="mk" style="left:30%;top:30%">1</span></figure><div class="cap"><div><span class="n">1</span><span>Her slide, big, whole and the brightest thing</span></div><div><span class="n two">2</span><span>Trace of her: none needed. She is implied</span></div><span class="pres">Product presence <span class="meter"><i class="on"></i><i></i><i></i></span></span></div></div><div class="sep"></div><div class="rowh">Focus</div><div class="nuc"><p><em>Professional</em>Her in flow, thinking and creating</p><p><em>Idea</em>The idea in its soft clay state: prompts and draft outlines</p></div><div class="nuc"><p><em>Professional</em>Her presence and influence in the product. Less product, more of her</p><p><em>Idea</em>The content taking shape, like a chart, with her as a smaller cursor</p></div><div class="nuc"><p><em>Professional</em>Her showing up ready, in a video bubble, a room or a call</p><p><em>Idea</em>The slide, big and whole. Her talking head small, or gone</p></div><div class="rowh">Spotlight</div><div class="nuc"><p><em>Professional</em>On her: a glow from the screen, or sun or room light</p><p><em>Idea</em>Brand color around the UI, the idea or the prompt</p></div><div class="nuc"><p><em>Professional</em>Her cursor and its influence, brightest</p><p><em>Idea</em>The work area she is changing, brightest</p></div><div class="nuc"><p><em>Professional</em>She is the brightest thing in frame</p><p><em>Idea</em>The whole slide is the brightest, most vibrant thing</p></div><div class="rowh">People</div><div class="nuc">Her alone with the idea</div><div class="nuc">Her plus 1 teammate, such as her manager</div><div class="nuc">Her and her audience</div><div class="rowh">Product presence</div><div class="nuc"><p><em>Professional</em>Some</p><p><em>Idea</em>High</p></div><div class="nuc"><p><em>Professional</em>Medium: more of her, less product</p><p><em>Idea</em>Peaks</p></div><div class="nuc"><p><em>Professional</em>Low</p><p><em>Idea</em>Low</p></div></div></div>
 
-    <div class="sub-title pr-rules-head"><h3>How we look</h3><p class="st-rule">These hold for every image and every shot type. Break one and the image doesn't ship.</p></div>
-    <div class="rt-tabs" role="tablist" aria-label="Image subject"><button type="button" role="tab" id="rt-t1" aria-controls="rt-p1" aria-selected="true">Professionals</button><button type="button" role="tab" id="rt-t2" aria-controls="rt-p2" aria-selected="false" tabindex="-1">Product</button><button type="button" role="tab" id="rt-t3" aria-controls="rt-p3" aria-selected="false" tabindex="-1">Presentations</button></div>
-    <div class="rule-grid" role="tabpanel" id="rt-p1" aria-labelledby="rt-t1">
-      <article class="rule-card"><figure class="pr-img"><img style="transform:scale(-1.2,1.2);transform-origin:50% 90%" src="assets/photo-rule-light.jpg" alt="A professional at a sunlit desk, her face turned toward warm side light"></figure><div class="rule-body"><h4 class="rule-h">Light</h4><p>Turn the professional’s face toward the light so it spotlights them. Let the light fall off or wash the space around them as the setting needs. The warm sun sets our pros apart from the cool neutrals of our product and slides.</p></div></article>
-      <article class="rule-card"><figure class="pr-img"><img src="assets/photo-rule-camera-2.jpg" alt="A professional working at a sunlit table, seen from table height past a glass and a softly blurred plant"></figure><div class="rule-body"><h4 class="rule-h">Camera</h4><p>Shoot from seated table height past a soft foreground object, such as a glass, a mug or a colleague’s shoulder, so we feel in the room.</p></div></article>
-      <article class="rule-card"><figure class="pr-img"><img src="assets/photo-rule-candid-2.webp" alt="A professional on a sofa reaches over to a shared laptop while a colleague reads along, mug in hand"></figure><div class="rule-body"><h4 class="rule-h">Keep it candid</h4><p>We photograph pros mid-action or mid-gesture, the way a documentary photographer would, so every image shows real work in progress. Nobody poses or sits idle for our camera.</p></div></article>
-      <article class="rule-card"><figure class="pr-img thirds"><img src="assets/photo-rule-composition.webp" alt="A professional in a linen shirt shakes hands with a colleague across a desk, his eye line on the upper third"></figure><div class="rule-body"><h4 class="rule-h">Composition</h4><p>Hold 1 hero with room to breathe, and place their eye line on a third. When we show 2 or more colleagues, the light favors the professional the story is about.</p></div></article>
-      <article class="rule-card"><figure class="pr-img"><img src="assets/photo-rule-wardrobe-3.webp" alt="A professional in a navy overshirt over a white tee sits at a round table with a laptop, glasses in hand"></figure><div class="rule-body"><h4 class="rule-h">Casting and wardrobe</h4><p>Cast wide across role, age, geography, ability and body shape, so every professional sees their team in our frames. Dress them in classic, timeless workwear in quiet neutrals, with brand color accent that fills no more than 10% of the frame. We show heritage only through real features, never through cultural jewelry, dress, decor or props.</p></div></article>
-      <article class="rule-card"><figure class="pr-img" data-prompt-src="photo-pro-train.webp"><img src="assets/photo-rule-product-slides-2.webp" alt="A professional on a sofa reviews printouts beside a laptop, with 3 slides floating in line along the soft-focus wall behind him"></figure><div class="rule-body"><h4 class="rule-h">With product or slides</h4><p>The product or slides sit in frame as a secondary part of the work, with screens framing the professional. Words and graphics appear only on the slides or product, while the rest of the frame has no writing, signage, logos or numbers.</p></div></article>
+    <style>
+    #photography .ly-intro{margin-top:96px}
+    #photography .ly{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut,32px);margin:32px 0 var(--gut,32px);align-items:stretch}
+    #photography .ly-stack{grid-column:span 5;background:#fff;border-radius:var(--radius-xl,18px);box-shadow:var(--shadow-xxsmall);padding:24px;display:grid;place-items:center}
+    #photography .ly-st{position:relative;width:78%;aspect-ratio:1.35/1}
+    #photography .ly-l{position:absolute;width:58%;aspect-ratio:4/3;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,26,36,.18)}
+    #photography .ly-l img{width:100%;height:100%;object-fit:cover;display:block}
+    #photography .ly-l.l1{left:0;top:0;background:url(assets/brand-gradient.avif) center/cover #002533}
+    #photography .ly-l.l2{left:14%;top:14%}
+    #photography .ly-l.l3{left:28%;top:28%;background:#fff;display:grid;grid-template-rows:14% 1fr;}
+    #photography .ly-l.l3 .bar{background:#F0F3F5;display:flex;align-items:center;gap:6%;padding:0 6%}
+    #photography .ly-l.l3 .bar i{display:block;height:34%;aspect-ratio:1;border-radius:50%;background:#B2B5B6}
+    #photography .ly-l.l3 .bar i.az{background:#00B9FF;border-radius:3px;aspect-ratio:2.4}
+    #photography .ly-l.l3 .bar i.ro{background:#DB2475;margin-left:auto}
+    #photography .ly-l.l3 .pan{margin:8% 8% 0;background:#F0F3F5;border-radius:4px;border:2px solid #00B9FF}
+    #photography .ly-l.l4{left:42%;top:42%;background:#F4F1EA;padding:5%;display:grid;grid-template-columns:1fr 1fr 1fr;gap:6%;align-items:end}
+    #photography .ly-l.l4 b{display:block;background:#1E2A1F;border-radius:2px}#photography .ly-l.l4 b:nth-child(1){height:45%;background:#B9E3A4}#photography .ly-l.l4 b:nth-child(2){height:70%}#photography .ly-l.l4 b:nth-child(3){height:55%;background:#B9E3A4}
+    #photography .ly-n{position:absolute;z-index:3;width:24px;height:24px;border-radius:50%;background:#001A24;color:#fff;font-size:12px;font-weight:500;display:grid;place-items:center}
+    #photography .ly-ex{grid-column:2/span 10;margin:0;position:relative;aspect-ratio:1728/884;align-self:center;border-radius:var(--radius-xl,18px);overflow:hidden}
+    #photography .ly-ex img{width:100%;height:100%;object-fit:cover;display:block}
+    #photography .ly-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gut,32px);margin:0 0 var(--gut,32px)}
+    #photography .ly-c{background:#fff;border-radius:var(--radius-l,12px);box-shadow:var(--shadow-xxsmall);padding:24px;display:grid;gap:10px;align-content:start}
+    #photography .ly-c .hd{display:flex;align-items:center;gap:10px}
+    #photography .ly-c .hd .ly-n{position:static}
+    #photography .ly-c h4{margin:0;font-size:18px;font-weight:500}
+    #photography .ly-c p{margin:0;font-size:15px;line-height:1.5}
+    #photography .ly-chips{display:flex;gap:6px}
+    #photography .ly-chips i{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,26,36,.12)}
+    #photography .ly-rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px var(--gut,32px);margin:0 0 64px;padding:0;list-style:none}
+    #photography .ly-rules li{display:grid;grid-template-columns:24px 1fr;gap:10px;font-size:15px;line-height:1.5}
+    #photography .ly-rules li .material-symbols-outlined{font-size:22px;width:24px;overflow:hidden;color:#001A24}
+    @media (max-width:1100px){#photography .ly-stack,#photography .ly-ex{grid-column:1/-1}#photography .ly-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media (max-width:640px){#photography .ly-cards,#photography .ly-rules{grid-template-columns:1fr}}
+    #photography .ly-stack{grid-template-rows:1fr auto auto;gap:16px;place-items:center}
+    #photography .ly-l,#photography .ly-stack .ly-n{transition:opacity .5s ease,filter .5s ease}
+    #photography .ly-stack .off.ly-l{opacity:.07;filter:grayscale(1);box-shadow:none}
+    #photography .ly-stack .off.ly-n{opacity:.25}
+    #photography .ly-cap{text-align:center;max-width:36ch;min-height:4.6em}
+    #photography .ly-cap p{margin:0}
+    #photography .ly-cap-t{font-size:18px;font-weight:500;color:#001A24}
+    #photography .ly-cap-b{font-size:14px;line-height:1.45;color:var(--color-neutral-dark,#4C5255);margin-top:4px!important}
+    #photography .ly-dots{display:flex;gap:8px}
+    #photography .ly-dots button{width:28px;height:6px;border-radius:3px;border:0;padding:0;background:#D8DADA;cursor:pointer}
+    #photography .ly-dots button[aria-selected="true"]{background:#001A24}
+    #photography .ly-meta{display:flex;justify-content:center;gap:20px;margin-top:10px!important;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral,#7F8486)}
+    #photography .ly-meta b{font-weight:500;letter-spacing:.04em;margin-left:6px}
+    #photography .ly-meter{display:inline-flex;gap:3px;vertical-align:middle}
+    #photography .ly-meter i{width:14px;height:8px;border-radius:2px;background:#D8DADA}
+    #photography .ly-meter i.on{background:#001A24}
+    #photography .ly-cap{min-height:7.2em!important;max-width:40ch!important}
+    #photography .ly-dots button{width:32px!important;height:32px!important;border-radius:50%!important;font-size:13px;font-weight:500;color:#001A24;background:#F0F3F5!important}
+    #photography .ly-dots button[aria-selected="true"]{background:#001A24!important;color:#fff}
+    </style>
+    <div class="sub-title st-row ly-intro"><h3>Layering</h3><p class="st-rule">We pick the layers each beat needs, and each layer keeps its own color.</p><div class="st-body"><p>The professional's world and the product are 2 color universes, so we never match their hues. We pair them through light and depth, so every frame reads as part of the same story.</p></div></div>
+
+    <div class="ly">
+      <figure class="ly-ex">
+        <img src="assets/layering-example.webp" alt="A professional at a café laptop, framed on the brand gradient, with product layout pickers and a cursor on the left and his revenue slide breaking out of the photo on the right">
+        <span class="ly-n" style="left:5%;top:8%">1</span><span class="ly-n" style="left:44%;top:16%">2</span><span class="ly-n" style="left:21%;top:16%">3</span><span class="ly-n" style="left:70%;top:58%">4</span>
+      </figure>
     </div>
-    <div class="rule-grid" role="tabpanel" id="rt-p3" aria-labelledby="rt-t3" hidden>
-      <article class="rule-card"><figure class="pr-img"><img src="assets/photo-real-slide-laptop.webp?v=2" alt="A professional at a laptop showing a real company overview slide"></figure><div class="rule-body"><h4 class="rule-h">Real slides</h4><p>Every slide we show is one professionals can build in our platform today. We generate blank slide faces and place real slides on them in post.</p></div></article>
-      
-      <article class="rule-card"><figure class="pr-img"><img data-keyline src="assets/hero-content-stack.webp" style="object-position:50% 50%" alt="A stack of real slides on white with a soft Azul glow"></figure><div class="rule-body"><h4 class="rule-h">Our brand light</h4><p>Set slides on Gallery Grey or Base Blue. A soft glow of Agency Azul and Ready Rose fills no more than 20% of the frame.</p></div></article><article class="rule-card"><figure class="pr-img" style="background:url('assets/brand-gradient.avif') center/cover var(--blue-deepest)"><img style="transform:scale(1.5);transform-origin:72% 38%" src="assets/hero-content-fan.webp" alt="Thin slides flying through an open Base Blue space"></figure><div class="rule-body"><h4 class="rule-h">Endless and nimble</h4><p>Show thin slides floating, flying or pulling apart in depth, and let them run past the edge of the frame so the deck feels endless.</p></div></article><article class="rule-card"><figure class="pr-img arc-grid"><div class="arc-tilt" style="top:51.8%"><img src="assets/slide-arc-1-title.webp" alt="Incident report title slide" style="position:absolute;width:123px;height:60px"><img src="assets/slide-arc-3-timeline.webp" alt="Incident timeline slide"><img src="assets/slide-arc-6-impact.webp" alt="Business impact slide"><img src="assets/slide-arc-7-response.webp" alt="Incident response measures slide"><img src="assets/slide-arc-4-status.webp" alt="System status slide"><img src="assets/slide-arc-10-stakeholders.webp" alt="Stakeholder communication slide"><img src="assets/slide-arc-5-takeaways.webp" alt="Key takeaways slide"><img src="assets/slide-arc-9-plan.webp" alt="Action plan slide"><img src="assets/slide-arc-8-closing.webp" alt="Closing slide stating the incident is resolved"><img src="assets/slide-arc-2-summary.webp" alt="Incident summary slide"></div></figure><div class="rule-body"><h4 class="rule-h">Show context</h4><p>Show a business story across the deck. Headlines, data and charts build from the problem to the result, so every deck reads as one argument.</p></div></article><article class="rule-card"><figure class="pr-img" style="background:url('assets/brand-gradient.avif') center/cover var(--blue-deepest);display:grid;place-items:center"><img src="assets/slide-pharma-pitch.webp" alt="A real pharma pitch deck title slide with a portrait of a senior professional" style="width:72%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-s);box-shadow:var(--shadow-large)"></figure><div class="rule-body"><h4 class="rule-h">Legitimate industries</h4><p>Show slides from a range of real industries, because we serve serious business. Every company, metric and headline reads as plausible work.</p></div></article><article class="rule-card"><figure class="pr-img persp-zoom" style="background:url('assets/brand-gradient.avif') center/cover var(--blue-deepest)"><img src="assets/slide-donor-donut.webp" alt="A donor impact report slide with a simple donut chart of where support went"></figure><div class="rule-body"><h4 class="rule-h">Simple and clear</h4><p>Choose simple, clear slides over busy ones. Professionals scan the deck and understand what it is about at a glance.</p></div></article>
+
+
+    <div class="ly-cards">
+      <div class="ly-c"><div class="hd"><span class="ly-n">1</span><h4>Environment</h4></div><div class="ly-chips"><i style="background:#002533"></i><i style="background:#F0F3F5"></i><i style="background:url(assets/brand-gradient.avif) center/cover"></i></div><p>Base Blue, Gallery Grey or the brand gradient. This is our brand, and it sets the ground for everything above it.</p></div>
+      <div class="ly-c"><div class="hd"><span class="ly-n">2</span><h4>The professional</h4></div><div class="ly-chips"><i style="background:#C98A4B"></i><i style="background:#6B4A2F"></i><i style="background:#E9D9C3"></i></div><p>She leads every frame, in warm natural light. She is in all 3 beats.</p></div>
+      <div class="ly-c"><div class="hd"><span class="ly-n">3</span><h4>Chrome</h4></div><div class="ly-chips"><i style="background:#fff"></i><i style="background:#D8DADA"></i><i style="background:#2B2F31"></i><i style="background:#00B9FF"></i><i style="background:#DB2475"></i></div><p>The product in full: neutral panels in light or dark mode, Ready Rose for AI and Agency Azul for her actions. It rises and falls with the beat.</p></div>
+      <div class="ly-c"><div class="hd"><span class="ly-n">4</span><h4>Her idea</h4></div><div class="ly-chips"><i style="background:#F4F1EA"></i><i style="background:#B9E3A4"></i><i style="background:#1E2A1F"></i></div><p>Her slides, in whatever theme the deck uses. The idea is the point of every frame, and it brings the most color.</p></div>
     </div>
+
+    <ul class="ly-rules">
+      <li><span class="material-symbols-outlined" aria-hidden="true">swap_horiz</span><span>Color follows the beat: Rose leads while AI shapes the idea, Azul leads while she crafts it, and her own work leads when she presents.</span></li>
+      <li><span class="material-symbols-outlined" aria-hidden="true">light_mode</span><span>Light falls from the same side across every layer, from the window in the photo to the glow in the gradient.</span></li>
+      <li><span class="material-symbols-outlined" aria-hidden="true">layers</span><span>Value climbs as the layers stack. The environment sits darkest and her idea sits brightest.</span></li>
+      <li><span class="material-symbols-outlined" aria-hidden="true">open_in_full</span><span>Her slide breaks out of the photo's frame. That overlap is where the idea moves from her into the product.</span></li>
+      <li><span class="material-symbols-outlined" aria-hidden="true">contrast</span><span>Chrome contrasts with its ground: light chrome on Base Blue, dark chrome on Gallery Grey.</span></li>
+      <li><span class="material-symbols-outlined" aria-hidden="true">crop_free</span><span>A slide whose theme echoes our gradient sits inside the chrome or on Gallery Grey, never straight on the brand field.</span></li>
+      <li><span class="material-symbols-outlined" aria-hidden="true">dashboard_customize</span><span>Our slide alphabet, the layouts AI builds from, appears small beside a picker or cursor, so it reads as the product at work.</span></li>
+    </ul>
+
+    <div class="sub-title st-row pr-rules-head"><h3>How we look</h3><p class="st-rule">Every image shows a professional and her idea, and these 5 rules hold in every beat.</p><div class="st-body"><p>She and her idea are always the subject. Our product appears as much as the beat calls for: front and center while she shapes and crafts, quiet while she presents.</p></div></div>
+    <style>
+#photography .hl{margin:32px 0 64px;display:grid;gap:40px}
+#photography .hl-row{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut,32px);align-items:start}
+#photography .hl-hd{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:var(--gut,32px);margin-bottom:-24px}
+#photography .hl-hd p,#photography .hl-tx .hl-n{margin:0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral,#7F8486)}
+#photography .hl-hd p:nth-child(1){grid-column:5/span 4}#photography .hl-hd p:nth-child(2){grid-column:9/span 4}
+#photography .hl-tx{grid-column:span 4;display:grid;gap:10px;padding-top:4px}
+#photography .hl-tx .rule-h{margin:0!important;font-size:var(--text-h6-size,1.5rem)!important;font-weight:500;line-height:1.2}
+#photography .hl-tx p{margin:0;font-size:15px;line-height:1.5}
+#photography .hl-tx p b{font-weight:500}
+#photography .hl .rule-card{grid-column:span 4;display:block!important;padding:0!important;margin:0!important;background:none!important;border:0!important;box-shadow:none!important}
+#photography .hl .pr-img{aspect-ratio:4/3!important;height:auto!important;border-radius:var(--radius-l,12px)!important;overflow:hidden;margin:0!important}
+#photography .hl .pr-img>img{width:100%;height:100%;object-fit:cover}
+#photography .hl-note{grid-column:5/-1;margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-darkest,#001A24)}
+@media (max-width:900px){#photography .hl-hd{display:none}#photography .hl-tx{grid-column:1/-1}#photography .hl .rule-card{grid-column:span 6}#photography .hl .rule-card::before{display:block;margin:0 0 8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--color-neutral,#7F8486)}#photography .hl .rule-card.r::before{content:"The professional"}#photography .hl .rule-card.l::before{content:"Her idea"}#photography .hl-note{grid-column:1/-1}}
+</style>
+<div class="hl">
+      <div class="hl-hd" aria-hidden="true"><p>The professional</p><p>Her idea</p></div>
+      <div class="hl-row">
+        <div class="hl-tx"><p class="hl-n">01</p><h4 class="rule-h">Light</h4><p><b>The professional.</b> Turn her face toward warm sun so it spotlights her.</p><p><b>Her idea.</b> Her slides sit in a soft Azul and Rose glow on Gallery Grey or Base Blue, never brighter than she is.</p></div>
+        <article class="rule-card r"><figure class="pr-img"><img style="transform:scale(-1.2,1.2);transform-origin:50% 90%" src="assets/photo-rule-light.jpg" alt="A professional at a sunlit desk, her face turned toward warm side light"></figure></article>
+        <article class="rule-card l"><figure class="pr-img"><img data-keyline src="assets/hero-content-stack.webp" style="object-position:50% 50%" alt="A stack of real slides on white with a soft Azul glow"></figure></article>
+      </div>
+      <div class="hl-row">
+        <div class="hl-tx"><p class="hl-n">02</p><h4 class="rule-h">Real</h4><p><b>The professional.</b> Catch her mid-work, the way a documentary photographer would. Nobody poses.</p><p><b>Her idea.</b> Every slide is one she could build today, from a real industry with plausible numbers. Never a mock-up.</p></div>
+        <article class="rule-card r"><figure class="pr-img"><img src="assets/photo-rule-candid-2.webp" alt="A professional on a sofa reaches over to a shared laptop while a colleague reads along, mug in hand"></figure></article>
+        <article class="rule-card l"><figure class="pr-img" style="background:url('assets/brand-gradient.avif') center/cover var(--blue-deepest);display:grid;place-items:center"><img src="assets/slide-pharma-pitch.webp" alt="A real pharma pitch deck title slide with a portrait of a senior professional" style="width:72%;height:auto!important;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-s);box-shadow:var(--shadow-large)"></figure></article>
+      </div>
+      <div class="hl-row">
+        <div class="hl-tx"><p class="hl-n">03</p><h4 class="rule-h">One focus</h4><p><b>The professional.</b> Hold 1 hero with room to breathe, eye line on a third.</p><p><b>Her idea.</b> Show 1 idea per frame: 1 slide sharp, everything else soft.</p></div>
+        <article class="rule-card r"><figure class="pr-img thirds"><img src="assets/photo-rule-composition.webp" alt="A professional in a linen shirt shakes hands with a colleague across a desk, his eye line on the upper third"></figure></article>
+        <article class="rule-card l"><figure class="pr-img persp-zoom" style="background:url('assets/brand-gradient.avif') center/cover var(--blue-deepest)"><img src="assets/slide-donor-donut.webp" alt="A donor impact report slide with a simple donut chart of where support went"></figure></article>
+      </div>
+      <div class="hl-row">
+        <div class="hl-tx"><p class="hl-n">04</p><h4 class="rule-h">Depth</h4><p><b>The professional.</b> Shoot from table height past a soft foreground object, so we feel in the room.</p><p><b>Her idea.</b> Her slides layer in depth and run past the frame edge, so the work feels bigger than the frame.</p></div>
+        <article class="rule-card r"><figure class="pr-img"><img src="assets/photo-rule-camera-2.jpg" alt="A professional working at a sunlit table, seen from table height past a glass and a softly blurred plant"></figure></article>
+        <article class="rule-card l"><figure class="pr-img" style="background:url('assets/brand-gradient.avif') center/cover var(--blue-deepest)"><img style="transform:scale(1.5);transform-origin:72% 38%" src="assets/hero-content-fan.webp" alt="Thin slides flying through an open Base Blue space"></figure></article>
+      </div>
+      <div class="hl-row">
+        <div class="hl-tx"><p class="hl-n">05</p><h4 class="rule-h">Flow</h4><p><b>The professional.</b> Her idea moves from her to the screen, as part of the work.</p><p><b>Her idea.</b> The product scaffolds it: AI shapes it, Smart Slides craft it, and teammates move it forward.</p></div>
+        <article class="rule-card r"><figure class="pr-img" data-prompt-src="photo-pro-train.webp"><img src="assets/photo-rule-product-slides-2.webp" alt="A professional on a sofa reviews printouts beside a laptop, with 3 slides floating in line along the soft-focus wall behind him"></figure></article>
+        <article class="rule-card l"><figure class="pr-img"><img src="assets/prod-ui-commenting.webp" style="object-position:100% 40%" alt="A teammate comment and a live avatar cursor on a project plan slide"></figure></article>
+      </div>
+      <div class="hl-row"><p class="hl-note"><b>Casting and wardrobe.</b> Cast wide across role, age, geography, ability and body, so every pro sees their team. Dress them in quiet neutrals, with brand color under 10% of the frame.</p></div>
+    </div>
+
     <script>(function(){var t=[].slice.call(document.querySelectorAll('.rt-tabs [role=tab]'));function sel(b){t.forEach(function(x){var on=x===b;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on})}t.forEach(function(b,i){b.addEventListener('click',function(){sel(b)});b.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(!d)return;e.preventDefault();var n=t[(i+d+t.length)%t.length];sel(n);n.focus()})})})()</script>
-    <div class="rule-grid" role="tabpanel" id="rt-p2" aria-labelledby="rt-t2" hidden> <article class="rule-card"><figure class="pr-img"><img src="assets/photo-real-screen-laptop.webp" style="object-position:55% 40%" alt="A professional types on a laptop showing a real slide in our editor, the headline selected with its text toolbar open"></figure><div class="rule-body"><h4 class="rule-h">Live product</h4><p>We show our live product as professionals use it today, in a photo or in open space, never a mock-up.</p></div></article> <article class="rule-card"><figure class="pr-img"><img src="assets/prod-ui-collab-cursors.webp" style="object-position:0% 50%;transform:scale(1.6);transform-origin:0% 86%" alt="The full editor with a process diagram selected and 2 teammates’ cursors, Jason and Ayden, on the slide"></figure><div class="rule-body"><h4 class="rule-h">Simplified and magnified</h4><p>We crop out extra controls and magnify the one that matters, so pros read it at a glance.</p></div></article> <article class="rule-card"><figure class="pr-img" style="background:var(--blue-deepest)"><img data-keyline src="assets/product-outline-light.webp" style="object-position:50% 40%" alt="The outline editor on Base Blue with a soft Azul and Ready Rose glow"></figure><div class="rule-body"><h4 class="rule-h">Our brand light</h4><p>We set the product on Gallery Grey or Base Blue, in a soft Azul and Rose glow.</p></div></article> <article class="rule-card"><figure class="pr-img"><img src="assets/real-product-image-menu.webp" style="object-position:50% 40%;transform:scale(1.1);transform-origin:50% 30%" alt="The image menu open at full size over a softly blurred slide"></figure><div class="rule-body"><h4 class="rule-h">Feature in focus</h4><p>We show 1 feature at full size and in sharp focus, with the slide behind it soft.</p></div></article> <article class="rule-card"><figure class="pr-img"><img src="assets/prod-ui-theme-gtm.webp" style="object-position:0% 40%" alt="The theme colors and fonts panel called out beside a go-to-market title slide, a cursor picking a color"></figure><div class="rule-body"><h4 class="rule-h">UI callouts</h4><p>We call out the control beside or on top of the slide it changes, so both read in 1 frame.</p></div></article> <article class="rule-card"><figure class="pr-img"><img src="assets/prod-ui-commenting.webp" style="object-position:100% 40%" alt="A teammate comment and a live avatar cursor on a project plan slide"></figure><div class="rule-body"><h4 class="rule-h">Avatars for story</h4><p>We add a teammate avatar, name, cursor or comment to point at the feature and tell the story.</p></div></article> </div>
+    
     
     
         <div class="bd" id="make" data-builder data-nav-label="Photo prompt builder">
@@ -127,6 +278,7 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
 #brand-shape .bs-pat .md.two{grid-template-columns:1fr 1fr}
 #brand-shape .bs-pat .md img{width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;display:block;border-radius:var(--radius-m);object-fit:cover}
 #brand-shape .bs-pat .md.tall img{aspect-ratio:4/5}
+#brand-shape .bs-pat .md.two.solo{grid-template-columns:1fr 1fr}
 #brand-shape .bs-pat .md.wide img{aspect-ratio:16/9}
 #brand-shape .bs-pat .md.fr{grid-column:span 9}
 #brand-shape .bs-pat .md.fr>.md{grid-column:auto}
@@ -171,9 +323,11 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
       </div>
       <div class="bs-pat">
         <div class="tx"><p class="bs-cap">02</p><h4>Composition</h4><p>The b and the period compose with our type, product and brand assets. At huge scale, a step lighter or darker than the gradient, they give the layout structure and depth while the message stays in front.</p></div>
-        <div class="md two tall"><img src="assets/shape-quote-card.webp" alt="A customer quote from Okan Dursun, Co-Founder and CEO of Carbon Gate, on the brand gradient with the b cropped large behind it" loading="lazy"><img src="assets/shape-post-card.webp" alt="A Beautiful.ai social post card reading Meetings were never the villain. Misalignment was., on the brand gradient with large cropped shapes behind it" loading="lazy"></div>
+        <div class="md two tall solo"><img src="assets/shape-quote-card.webp" alt="A customer quote from Okan Dursun, Co-Founder and CEO of Carbon Gate, on the brand gradient with the b cropped large behind it" loading="lazy"></div>
       </div>
     </div>
+
+    <div class="sub-title st-row"><h3>Don't</h3><p class="st-rule">These 3 uses break the shapes, so we never make them.</p><div class="st-body"><p>The b never holds a photo, a shape never floats whole on its own, and the period always stays a perfect circle.</p></div></div>
 
     <div class="bs-donts">
       <div class="d"><div class="pv" aria-hidden="true"><div class="bs-b" style="position:absolute;height:64%;left:50%;top:18%;transform:translateX(-50%)"><img src="assets/photo-group-cafe.webp" alt=""></div></div><div class="lb"><span class="material-symbols-outlined" aria-hidden="true">close</span>Don't put a photo inside the b. It turns the logo into a picture frame.</div></div>
@@ -183,6 +337,7 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
   </div>
 </section>
 
+<style>#brand-shape{padding-bottom:16px}#motion .mp-grid{margin-bottom:96px!important}</style>
 <section class="section" id="motion" data-screen-label="13 Motion">
   <div class="wrap"><div class="sub-head"><h2>Motion</h2></div></div>
   <div class="wrap">
@@ -314,8 +469,8 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
 <script src="photo-shows.js?v=130"></script>
 <script src="icon-swap.js?v=131"></script>
 <script src="ad-data.js?v=269"></script>
-<script src="mosaic-list.js?v=23"></script>
-<script src="ad-gallery.js?v=231"></script>
+<script src="mosaic-list.js?v=24"></script>
+<script src="ad-gallery.js?v=232"></script>
 <script src="copy-block.js?v=131"></script>
 <script>
 (function(){
@@ -330,7 +485,7 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
 })();
 </script>
 <script src="ch-spots.js?v=24"></script>
-<script src="rhythm.js?v=14"></script>
+<script src="rhythm.js?v=16"></script>
 <script>(function(){var rm=matchMedia('(prefers-reduced-motion: reduce)').matches;var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var v=e.target;io.unobserve(v);if(rm){var end=function(){v.currentTime=Math.max(0,v.duration-0.05)};v.readyState>0?end():v.addEventListener('loadedmetadata',end,{once:true})}else v.play()})},{threshold:0.5});document.querySelectorAll('#icons video.io-once').forEach(function(v){io.observe(v)})})()</script><script src="site-reveal.js?v=1"></script>
 </body>
 </html>

@@ -836,3 +836,7 @@ html body .bd .bd-out .bd-btn:hover{border-color:var(--color-white)!important}ht
 /* Guide gutter everywhere: every card and tile grid uses --gut (32 at 1440, 16 on phones), across and down.
    Mosaics keep their own tighter gutter (Brand platform .wrb, imagery .ad-mosaic), and specimens inside demos are content. */
 .aud-cols,.arch-refs,.tov-grid,.logo-variants,#logo .donts,#color .usage-grid,.pr-pair,.rule-grid,.mp-grid{gap:var(--gut)!important}
+
+/* Hangline: the h3 stands alone; the right-hand paragraph hangs from the rule line under it,
+   so the rule and the body share one top line. Wide screens only — below 1100 the body stacks. */
+@media (min-width:1101px){.sub-title.st-row>.st-body{grid-row:2/span 2;margin-top:var(--sp-rule,12px)}.sub-title.st-row>.st-body p{line-height:1.45}}
