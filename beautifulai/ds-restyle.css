@@ -850,3 +850,6 @@ html body .bd .bd-out .bd-btn:hover{border-color:var(--color-white)!important}ht
 .wrap:has(>.ch-subnav)+style+*,.wrap:has(>.ch-subnav)+style+style+*{padding-top:var(--padding-section-medium)!important;margin-top:0!important}
 @media (max-width:767px){.wrap:has(>.ch-subnav)+style+*,.wrap:has(>.ch-subnav)+style+style+*{padding-top:var(--padding-section-small)!important}}
 .wrap:has(>.ch-subnav)+style+.wrap>:first-child,.wrap:has(>.ch-subnav)+style+style+.wrap>:first-child{margin-top:0!important;border-top:0!important;padding-top:0!important}
+
+/* Gutters: every layout grid of columns, cards or images uses the DS gutter (--gut, 32px at 1440) */
+.ad-mosaic{gap:var(--gut)!important}.grid-3{gap:var(--gut)!important}.dt-demo{gap:var(--gut)!important}.tp-body{gap:var(--gut)!important}
