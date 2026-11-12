@@ -230,14 +230,18 @@
     html body #photography .pb-visual .pb-photo{position:relative;z-index:0}
     html body #photography .pb-visual .pb-think{--pw:calc((100% - 11 * var(--gut,32px)) * 0.75 + 8 * var(--gut,32px));position:absolute;z-index:1;top:0;left:calc(var(--pw) + 16px);width:calc(var(--pw) * 0.75);aspect-ratio:1;border-radius:var(--radius-xl,18px);overflow:hidden;background:#410A23;isolation:isolate}
     html body #photography .pb-visual .pb-think i{position:absolute;border-radius:50%;filter:blur(40px);will-change:transform}
-    html body #photography .pb-visual .pb-think .b1{width:95%;height:95%;left:-10%;top:5%;background:radial-gradient(circle,#DB2475 0%,rgba(219,36,117,.55) 45%,transparent 70%);animation:pbDrift1 22s ease-in-out infinite alternate}
+    html body #photography .pb-visual .pb-think .b1{width:95%;height:95%;left:-30%;top:25%;background:radial-gradient(circle,#DB2475 0%,rgba(219,36,117,.55) 45%,transparent 70%);animation:pbDrift1 22s ease-in-out infinite alternate}
     html body #photography .pb-visual .pb-think .b2{width:70%;height:70%;left:40%;top:-15%;background:radial-gradient(circle,#00B9FF 0%,rgba(0,185,255,.35) 45%,transparent 70%);opacity:.75;animation:pbDrift2 28s ease-in-out infinite alternate}
     html body #photography .pb-visual .pb-think .b3{width:60%;height:60%;left:30%;top:55%;background:radial-gradient(circle,#E5659E 0%,rgba(229,101,158,.4) 45%,transparent 70%);animation:pbDrift3 18s ease-in-out infinite alternate}
-    html body #photography .pb-visual .pb-think::after{content:"";position:absolute;inset:0;background:url(assets/grain.png) repeat;background-size:160px 160px;opacity:.055;mix-blend-mode:overlay;pointer-events:none}
+    html body #photography .pb-visual .pb-think::after{z-index:2;content:"";position:absolute;inset:0;background:url(assets/grain.png) repeat;background-size:160px 160px;opacity:.055;mix-blend-mode:overlay;pointer-events:none}
     @keyframes pbDrift1{0%{transform:translate(0,0) scale(1)}50%{transform:translate(18%,-8%) scale(1.12)}100%{transform:translate(6%,10%) scale(.94)}}
     @keyframes pbDrift2{0%{transform:translate(0,0) scale(1)}50%{transform:translate(-22%,18%) scale(1.15)}100%{transform:translate(-8%,30%) scale(.9)}}
     @keyframes pbDrift3{0%{transform:translate(0,0) scale(.9)}50%{transform:translate(14%,-20%) scale(1.1)}100%{transform:translate(-16%,-6%) scale(1)}}
     @media (prefers-reduced-motion:reduce){html body #photography .pb-visual .pb-think i{animation:none}}
+    html body #photography .pb-visual .pb-think .pb-forming{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:pbForm 14s ease-in-out infinite alternate}
+    html body #photography .pb-visual .pb-think .pb-grad{position:absolute;inset:0;z-index:1;background:#410A23;-webkit-mask-image:linear-gradient(54deg,#000 30%,rgba(0,0,0,.6) 52%,transparent 82%);mask-image:linear-gradient(54deg,#000 30%,rgba(0,0,0,.6) 52%,transparent 82%)}
+    @keyframes pbForm{0%{filter:blur(10px) saturate(.8);transform:scale(1.06)}100%{filter:blur(1.5px) saturate(1);transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){html body #photography .pb-visual .pb-think .pb-forming{animation:none;filter:blur(3px)}}
     html body #photography .pb-visual .pb-ui{z-index:2}
     @media(max-width:700px){html body #photography .pb-visual .pb-think{display:none}}
     #photography .pb-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:var(--gut,32px);margin-top:32px;padding:var(--content-padding-large,48px);border-radius:var(--radius-xxl,30px);background:var(--color-neutral-darkest,#001A24);color:#fff;text-decoration:none}
@@ -250,7 +254,7 @@
     </style>
     <div class="pb-link" id="make">
       <div class="sub-title st-row"><h3>Photo prompt builder</h3><p class="st-rule">Our builder writes on-brand photo prompts that follow these rules.</p><div class="st-body"><p>Pick the details, and the builder writes a prompt for ChatGPT or Figma. A second step gives you a prompt that places real slides and product into the image.</p></div></div>
-      <figure class="pb-visual" aria-label="The photo prompt builder with a copied prompt, in front of the photo it made: a professional at a laptop in warm window light, a colleague beside him"><img class="pb-photo" src="assets/pb-photo-laptop.webp" alt="" loading="lazy"><span class="pb-think" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></span><img class="pb-ui" src="assets/pb-ui-panel.webp" alt="" loading="lazy"></figure>
+      <figure class="pb-visual" aria-label="The photo prompt builder with a copied prompt, in front of the photo it made: a professional at a laptop in warm window light, a colleague beside him"><img class="pb-photo" src="assets/pb-photo-laptop.webp" alt="" loading="lazy"><span class="pb-think" aria-hidden="true"><img class="pb-forming" src="assets/pb-portrait-forming.webp" alt="" loading="lazy"><span class="pb-grad"><i class="b1"></i><i class="b2"></i><i class="b3"></i></span></span><img class="pb-ui" src="assets/pb-ui-panel.webp" alt="" loading="lazy"></figure>
       <a class="pb-card" href="prompt-builder.html" target="bai-prompt-builder" rel="noopener"><span><span class="t">Build an on-brand photo prompt</span><p>It opens in its own tab, so you can keep it beside ChatGPT or Figma while you work.</p></span><span class="go">Open the builder<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></span></a>
     </div>
     
