@@ -24,7 +24,7 @@
 .gv-meta{display:grid;gap:6px;padding-right:112px}
 .gv-cap{font-size:16px;line-height:1.3;color:var(--white)}
 .gv-tags{font-family:var(--font-label);font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-neutral-lighter,var(--color-neutral-lighter))}
-.gv-prompt{margin:0;font-family:var(--font-label);font-size:12.5px;line-height:1.6;color:var(--blue-light);white-space:pre-wrap;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:9}
+.gv-prompt{margin:0;font-family:var(--font-label);font-size:12px;line-height:1.6;color:var(--blue-light);white-space:pre-wrap;overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:9}
 .gv-pill{position:absolute;top:14px;right:14px;appearance:none;font:inherit;font-size:13px;line-height:1;padding:9px 16px;border-radius:999px;background:var(--white);color:var(--ink,var(--color-neutral-darkest));border:1px solid var(--opacity-neutral-darkest-15);cursor:pointer;opacity:0;transition:opacity .25s ease}
 .gv-card:hover .gv-pill,.gv-pill:focus-visible{opacity:1}
 .gv-pill:hover,.gv-pill.is-copied{background:var(--blue-lightest);color:var(--blue-darker)}

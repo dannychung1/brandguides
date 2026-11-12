@@ -19,7 +19,7 @@
 .ldm-page{position:relative;margin-inline:auto}
 .ldm-nav{display:flex;justify-content:space-between;align-items:center;font-weight:500}
 .ldm-nav span:last-child{background:var(--neutral-darkest,var(--color-neutral-darkest));color:var(--white,#fff);border-radius:var(--radius-s,6px)}
-.ldm-eb{font-family:var(--font-label);text-transform:uppercase;letter-spacing:.08em;color:var(--color-neutral-dark,var(--color-neutral-dark))}
+.ldm-eb{font-family:var(--font-label);text-transform:uppercase;letter-spacing:.12em;color:var(--color-neutral-dark,var(--color-neutral-dark))}
 .ldm-h{margin:0;font-weight:500;line-height:1.2;letter-spacing:-.02em;text-wrap:balance}
 .ldm-p{margin:0;line-height:1.5;color:var(--color-neutral-dark,var(--color-neutral-dark));max-width:70ch;text-wrap:pretty}
 .ldm-cards{display:grid}

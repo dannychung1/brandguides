@@ -17,7 +17,7 @@
 #type .tg-specs>div{display:grid;gap:6px;padding:14px 0;border-bottom:1px solid color-mix(in oklch,var(--neutral-darkest,var(--color-neutral-darkest)) 15%,transparent)}
 #type .tg-specs>div:first-child{padding-top:0}
 #type .tg-specs dt{font-size:var(--text-body-m,1rem);font-weight:500;color:var(--neutral-darkest,var(--color-neutral-darkest))}
-#type .tg-specs dd{margin:0;display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--font-label);font-size:12px;letter-spacing:.04em;line-height:1.5;color:var(--color-neutral-dark,var(--color-neutral-dark))}
+#type .tg-specs dd{margin:0;display:flex;flex-wrap:wrap;gap:4px 16px;font-family:var(--font-label);font-size:12px;letter-spacing:0;font-variant-numeric:tabular-nums;line-height:1.5;color:var(--color-neutral-dark,var(--color-neutral-dark))}
 #type .tg-guide .callout{margin:0!important;grid-template-columns:minmax(0,1fr);aspect-ratio:auto!important;height:auto!important;min-height:0!important}
 #type .tg-guide .callout.dont{background:var(--white,#fff);border:1px solid color-mix(in oklch,var(--neutral-darkest,var(--color-neutral-darkest)) 15%,transparent)}
 #type .tg-guide .callout.dont .co-kicker{color:var(--neutral-darkest,var(--color-neutral-darkest))}

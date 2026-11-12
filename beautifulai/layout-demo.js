@@ -26,7 +26,7 @@
     var ml=vp.querySelector('.ldm-mg.l'),mr=vp.querySelector('.ldm-mg.r');ml.style.left='0';ml.style.width=s.mg+'px';mr.style.right='0';mr.style.width=s.mg+'px';
     var pg=vp.querySelector('.ldm-page');pg.style.width=s.content+'px';pg.style.paddingTop=Math.round(s.h1*0.5)+'px';
     var nav=pg.querySelector('.ldm-nav');nav.style.fontSize=s.body+'px';nav.style.marginBottom=Math.round(s.h1*1.4)+'px';nav.lastElementChild.style.padding=Math.round(s.body*.6)+'px '+s.body+'px';
-    var eb=pg.querySelector('.ldm-eb');eb.style.fontSize=Math.max(11,Math.round(s.body*.7))+'px';eb.style.marginBottom='12px';
+    var eb=pg.querySelector('.ldm-eb');eb.style.fontSize=Math.min(12,Math.max(11,Math.round(s.body*.7)))+'px';eb.style.marginBottom='12px';
     var hd=pg.querySelector('.ldm-h');hd.style.fontSize=s.h1+'px';hd.style.maxWidth=s.cols===12?'10ch':'none';
     var p=pg.querySelector('.ldm-p');p.style.fontSize=s.body+'px';p.style.marginTop='32px';
     var cs=pg.querySelector('.ldm-cards');cs.style.gridTemplateColumns='repeat('+s.cards+',minmax(0,1fr))';cs.style.gap=s.gut+'px';cs.style.marginTop=Math.round(s.h1*1.2)+'px';
