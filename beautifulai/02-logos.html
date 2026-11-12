@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="styles.css?v=213">
 <link rel="stylesheet" href="photography.css?v=200">
 <link rel="stylesheet" href="white-ground.css?v=213">
-<link rel="stylesheet" href="ds-restyle.css?v=307">
+<link rel="stylesheet" href="ds-restyle.css?v=310">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,300,0,0">
 <script src="image-slot.js?v=130"></script>
 <template id="__bundler_thumbnail"><svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><rect width="120" height="120" fill="#001A24"></rect><circle cx="30" cy="26" r="34" fill="#B4379B" opacity="0.85"></circle><text x="36" y="76" font-family="system-ui, sans-serif" font-size="38" font-weight="600" fill="#F0F3F5">b</text><text x="58" y="76" font-family="system-ui, sans-serif" font-size="38" font-weight="600" fill="#52D0FF">.</text></svg></template>
@@ -112,18 +112,18 @@
 
     <!-- Minimum size -->
     <div style="margin-top:96px">
-      <div class="sub-title st-row"><h3>Minimum size</h3><p class="st-rule">Never below 80px wide.</p><div class="st-body"><p>The wordmark needs room for its letterforms, so 80px wide is the floor. When space gets tighter than that, switch to the symbol. It keeps the brand intact at favicon scale.</p></div></div>
+      <div class="sub-title st-row"><h3>Minimum size</h3><p class="st-rule">Never below 96px wide.</p><div class="st-body"><p>The wordmark needs room for its letterforms, so 96px wide (16px tall) is the floor. When space gets tighter than that, switch to the symbol. It keeps the brand intact at favicon scale.</p></div></div>
       <div class="donts dos spec-grid" style="margin-top:32px">
         <div class="dont">
           <div class="preview"><img src="assets/beautifulai-logo-color.svg?v=ds2" alt="" style="width:160px;height:auto;max-width:none"></div>
           <div class="label">Wordmark at 160px.</div>
         </div>
         <div class="dont">
-          <div class="preview"><img src="assets/beautifulai-logo-color.svg?v=ds2" alt="" style="width:80px;height:auto;max-width:none"></div>
-          <div class="label">Wordmark at 80px, the smallest we use.</div>
+          <div class="preview"><img src="assets/beautifulai-logo-color.svg?v=ds2" alt="" style="width:96px;height:auto;max-width:none"></div>
+          <div class="label">Wordmark at 96px, the smallest we use.</div>
         </div>
         <div class="dont">
-          <div class="preview"><img src="assets/beautifulai-symbol-dark.svg?v=ds2" alt="" style="height:16px;width:auto;max-width:none"></div>
+          <div class="preview"><img src="assets/beautifulai-symbol-dark.svg?v=ds2" alt="" class="min-size-sym" style="height:16px;width:auto;max-width:none"></div>
           <div class="label">Symbol at 16px, the smallest we use.</div>
         </div>
       </div>
@@ -252,5 +252,6 @@
 <script src="site-reveal.js?v=1"></script>
 <script>window.COPY_EDITS = /*EDITMODE-BEGIN*/{}/*EDITMODE-END*/;</script>
 <script src="copy-edit.js?v=2" defer></script>
+<style>#logo .dont .preview img.min-size-sym{height:16px!important}</style>
 </body>
 </html>

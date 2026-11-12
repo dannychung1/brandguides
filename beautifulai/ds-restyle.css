@@ -853,3 +853,31 @@ html body .bd .bd-out .bd-btn:hover{border-color:var(--color-white)!important}ht
 
 /* Gutters: every layout grid of columns, cards or images uses the DS gutter (--gut, 32px at 1440) */
 .ad-mosaic{gap:var(--gut)!important}.grid-3{gap:var(--gut)!important}.dt-demo{gap:var(--gut)!important}.tp-body{gap:var(--gut)!important}
+
+/* Type audit batch 4: headings on the design system scale.
+   Display 144/112/88 at 100% leading and -0.04em, like every heading.
+   Section heads reach H2 (58) at 1440, sub-titles hold at H4 (37) from 1440 up.
+   Small titles (16-18px) take no negative tracking. */
+:root{--ls-display:-0.04em;--text-display-1-lh:1;--text-display-2-lh:1;--text-display-3-lh:1;--t-section:clamp(2.125rem,4.0278vw,var(--text-h2-size,3.625rem));--t-sub:clamp(1.625rem,2.5694vw,var(--text-h4-size,2.3125rem))}
+html body :is(.sub-head h2,.section-head h2){font-size:var(--t-section)}
+html body :is(.sub-title h3,.sub-title h4){font-size:var(--t-sub)}
+html body :is(.footer-grid h5,.hd h4){letter-spacing:0!important}
+html body :is(.ly-card b,.ldm-read b,.ldm-h){letter-spacing:var(--ls-tight,-0.04em);line-height:1}
+/* Display statements that run 2 or more lines get 105% leading so descenders clear the next line. */
+html body #compass .ch-lead-sec>.ch-lead-text{line-height:1.05!important}
+
+/* Type audit batch 5: every label and eyebrow at 140% leading (Post Grotesk Book, 11-12px, uppercase, 0.12em). */
+html body :is(.cover-top,.cover-bottom,.footer-bottom,.ct-label,.cn-dir,.cover-bottom .right,.eyebrow,.mv-label,.sh-label,#vm .vm-eyebrow,#vm .vm-card p.vm-eyebrow,#vm .vm-row > p.vm-label small,#vm .vm-words .wr.hd > *,.type-row .tag,.weight .name,.co-kicker,.ldm-eb,.th-meta,.ctx-meta,.th-eyebrow,.th-label,#color .pair-meta,.ratio-name,#photography .sbd .lab,#photography .sbd .band > span,#photography .sbd .pres,#photography .sbd .nuc em,#photography .hl-hd p,#photography .hl-tx .hl-n,#brand-shape .bs-stage figcaption,#brand-shape .bs-cap,.gv-glabel,.bd-tabs-q){line-height:1.4}
+html body .type-row .sample[style*="uppercase"]{line-height:1.4!important}
+
+/* Grid: the beautiful.ai marketing site grid.
+   Margins 20px on phones to 80px at 1440, gutters 20px to 32px, 12 columns,
+   content in a centered column up to 1280px. Chosen imagery breaks out to the page margins. */
+:root{--site-margin:clamp(20px, calc(20px + (100vw - 376px) * 0.056391), 80px);--wrap-pad:var(--site-margin);--gut:clamp(20px, calc(20px + (100vw - 376px) * 0.011278), 32px);--gutter:max(var(--site-margin), calc(50vw - 640px));--breakout:calc(100vw - var(--sbw, 0px) - 2 * var(--site-margin))}
+html body :is(.wrap,.wrap.narrow){max-width:calc(1280px + 2 * var(--site-margin))}
+html body :is(.logo-motion,.ad-mosaic,.mo-hero,.bu-grid,#color .color-story){width:var(--breakout)!important;max-width:none!important;margin-left:calc((100% - var(--breakout)) / 2)!important;margin-right:0!important}
+/* Introduction: paragraph and chapter names start on column 5, the body-text column used on every chapter. Numbers sit in the label rail. */
+:root{--col5:calc(4 * (min(100vw - 2 * var(--site-margin), 1280px) - 11 * var(--gut)) / 12 + 4 * var(--gut))}
+@media (min-width:701px){html body #introduction .intro-about{padding-left:var(--col5)}html body #introduction .contents li{grid-template-columns:var(--col5) 1fr}}
+/* "In this chapter" links start on column 5 and column 9, like body text. */
+@media (min-width:701px){html body .ch-subnav{grid-template-columns:calc(var(--col5) - var(--gut)) minmax(0,1fr)!important;column-gap:var(--gut)!important}html body .ch-subnav>ul,html body .ch-subnav ul.csn-cols,html body .ch-subnav ul.csn-nested{grid-template-columns:calc(var(--col5) - var(--gut)) minmax(0,1fr)!important;column-gap:var(--gut)!important}}
