@@ -39,12 +39,9 @@ html body .pb-main .bd-out .copy-block{position:relative!important}.pb-main .bd-
 html body .pb-main .bd-head::after{content:none!important;display:none!important}
 .pb-glow{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 .pb-glow i{position:absolute;bottom:-10vh;height:128vh;filter:blur(40px);will-change:transform,opacity}
-.pb-glow .g1{left:-12vw;width:78vw;transform-origin:34% 100%;background:radial-gradient(ellipse 52% 88% at 34% 100%,rgba(0,185,255,.38) 0%,rgba(0,185,255,.22) 38%,rgba(0,185,255,.09) 66%,transparent 84%);animation:pbRise1 26s ease-in-out infinite alternate}
-.pb-glow .g2{right:-12vw;width:74vw;transform-origin:66% 100%;background:radial-gradient(ellipse 50% 84% at 66% 100%,rgba(219,36,117,.32) 0%,rgba(219,36,117,.19) 38%,rgba(219,36,117,.08) 66%,transparent 84%);animation:pbRise2 32s ease-in-out infinite alternate}
+.pb-glow .g1{left:-12vw;width:78vw;transform-origin:34% 100%;background:radial-gradient(ellipse 52% 88% at 34% 100%,rgba(0,185,255,.38) 0%,rgba(0,185,255,.22) 38%,rgba(0,185,255,.09) 66%,transparent 84%)}
+.pb-glow .g2{right:-12vw;width:74vw;transform-origin:66% 100%;background:radial-gradient(ellipse 50% 84% at 66% 100%,rgba(219,36,117,.32) 0%,rgba(219,36,117,.19) 38%,rgba(219,36,117,.08) 66%,transparent 84%)}
 .pb-glow::after{content:"";position:absolute;inset:0;background:url(grain.png) repeat;background-size:160px 160px;opacity:.035;mix-blend-mode:multiply}
-@keyframes pbRise1{0%{transform:rotate(-10deg) scale(1,.9);opacity:.8}50%{transform:rotate(4deg) scale(1.04,1.06);opacity:1}100%{transform:rotate(12deg) scale(.98,1);opacity:.85}}
-@keyframes pbRise2{0%{transform:rotate(10deg) scale(1,.92);opacity:.8}50%{transform:rotate(-4deg) scale(1.05,1.08);opacity:1}100%{transform:rotate(-12deg) scale(1,.96);opacity:.8}}
-@media (prefers-reduced-motion:reduce){.pb-glow i{animation:none}}
 .pb-hero,.pb-main,.pb-foot{position:relative;z-index:1}
 </style>
 </head>
@@ -109,6 +106,32 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
   }
   function run(){document.querySelectorAll('.pb-main .bd-out .copy-block').forEach(add)}
   run();new MutationObserver(run).observe(document.querySelector('.pb-main')||document.body,{childList:true,subtree:true});
+})();
+</script>
+<script>
+// builder spotlights: the cover's resting motion (38s orbit, 6.4s wander, 26s breathing, spring follow), anchored to the bottom corners, no cursor
+(function(){
+  var g=document.querySelector('.pb-glow');if(!g)return;var B=g.querySelector('.g1'),R=g.querySelector('.g2');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  function eio(t,p){var q=(t%p)/p,tri=q<0.5?q*2:2-q*2,s=tri*tri*tri*(tri*(tri*6-15)+10);return s*2-1}
+  function spring(c,g,v,k,dt){var a=(g-c)*k-v*2*Math.sqrt(k);return [c+v*dt,v+a*dt]}
+  function sm(z){return 0.5+0.5*z*(1.5-0.5*z*z)}
+  function kf(t,s,P){var n=Math.floor(t/P),u=t/P-n,h=function(i){var x=Math.sin((i+s)*127.1+s*311.7)*43758.5453;return (x-Math.floor(x))*2-1},e=u<0.6?0:(function(v){return v<.5?4*v*v*v:1-Math.pow(-2*v+2,3)/2})((u-0.6)/0.4);return h(n)+(h(n+1)-h(n))*e}
+  var th=Math.random()*6.283,ph=[0,1,2].map(function(){return Math.random()*1e5}),cx=0,cy=0,vx=0,vy=0,gx=0,gy=0,gvx=0,gvy=0,last=0;
+  function f(t){var dt=Math.min(0.05,last?(t-last)/1000:0.016);last=t;
+    if(!document.hidden){
+      th+=dt*(2*Math.PI/38);
+      var dx=kf(t,ph[0]%97,6400)*6,dy=kf(t,ph[2]%89,6400)*4,r;
+      r=spring(cx,dx,vx,9,dt);cx=r[0];vx=r[1];r=spring(cy,dy,vy,9,dt);cy=r[0];vy=r[1];
+      var b=0.78+0.22*(eio(t+ph[1],26300)*0.5+0.5),ox=Math.cos(th)*7.6*b,oy=Math.sin(th)*3.9*b;
+      r=spring(gx,cx-ox,gvx,14,dt);gx=r[0];gvx=r[1];r=spring(gy,cy-oy,gvy,14,dt);gy=r[0];gvy=r[1];
+      var z=Math.sin(th);
+      B.style.transform='translate3d('+(cx+ox).toFixed(2)+'vw,'+(cy+oy).toFixed(2)+'vh,0) rotate('+(ox*0.9).toFixed(2)+'deg) scale('+(0.9+0.2*sm(z)).toFixed(3)+')';
+      R.style.transform='translate3d('+gx.toFixed(2)+'vw,'+gy.toFixed(2)+'vh,0) rotate('+(gx*0.9).toFixed(2)+'deg) scale('+((0.9+0.2*sm(-z))*1.05).toFixed(3)+')';
+      B.style.opacity=(0.74+0.26*sm(z)).toFixed(3);R.style.opacity=(0.74+0.26*sm(-z)).toFixed(3);
+    }
+    requestAnimationFrame(f)}
+  requestAnimationFrame(f);
 })();
 </script>
 <script>window.COPY_EDITS = /*EDITMODE-BEGIN*/{
