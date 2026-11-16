@@ -38,12 +38,12 @@ body.pb-app{margin:0;background:var(--scheme5-bg,var(--color-neutral-lightest,#F
 html body .pb-main .bd-out .copy-block{position:relative!important}.pb-main .bd-out .copy-block pre{resize:none!important}.pb-grip{position:absolute;right:6px;bottom:6px;z-index:3;width:24px;height:24px;display:grid;place-items:center;border-radius:var(--radius-xs,4px);color:#fff;background:color-mix(in oklch,#fff 16%,transparent);cursor:ns-resize;touch-action:none;opacity:1;transition:opacity .2s ease,background .2s ease}.pb-grip:hover,.pb-grip:focus-visible,.pb-grip.is-drag{opacity:1;background:color-mix(in oklch,#fff 28%,transparent);outline:none}.pb-grip:focus-visible{box-shadow:0 0 0 2px var(--color-blue,#00B9FF)}.pb-grip svg{width:18px;height:18px;display:block;transform:scaleX(-1)}body.pb-resizing{cursor:ns-resize;user-select:none}
 html body .pb-main .bd-head::after{content:none!important;display:none!important}
 .pb-glow{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
-.pb-glow i{position:absolute;filter:blur(48px);will-change:transform,opacity}
-.pb-glow .g1{width:76vw;height:44vw;left:-14vw;bottom:-8vh;transform-origin:50% 50%;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(0,185,255,.16) 0%,rgba(0,185,255,.07) 45%,transparent 72%),radial-gradient(ellipse 30% 26% at 64% 44%,rgba(0,185,255,.36) 0%,rgba(0,185,255,.14) 50%,transparent 80%);animation:pbRise1 26s ease-in-out infinite alternate}
-.pb-glow .g2{width:70vw;height:40vw;right:-12vw;bottom:-6vh;transform-origin:50% 50%;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(219,36,117,.13) 0%,rgba(219,36,117,.055) 45%,transparent 72%),radial-gradient(ellipse 30% 26% at 36% 44%,rgba(219,36,117,.30) 0%,rgba(219,36,117,.11) 50%,transparent 80%);animation:pbRise2 32s ease-in-out infinite alternate}
+.pb-glow i{position:absolute;bottom:-10vh;height:128vh;filter:blur(40px);will-change:transform,opacity}
+.pb-glow .g1{left:-12vw;width:78vw;transform-origin:34% 100%;background:radial-gradient(ellipse 52% 88% at 34% 100%,rgba(0,185,255,.38) 0%,rgba(0,185,255,.22) 38%,rgba(0,185,255,.09) 66%,transparent 84%);animation:pbRise1 26s ease-in-out infinite alternate}
+.pb-glow .g2{right:-12vw;width:74vw;transform-origin:66% 100%;background:radial-gradient(ellipse 50% 84% at 66% 100%,rgba(219,36,117,.32) 0%,rgba(219,36,117,.19) 38%,rgba(219,36,117,.08) 66%,transparent 84%);animation:pbRise2 32s ease-in-out infinite alternate}
 .pb-glow::after{content:"";position:absolute;inset:0;background:url(grain.png) repeat;background-size:160px 160px;opacity:.035;mix-blend-mode:multiply}
-@keyframes pbRise1{0%{transform:translate3d(0,4vh,0) rotate(-22deg) scale(.94);opacity:.8}50%{transform:translate3d(6vw,-3vh,0) rotate(-16deg) scale(1.04);opacity:1}100%{transform:translate3d(12vw,-6vh,0) rotate(-12deg) scale(1);opacity:.85}}
-@keyframes pbRise2{0%{transform:translate3d(0,5vh,0) rotate(20deg) scale(1);opacity:.8}50%{transform:translate3d(-7vw,-3vh,0) rotate(14deg) scale(1.06);opacity:1}100%{transform:translate3d(-13vw,-6vh,0) rotate(18deg) scale(.96);opacity:.8}}
+@keyframes pbRise1{0%{transform:rotate(-10deg) scale(1,.9);opacity:.8}50%{transform:rotate(4deg) scale(1.04,1.06);opacity:1}100%{transform:rotate(12deg) scale(.98,1);opacity:.85}}
+@keyframes pbRise2{0%{transform:rotate(10deg) scale(1,.92);opacity:.8}50%{transform:rotate(-4deg) scale(1.05,1.08);opacity:1}100%{transform:rotate(-12deg) scale(1,.96);opacity:.8}}
 @media (prefers-reduced-motion:reduce){.pb-glow i{animation:none}}
 .pb-hero,.pb-main,.pb-foot{position:relative;z-index:1}
 </style>
@@ -112,7 +112,8 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
 })();
 </script>
 <script>window.COPY_EDITS = /*EDITMODE-BEGIN*/{
-  "A|0|Imagery rulesopen_in_new": "Back to Imagery\u003cspan class=\"material-symbols-outlined\" aria-hidden=\"true\">open_in_new\u003c\/span>"
+  "A|0|Imagery rulesopen_in_new": "Back to Imagery\u003cspan class=\"material-symbols-outlined\" aria-hidden=\"true\">open_in_new\u003c\/span>",
+  "P|0|Make on-brand images of professionals and their ideas in a few picks. The builder writes every prompt to our imagery rules, so each image shows the professional and the idea in their best light.": "Start with on-brand images."
 }/*EDITMODE-END*/;</script>
 <script src="copy-edit.js?v=2" defer></script>
 </body>
