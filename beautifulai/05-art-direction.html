@@ -224,7 +224,7 @@
     #photography .pb-link{margin-top:96px}
     html body #photography .pb-visual{position:relative;margin:0 0 var(--gut,32px);display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut,32px);overflow:visible!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;border-radius:0!important;background:none!important}
     html body #photography .pb-visual .pb-photo{grid-column:1/span 9;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 55%;border-radius:var(--radius-xl,18px);display:block}
-    html body #photography .pb-visual .pb-ui{position:absolute;left:58%;top:50%;width:38%;height:auto;transform:translateY(-46%);filter:drop-shadow(0 24px 48px rgba(0,26,36,.22))}
+    html body #photography .pb-visual .pb-ui{position:absolute;left:58%;top:50%;width:38%;height:auto;transform:translateY(-46%);aspect-ratio:728/671;object-fit:cover;border-radius:var(--radius-l,16px);background:#001A24;box-shadow:0 24px 48px rgba(0,26,36,.28)}
     @media(max-width:700px){html body #photography .pb-visual{display:block}html body #photography .pb-visual .pb-ui{position:relative;display:block;left:auto;top:auto;width:80%;margin:-72px 0 0 auto;transform:none}}
     html body #photography{overflow-x:clip}
     html body #photography .pb-visual .pb-photo{position:relative;z-index:0}
@@ -244,6 +244,16 @@
     @media (prefers-reduced-motion:reduce){html body #photography .pb-visual .pb-think .pb-forming{animation:none;filter:blur(3px)}}
     html body #photography .pb-visual .pb-ui{z-index:2}
     @media(max-width:700px){html body #photography .pb-visual .pb-think{display:none}}
+    #photography #make>.sub-title{position:relative}
+    #photography #make>.sub-title>.dl-row{position:absolute;right:0;top:-4px;margin:0!important;padding:0!important}
+    @media(max-width:1100px){#photography #make>.sub-title>.dl-row{position:static;margin-top:24px;justify-content:flex-start}}
+    html body #photography .pb-visual.pb-v2{align-items:center;overflow:visible!important}
+    html body #photography .pb-v2 .pb-photowrap{grid-column:1/span 9;grid-row:1;align-self:stretch;position:relative;overflow:hidden;border-radius:var(--radius-xl,18px);background:#2b2420}
+    html body #photography .pb-v2 .pb-photowrap .pb-photo{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;border-radius:0;transform-origin:30% 50%;will-change:filter,transform}
+    html body #photography .pb-v2 .pb-ui{position:relative;grid-column:7/-1;grid-row:1;left:auto;top:auto;transform:none;width:100%;aspect-ratio:1588/1436;margin:40px 0;border-radius:16px;object-fit:cover;background:#002533;box-shadow:0 32px 64px rgba(0,26,36,.32);z-index:2}
+    html body #photography .pb-v2 .pb-spot{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;opacity:.35;background:radial-gradient(70% 80% at 14% 92%,rgba(219,36,117,.85) 0%,rgba(229,101,158,.35) 40%,transparent 72%),radial-gradient(45% 55% at 78% 12%,rgba(0,185,255,.45) 0%,transparent 70%)}
+    @media(max-width:700px){html body #photography .pb-visual.pb-v2{display:grid}html body #photography .pb-v2 .pb-photowrap{grid-column:1/span 10}html body #photography .pb-v2 .pb-ui{grid-column:4/-1;width:100%;margin:28px 0;border-radius:12px}}
+    @media (prefers-reduced-motion:reduce){html body #photography .pb-v2 .pb-photo{filter:none}}
     #photography .pb-card{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:var(--gut,32px);margin-top:32px;padding:var(--content-padding-large,48px);border-radius:var(--radius-xxl,30px);background:var(--color-neutral-darkest,#001A24);color:#fff;text-decoration:none}
     #photography .pb-card .t{display:block;font-size:var(--text-h5-size,1.875rem);line-height:1.1;font-weight:500;letter-spacing:-.02em;color:#fff}
     #photography .wrap .pb-card p{margin:12px 0 0;max-width:56ch;font-size:var(--text-body-l,1.125rem);line-height:1.5;color:var(--color-neutral-lighter,#D8DADA)}
@@ -253,9 +263,8 @@
     @media(max-width:700px){#photography .pb-card{grid-template-columns:minmax(0,1fr);padding:var(--content-padding-regular,24px)}}
     </style>
     <div class="pb-link" id="make">
-      <div class="sub-title st-row"><h3>Photo prompt builder</h3><p class="st-rule">Our builder writes on-brand photo prompts that follow these rules.</p><div class="st-body"><p>Pick the details, and the builder writes a prompt for ChatGPT or Figma. A second step gives you a prompt that places real slides and product into the image.</p></div></div>
-      <figure class="pb-visual" aria-label="The photo prompt builder with a copied prompt, in front of the photo it made: a professional at a laptop in warm window light, a colleague beside him"><img class="pb-photo" src="assets/pb-photo-laptop.webp" alt="" loading="lazy"><span class="pb-think" aria-hidden="true"><img class="pb-forming" src="assets/pb-portrait-forming.webp" alt="" loading="lazy"><span class="pb-grad"><i class="b1"></i><i class="b2"></i><i class="b3"></i></span></span><img class="pb-ui" src="assets/pb-ui-panel.webp" alt="" loading="lazy"></figure>
-      <a class="pb-card" href="prompt-builder.html" target="bai-prompt-builder" rel="noopener"><span><span class="t">Build an on-brand photo prompt</span><p>It opens in its own tab, so you can keep it beside ChatGPT or Figma while you work.</p></span><span class="go">Open the builder<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></span></a>
+      <div class="sub-title st-row"><h3>Photo prompt builder</h3><p class="st-rule">Our builder writes on-brand photo prompts that follow these rules.</p><div class="st-body"><p>Pick the details, and the builder writes a prompt for ChatGPT or Figma. A second step gives you a prompt that places real slides and product into the image.</p></div><div class="dl-row"><a class="dl-pill" href="prompt-builder.html" target="bai-prompt-builder" rel="noopener">Open the photo prompt builder <span>↗</span></a></div></div>
+      <figure class="pb-visual pb-v2" aria-label="The photo prompt builder writing a prompt, in front of the photo it makes coming into focus: a professional at a laptop in warm window light"><span class="pb-photowrap"><img class="pb-photo" src="assets/pb-photo-laptop.webp" alt="" loading="lazy"><span class="pb-spot" aria-hidden="true"></span></span><video class="pb-ui" src="assets/pb-builder-full.mp4" poster="assets/pb-builder-full-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></figure><script>(function(){var f=document.querySelector(".pb-v2");if(!f)return;var v=f.querySelector("video"),ph=f.querySelector(".pb-photo"),sp=f.querySelector(".pb-spot");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;function e(u){u=Math.max(0,Math.min(1,u));return u*u*(3-2*u)}function tick(){var t=v.currentTime||0,b,s;if(t<3.6){b=18-t*1.6}else if(t<4.6){b=(18-3.6*1.6)*(1-e(t-3.6))}else if(t<4.75){b=0}else{b=18*e((t-4.75)/.3)}s=1+b/18*.05;ph.style.filter="blur("+b.toFixed(2)+"px) saturate("+(.75+.25*(1-b/18)).toFixed(3)+")";ph.style.transform="scale("+s.toFixed(4)+")";var g=(t>=3.6&&t<4.75)?Math.sin(Math.PI*Math.min(1,(t-3.6)/1.15)):0;sp.style.opacity=(.35+.3*(b/18)+.5*g).toFixed(3);requestAnimationFrame(tick)}requestAnimationFrame(tick)})();</script>
     </div>
     
 
@@ -320,11 +329,12 @@
 <script src="ad-gallery.js?v=232"></script>
 <script src="copy-block.js?v=131"></script>
 <script src="ch-spots.js?v=24"></script>
-<script src="rhythm.js?v=19"></script>
+<script src="rhythm.js?v=20"></script>
 <script src="site-reveal.js?v=1"></script>
 <script>window.COPY_EDITS = /*EDITMODE-BEGIN*/{
   "P|0|Every story moves through 3 beats, and every frame has 1 hero: the professional or the idea.": "Stories moves through 3 beats, and every frame has 1 hero: the professional or the idea—the product is ever-present and suggested or directly in support of all beats.",
-  "P|0|Our builder writes on-brand photo prompts that follow these rules.": "Our builder writes on-brand photo prompts for any model, but we use ChatGPT Images or Figma's included models."
+  "P|0|Our builder writes on-brand photo prompts that follow these rules.": "Our builder writes on-brand photo prompts for any model, but we use ChatGPT Images or Figma's included models.",
+  "H3|0|Photo prompt builder": "Image prompt builder"
 }/*EDITMODE-END*/;</script>
 <script src="copy-edit.js?v=2" defer></script>
 </body>
