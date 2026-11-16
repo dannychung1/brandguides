@@ -244,8 +244,8 @@
     @media (prefers-reduced-motion:reduce){html body #photography .pb-visual .pb-think .pb-forming{animation:none;filter:blur(3px)}}
     html body #photography .pb-visual .pb-ui{z-index:2}
     @media(max-width:700px){html body #photography .pb-visual .pb-think{display:none}}
-    #photography #make>.sub-title{position:relative}
-    #photography #make>.sub-title>.dl-row{position:absolute;right:0;top:-4px;margin:0!important;padding:0!important}
+    #photography #make>.sub-title{position:relative;padding-bottom:0!important;margin-bottom:var(--gut,32px)!important}
+    #photography #make>.sub-title>.dl-row{grid-row:1;grid-column:1/-1;position:absolute;right:0;top:-4px;margin:0!important;padding:0!important}
     @media(max-width:1100px){#photography #make>.sub-title>.dl-row{position:static;margin-top:24px;justify-content:flex-start}}
     html body #photography .pb-visual.pb-v2{align-items:center;overflow:visible!important}
     html body #photography .pb-v2 .pb-photowrap{grid-column:1/span 9;grid-row:1;align-self:stretch;position:relative;overflow:hidden;border-radius:var(--radius-xl,18px);background:#2b2420}
@@ -264,7 +264,7 @@
     </style>
     <div class="pb-link" id="make">
       <div class="sub-title st-row"><h3>Photo prompt builder</h3><p class="st-rule">Our builder writes on-brand photo prompts that follow these rules.</p><div class="st-body"><p>Pick the details, and the builder writes a prompt for ChatGPT or Figma. A second step gives you a prompt that places real slides and product into the image.</p></div><div class="dl-row"><a class="dl-pill" href="prompt-builder.html" target="bai-prompt-builder" rel="noopener">Open the photo prompt builder <span>↗</span></a></div></div>
-      <figure class="pb-visual pb-v2" aria-label="The photo prompt builder writing a prompt, in front of the photo it makes coming into focus: a professional at a laptop in warm window light"><span class="pb-photowrap"><img class="pb-photo" src="assets/pb-photo-laptop.webp" alt="" loading="lazy"><span class="pb-spot" aria-hidden="true"></span></span><video class="pb-ui" src="assets/pb-builder-full.mp4" poster="assets/pb-builder-full-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></figure><script>(function(){var f=document.querySelector(".pb-v2");if(!f)return;var v=f.querySelector("video"),ph=f.querySelector(".pb-photo"),sp=f.querySelector(".pb-spot");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;function e(u){u=Math.max(0,Math.min(1,u));return u*u*(3-2*u)}function tick(){var t=v.currentTime||0,b,s;if(t<3.6){b=18-t*1.6}else if(t<4.6){b=(18-3.6*1.6)*(1-e(t-3.6))}else if(t<4.75){b=0}else{b=18*e((t-4.75)/.3)}s=1+b/18*.05;ph.style.filter="blur("+b.toFixed(2)+"px) saturate("+(.75+.25*(1-b/18)).toFixed(3)+")";ph.style.transform="scale("+s.toFixed(4)+")";var g=(t>=3.6&&t<4.75)?Math.sin(Math.PI*Math.min(1,(t-3.6)/1.15)):0;sp.style.opacity=(.35+.3*(b/18)+.5*g).toFixed(3);requestAnimationFrame(tick)}requestAnimationFrame(tick)})();</script>
+      <figure class="pb-visual pb-v2" aria-label="The photo prompt builder writing a prompt, in front of the photo it makes coming into focus: a professional at a laptop in warm window light"><span class="pb-photowrap"><img class="pb-photo" src="assets/pb-photo-laptop.webp" alt="" loading="lazy"><span class="pb-spot" aria-hidden="true"></span></span><video class="pb-ui" src="assets/pb-builder-full.mp4?v=2" poster="assets/pb-builder-full-poster.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></figure><script>(function(){var f=document.querySelector(".pb-v2");if(!f)return;var v=f.querySelector("video"),ph=f.querySelector(".pb-photo"),sp=f.querySelector(".pb-spot");if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;function e(u){u=Math.max(0,Math.min(1,u));return u*u*(3-2*u)}function tick(){var t=v.currentTime||0,b,s;if(t<3.6){b=18-t*1.6}else if(t<4.6){b=(18-3.6*1.6)*(1-e(t-3.6))}else if(t<6.25){b=0}else{b=18*e((t-6.25)/.3)}s=1+b/18*.05;ph.style.filter="blur("+b.toFixed(2)+"px) saturate("+(.75+.25*(1-b/18)).toFixed(3)+")";ph.style.transform="scale("+s.toFixed(4)+")";var g=(t>=3.6&&t<4.75)?Math.sin(Math.PI*Math.min(1,(t-3.6)/1.15)):0;sp.style.opacity=(.35+.3*(b/18)+.5*g).toFixed(3);requestAnimationFrame(tick)}requestAnimationFrame(tick)})();</script>
     </div>
     
 
@@ -333,8 +333,10 @@
 <script src="site-reveal.js?v=1"></script>
 <script>window.COPY_EDITS = /*EDITMODE-BEGIN*/{
   "P|0|Every story moves through 3 beats, and every frame has 1 hero: the professional or the idea.": "Stories moves through 3 beats, and every frame has 1 hero: the professional or the idea—the product is ever-present and suggested or directly in support of all beats.",
-  "P|0|Our builder writes on-brand photo prompts that follow these rules.": "Our builder writes on-brand photo prompts for any model, but we use ChatGPT Images or Figma's included models.",
-  "H3|0|Photo prompt builder": "Image prompt builder"
+  "P|0|Our builder writes on-brand photo prompts that follow these rules.": "Our builder writes on-brand image prompts for use with any model, with ChatGPT Images Sunburst as the standard.",
+  "H3|0|Photo prompt builder": "Image prompt builder",
+  "P|0|Pick the details, and the builder writes a prompt for ChatGPT or Figma. A second step gives you a prompt that places real slides and product into the image.": "Under each tab, pick details that fit your story and get prompts for both the image or mock up instructions (when applicable). \"Surprise Me\" randomly remixes details in the tab for a range of results.",
+  "A|0|Open the photo prompt builder ↗": "Open the prompt builder \u003cspan>↗\u003c\/span>"
 }/*EDITMODE-END*/;</script>
 <script src="copy-edit.js?v=2" defer></script>
 </body>
