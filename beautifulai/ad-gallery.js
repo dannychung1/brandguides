@@ -137,7 +137,7 @@
       ['setting','Setting',Object.keys(AD.SETTINGS),'Professional Product','select'],
       ['layout','Scene',Object.keys(AD.LAYOUTS),'Presentation','select'],
       ['ground','Background',Object.keys(AD.GROUNDS),'Product Presentation'],
-      ['style','Moment',['Candid','Portrait','Detail'],'Professional'],
+      ['style','Moment',['Candid','Portrait','Detail','Video call'],'Professional'],
       ['shot','Framing',Object.keys(AD.SHOTS),'Professional','frame'],
       ['pshot','Framing',Object.keys(AD.PSHOTS),'Product','frame'],
       ['prop','Props',['Prop','No prop'],'Professional'],

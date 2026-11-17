@@ -19,43 +19,74 @@
   var HAIR='Hair: styled and groomed for a workday, neat and in place, with natural texture and a few fine strands at the hairline; never messy, windswept, frizzy or wet-looking, never helmet-stiff or plastic';
   var SCREEN_BLANK=function(dev){return 'Screen: '+dev+' is on and completely blank: a flat, even light grey rectangle inside its thin bezel, all 4 corners visible, nothing overlapping it, no interface, icons or text, ready for a screenshot in post'};
 
-  /* ── times, situations and wins (section 3); each row lists the settings it fits and the light types it allows ── */
+  /* ── times, wins, places and poses (sections 3 and 6) ──
+     Each time sets the light and its own wins; the Setting chip picks the place; the place's posture tag picks the pose. */
+  var ALL=['Office','Home','Home office','Café','In transit','Coworking','Hotel'];
   var TIMES=[
-    {k:'7:30',time:'7:30 a.m.',light:'cool early-morning daylight with warm patches of low sun',types:['Sun','Backlit','Soft'],win:'the first draft is done before the day starts',
-      at:{Home:['standing at the kitchen counter, coffee beside the laptop'],'Home office':['standing at the kitchen counter before heading to the desk, coffee beside the laptop']},post:'standing'},
-    {k:'9:00',time:'9:00 a.m.',light:'bright, clean morning light',types:['Sun','Soft','Backlit'],win:'a final tweak lands on the way in',
-      at:{'Café':['at a café window table'],'In transit':['in a train seat by the window','at a quiet airport gate, laptop on their knees'],Office:['walking in through the office, laptop carried open in one hand']},post:'mixed'},
-    {k:'10:55',time:'10:55 a.m.',light:'open window light',types:['Soft','Backlit'],win:'they walk in ready',
-      at:{Office:['in the hallway outside a meeting room, laptop under one arm','at a meeting-room door, about to step in']},post:'standing'},
-    {k:'11:30',time:'11:30 a.m.',light:'bright midday light',types:['Soft','Sun'],win:'the room leans in',
-      at:{Office:['presenting at a wall-mounted screen in a meeting room, the backs of 2 colleagues soft in the foreground']},post:'presenting',screen:'the wall-mounted screen'},
-    {k:'12:30',time:'12:30 p.m.',light:'hard midday sun',types:['Sun'],win:'the idea gets a laugh',
-      at:{Office:['at a tall table with a colleague'],'Café':['at a tall café table with a colleague']},post:'high',company:true},
-    {k:'2:00',time:'2:00 p.m.',light:'soft, even afternoon light',types:['Soft'],win:'the client on the call says "send me that"',
-      at:{Office:['on a video call at their desk'],'Home office':['on a video call at their desk'],Home:['on a video call at the dining table']},post:'seated'},
-    {k:'4:45',time:'4:45 p.m.',light:'low, warm late-afternoon sun',types:['Sun','Backlit','Soft'],win:'the deck is sent: the exhale',
-      at:{Home:['cross-legged on the sofa'],'Home office':['leaning on a window ledge'],Office:['leaning on a window ledge in a quiet corner'],'Café':['sitting back in a café armchair by the window']},post:'easy'},
-    {k:'6:15',time:'6:15 p.m.',light:'golden light turning to dusk',types:['Backlit','Sun','Soft'],win:"tomorrow's deck is done",
-      at:{Office:['at a desk as the office empties out','perched on the edge of a desk as the office empties out'],'Home office':['at their desk as the house goes quiet']},post:'seated',dim:true}
+    {k:'7:30',time:'7:30 a.m.',light:'cool early-morning daylight with warm patches of low sun',types:['Sun','Backlit','Soft'],sets:ALL,tags:['s','st','pe','le','so','h'],
+      wins:['the first draft is done before the day starts','the outline clicks over the first coffee','the overnight edits from the team are all in','the opening slide finally says it','the deck is ready before anyone else is up','the agenda is set before the first call']},
+    {k:'9:00',time:'9:00 a.m.',light:'bright, clean morning light',types:['Sun','Soft','Backlit'],sets:ALL,tags:['s','st','h','w','le','so','pe'],
+      wins:['a final tweak lands on the way in','the numbers update in one pass','the deck is shared before the 9:30','the last slide clicks into place on the way','the reply comes back: "looks great"','the story order finally makes sense']},
+    {k:'10:55',time:'10:55 a.m.',light:'open window light',types:['Soft','Backlit'],sets:['Office','Coworking','Hotel','Café','Home office','Home'],tags:['w','st'],
+      wins:['they walk in ready','the deck is up on screen before anyone sits down','the last check is done at the door','a colleague says "this looks sharp" on the way in','they walk in with time to spare','the one-pager is open and ready']},
+    {k:'11:30',time:'11:30 a.m.',light:'bright midday light',types:['Soft','Sun'],sets:['Office','Coworking','Hotel'],tags:['pr'],screen:true,
+      wins:['the room leans in','the room goes quiet on the key slide','someone asks for the deck before it ends','the chart makes the point on its own','the questions are the good kind','the decision gets made in the room']},
+    {k:'12:30',time:'12:30 p.m.',light:'hard midday sun',types:['Sun'],sets:ALL,tags:['h','s','st'],company:true,
+      wins:['the idea gets a laugh','a colleague says "that’s the slide"','the plan comes together over lunch','a rough idea becomes a slide in minutes','they both agree on the headline','a quick win worth a grin']},
+    {k:'2:00',time:'2:00 p.m.',light:'soft, even afternoon light',types:['Soft'],sets:['Office','Home office','Home','Coworking','Hotel','Café'],tags:['s','pe'],act:'on a video call',
+      wins:['the client on the call says "send me that"','the call ends 10 minutes early','the client asks to share the deck with their team','the follow-up deck is sent before the call ends','the client asks, "can we use this for the board?"','the client nods along on the video call']},
+    {k:'4:45',time:'4:45 p.m.',light:'low, warm late-afternoon sun',types:['Sun','Backlit','Soft'],sets:ALL,tags:['so','le','s','pe','st'],
+      wins:['the deck is sent: the exhale','the last comment is resolved','the proposal goes out on time','the deck is approved without a change','the inbox finally goes quiet','the laptop eases halfway closed, done']},
+    {k:'6:15',time:'6:15 p.m.',light:'golden light turning to dusk',types:['Backlit','Sun','Soft'],sets:['Office','Home office','Coworking','Hotel','In transit','Home'],tags:['s','pe','le','w','st'],dim:true,
+      wins:["tomorrow's deck is done",'the week’s last deck goes out','the team’s slides are merged and clean','the deck is locked and the coat goes on','the morning review is prepped','the room empties and the work is done']}
   ];
-  var BODY=['settled in their body, shoulders relaxed, a hand resting on the laptop','leaning back a little, shoulders loose','settled in, one arm loose over the chair back','weight easy on one hip, shoulders relaxed'];
-  var BODY_FOR={standing:[3,0],mixed:[1,0],presenting:[3],high:[0,3],seated:[0,1,2],easy:[1,2,0]};
+  /* role wins mix in about 2 times in 5, so a leader's win reads like a leader's */
+  var RWINS={
+    'Marketing':['the campaign story finally clicks','the launch deck gets a yes from the brand team','the hero slide lands on the first try','the results slide makes the numbers sing','the creative review ends early'],
+    'Sales':['the prospect asks for the proposal by Friday','the renewal deck gets a nod','the pricing slide answers the question before it’s asked','the demo deck lands with the buyer','the forecast review goes smoothly'],
+    'Business development':['the partner says "let’s do this"','the pitch earns a second meeting','the market map makes the case in one slide','the deal summary is ready ahead of the call','the intro deck opens the door'],
+    'Consultants & analysts':['the client signs off on the recommendation','the findings deck tells the story in 10 slides','the steering committee nods along','the workshop readout is done by noon','the analysis finally fits on one slide'],
+    'Team leader':['the team’s deck comes together in one pass','the team review ends with everyone aligned','a teammate’s slide gets the credit it deserves','the all-hands deck is locked','the quarterly plan lands with the team'],
+    'C-suite':['the board deck is locked a day early','the investor update reads clear and calm','the all-hands story lands with the whole company','the strategy slide gets a yes from the board','the budget review wraps in half the time']
+  };
+  /* places per setting, each tagged with its posture: s seated · st standing · pe perched · le ledge · so sofa · w walking or arriving · pr presenting · h tall table */
+  var PLACES={
+    'Office':[['s','at a wide desk by the window'],['s','in a glass-walled meeting room'],['s','at a long shared table'],['s','in a quiet library-style booth'],['h','at a tall table in the break-out area'],['st','at the kitchen bar in the office'],['so','on a low sofa in the office lounge'],['pe','on the edge of a desk on the open floor'],['le','at a window ledge in a quiet corner'],['st','at a standing desk'],['w','across the open floor'],['w','in the hallway outside a meeting room'],['w','at a meeting-room door, about to step in'],['pr','in a meeting room, at a wall-mounted screen'],['pr','at the head of a long boardroom table, beside a wall-mounted screen']],
+    'Home':[['st','at the kitchen counter'],['s','at the dining table'],['so','on the sofa'],['so','in an armchair by a bookcase'],['le','on a window seat'],['st','at a breakfast bar'],['s','at a table in a sunroom'],['s','at a balcony table, the door open behind them'],['s','at the kitchen table after breakfast'],['h','on a stool at the kitchen island'],['w','down the hallway at home, on the way out']],
+    'Home office':[['s','at their desk by the window'],['s','at a desk in a converted spare room'],['st','at a standing desk'],['le','at the window ledge'],['s','at a desk in a garden studio'],['pe','on the edge of their desk'],['st','at the kitchen counter before heading to the desk'],['so','on a reading chair in the corner of the study']],
+    'Café':[['s','at a café window table'],['h','at a tall café table'],['so','in a deep café armchair by the window'],['s','at a small marble table'],['s','on a long bench in a bakery café'],['s','at a café terrace table under an awning'],['h','on a stool at the coffee bar'],['s','at a table in a bookshop café'],['w','stepping out of a café door']],
+    'In transit':[['s','in a train seat by the window'],['s','at a quiet airport gate'],['so','in an airport lounge armchair'],['h','at a counter in a station café'],['s','at a train table seat'],['s','in a ferry lounge seat by the window'],['w','through a bright airport concourse'],['s','in a quiet carriage on a high-speed train']],
+    'Coworking':[['s','at a long communal table in a coworking space'],['h','at a tall table by the coworking coffee bar'],['so','on a lounge sofa in a coworking space'],['s','in a glass phone booth in a coworking space'],['pe','on a stool by the coworking window'],['st','at a standing bar along the coworking window'],['w','across a coworking floor'],['pr','in a small coworking meeting room, at a wall-mounted screen'],['s','in a quiet corner pod in a coworking space']],
+    'Hotel':[['s','at the desk in a hotel room'],['so','in a hotel lobby armchair'],['h','at a tall table in a hotel lobby'],['s','at a table in a hotel café'],['le','on the window seat of a hotel room'],['w','through a hotel lobby'],['pr','in a hotel conference room, at a wall-mounted screen']]
+  };
+  var POSES={
+    s:['sitting back in the chair, one arm loose over the backrest','leaning in, elbows on the table','turned a little in the chair toward the window','one leg crossed over the other, the laptop square in front of them','sitting forward, both hands on the keyboard','half turned toward someone just out of frame, one hand on the trackpad','settled back, a cup in one hand','sitting sideways on the chair, one arm over the back'],
+    st:['standing, one hip against the counter','standing, weight on one leg, a hand on the laptop','standing over the laptop, leaning on both palms','standing with a cup in one hand, scrolling with the other','standing, half turned toward someone just out of frame'],
+    pe:['perched, one foot on the floor','perched, the laptop balanced on one knee','perched, arms loosely folded, eyes on the screen','perched, leaning back on one hand'],
+    le:['leaning on the ledge, the laptop open beside them','sitting on the ledge, knees up, the laptop resting on them','leaning a shoulder on the window frame, the laptop on one forearm','half sitting on the ledge, one foot on the floor'],
+    so:['cross-legged, the laptop on their knees','curled into the corner, the laptop on a cushion','feet up on the coffee table, the laptop on their lap','sitting forward on the edge of the cushion','stretched out, one arm along the back'],
+    w:['mid-stride, the laptop under one arm','walking with the laptop open on one forearm, eyes on the last slide','slowing at the door, glancing at the laptop one last time','walking side by side with a colleague','turning back mid-stride to answer someone'],
+    pr:['standing beside the screen, one hand open toward it','standing at the head of the table, mid-sentence','stepping back from the screen to let the slide speak','standing, a clicker loose in one hand, turned toward the room','leaning on the table edge, answering a question'],
+    h:['leaning on the tall table, the laptop between their hands','on a stool, one foot on the rung','standing at the tall table, a cup beside the laptop','leaning in over the table, mid-laugh']
+  };
+  var BODY=['shoulders relaxed, settled in their body','shoulders loose, breathing out','easy and unhurried, the tension gone','settled in, a hand resting on the laptop'];
   var MOMENT_TAIL=', caught just after the peak: the smile settling, the nod finishing';
   var STOCK=' no fist pumps, high fives, thumbs up, jumping or finger guns';
 
   /* ── casting (section 4) ── */
   var AGE_RANGE={'20s':[24,29],'30s':[31,39],'40s':[41,49],'50s':[51,59]};
   var PERSON={Female:'woman',Male:'man',Other:'person'};
-  var ROLE={'Marketing':'in marketing','Sales':'in sales','Business development':'in business development','Consultants & analysts':'in consulting'};
+  var ROLE={'Marketing':'in marketing','Sales':'in sales','Business development':'in business development','Consultants & analysts':'in consulting','Team leader':'who leads a team','C-suite':'C'};
+  var CHIEF=['chief executive','chief financial officer','chief marketing officer','chief operating officer','chief revenue officer'];
   var HERITAGE={'Mixed heritage':'mixed-heritage'};
   var MARKS=[['freckles'],['a mole on the cheek'],['a small scar through one brow'],['crooked lower teeth'],['a chipped front tooth'],['faint acne scars'],['sun spots on the cheeks',40],['laugh lines',30],['a few grey strands',36],['salt-and-pepper stubble',38,'Male'],['a receding hairline',38,'Male'],['uneven single eyelids',0,null,['East Asian','Southeast Asian']]];
   var HAND_MARKS=['sun spots on the backs of the hands','a small scar on one knuckle','short, unpolished nails','visible veins on the backs of the hands'];
-  var STYLING=['tortoiseshell glasses','gold-rimmed glasses','rimless glasses','a simple ring','a steel watch','small hoop earrings','a woven bracelet','reading glasses pushed up on the head'];
+  var STYLING=['tortoiseshell glasses','gold-rimmed glasses','rimless glasses','bold, thick-framed glasses','a simple ring','stacked silver rings','a steel watch','small hoop earrings','a woven bracelet','reading glasses pushed up on the head','over-ear headphones around the neck','a knit beanie'];
   function styl(pool,n){var o=[],c=pickN(pool,pool.length);c.forEach(function(x){if(o.length<n&&!(/glasses/.test(x)&&o.some(function(y){return /glasses/.test(y)}))&&!(/watch/.test(x)&&o.some(function(y){return /watch/.test(y)})))o.push(x)});return o}
   var HAND_STYLING=['a simple ring','a steel watch','a woven bracelet','a leather-strap watch'];
   var ASSIST=['a hearing aid','a cane resting against the table','a wheelchair','a prosthetic hand'];
   function ageOf(sel){var r=AGE_RANGE[sel.age]||[31,39];return keep('ageN',function(){return r[0]+Math.floor(Math.random()*(r[1]-r[0]+1))})}
-  function who(sel){var age=ageOf(sel),h=HERITAGE[sel.race]||sel.race,p=PERSON[sel.gender]||'person',b=(AD.BUILDS&&AD.BUILDS[sel.build])||'an average build',r=ROLE[sel.role]||'in marketing';
+  function who(sel){var age=ageOf(sel),h=HERITAGE[sel.race]||sel.race,p=PERSON[sel.gender]||'person',b=(AD.BUILDS&&AD.BUILDS[sel.build])||'an average build',r=ROLE[sel.role]||'in marketing';if(r==='C')r='who is the company\u2019s '+v('chief',keep('chief',function(){return one(CHIEF)}));
     return v('ageN',age+'-year-old')+' '+h+' '+p+' '+r+', with '+b}
   function marks(sel,hands){var age=ageOf(sel);if(hands)return keep('marks',function(){return pickN(HAND_MARKS,2)});
     return keep('marks',function(){var ok=MARKS.filter(function(m){return age>=(m[1]||0)&&(!m[2]||m[2]===sel.gender)&&(!m[3]||m[3].indexOf(sel.race)>-1)}).map(function(m){return m[0]});return pickN(ok,2)})}
@@ -63,21 +94,23 @@
     return 'Cast: a real person, never a model; '+v('marks',m.join(', '))+'; '+v('styling',st.join(' and '))+(as?'; '+v('assist',as)+', shown as part of their day':'')}
 
   /* ── wardrobe color (section 5) ── */
+  /* each hue carries the warm, natural colors that pair with it for the rest of the outfit */
+  var PAIRS={a:['cream','camel','khaki','charcoal','oatmeal'],n:['cream','camel','white','stone','tan'],r:['oatmeal','warm grey','olive','cream','camel'],m:['denim blue','cream','chocolate brown','olive','stone']};
   var RAMPS=[
-    ['faded azure, like well-washed chambray','#5C9DBA',['chambray shirt','oxford-cloth shirt','poplin shirt']],
-    ['deep azure denim, broken in','#2E5A6B',['denim jacket','wool crewneck','corduroy overshirt']],
-    ['soft greyed azure','#CCDEE6',['knit sweater','linen shirt']],
-    ['darkest navy that reads near-black','#002533',['wool blazer','crewneck sweater']],
-    ['dusty raspberry wool','#8F4565',['wool blazer','knit sweater']],
-    ['muted magenta wine','#57293E',['ribbed knit sweater','velvet blazer','leather jacket']],
-    ['soft greyed rose','#E4CDD7',['linen shirt','silk shirt']],
-    ['garment-dyed marigold cotton, slightly faded','#D39A58',['cotton overshirt','cotton shirt']],
-    ['washed ochre, like an old work shirt','#A9733C',['canvas jacket','suede jacket']],
-    ['muted rust brown','#764E2D',['knit cardigan','corduroy jacket']]
+    ['faded azure, like well-washed chambray','#5C9DBA','a',['chambray shirt','oxford-cloth shirt','poplin shirt']],
+    ['deep azure denim, broken in','#2E5A6B','a',['denim jacket','wool crewneck','corduroy overshirt']],
+    ['soft greyed azure','#CCDEE6','a',['knit sweater','linen shirt']],
+    ['darkest navy that reads near-black','#002533','n',['wool blazer','crewneck sweater']],
+    ['dusty raspberry wool','#8F4565','r',['wool blazer','knit sweater']],
+    ['muted magenta wine','#57293E','r',['ribbed knit sweater','velvet blazer','leather jacket']],
+    ['soft greyed rose','#E4CDD7','r',['linen shirt','silk shirt']],
+    ['garment-dyed marigold cotton, slightly faded','#D39A58','m',['cotton overshirt','cotton shirt']],
+    ['washed ochre, like an old work shirt','#A9733C','m',['canvas jacket','suede jacket']],
+    ['muted rust brown','#764E2D','m',['knit cardigan','corduroy jacket']]
   ];
-  function wardrobeLine(sel,sleeve){var r=keep('ramp',function(){return one(RAMPS)}),g=keep('garment',function(){return one(r[2])});if(r[2].indexOf(g)<0){g=one(r[2]);R.garment=g}
+  function wardrobeLine(sel,sleeve){var r=keep('ramp',function(){return one(RAMPS)}),g=keep('garment',function(){return one(r[3])});if(r[3].indexOf(g)<0){g=one(r[3]);R.garment=g}var pr=keep('pair',function(){return pickN(PAIRS[r[2]],2)});if(pr.some(function(x){return PAIRS[r[2]].indexOf(x)<0})){pr=pickN(PAIRS[r[2]],2);R.pair=pr}
     var what=sleeve?'the sleeve of a '+g:'a '+g;
-    return 'Wardrobe: '+v('garment',what)+' in '+v('ramp',r[0]+' ('+r[1]+')')+', the same hue as our brand color but the way real clothes look after a few washes: softly faded, slightly uneven dye, a little lighter at the seams and creases, never vivid, uniform or costume-like; it stands out from the warm light rather than matching it; everything else neutral'}
+    return 'Wardrobe: '+v('garment',what)+' in '+v('ramp',r[0]+' ('+r[1]+')')+', the same hue as our brand color but the way real clothes look after a few washes: softly faded, slightly uneven dye, a little lighter at the seams and creases, never vivid, uniform or costume-like; it stands out from the warm light rather than matching it; the rest of the outfit in '+v('pair',pr.join(' and '))+', colors that pair well with it, never another bright color'}
 
   /* ── light (section 2) ── */
   var TYPE_LINE={Sun:'hard-edged patches of sun across the table, floor and hands',Soft:'soft, even window light with one warm patch of sun near the hands',Backlit:'a window glows behind them and rims their hair and shoulders without blowing out'};
@@ -87,31 +120,38 @@
     if(row.dim)s+='; the screen adds only a faint, neutral fill on the hands or chin, never tinted, never the main light on the face';
     return s+'; never the sun disc in frame, haze beams or a spotlight on a black background'}
 
-  /* ── choosing a time row that fits the setting and the light chip ── */
-  function rowFor(sel,desk){var st=sel.setting||'Office';
-    var fits=TIMES.filter(function(r){return r.at[st]&&(!desk||!/standing|presenting|mixed/.test(r.post)||r.k==='7:30')});if(!fits.length)fits=TIMES.filter(function(r){return r.at[st]});if(!fits.length)fits=TIMES.filter(function(r){return r.at.Office});
+  /* ── choosing a time that fits the setting and light chips, then a place and a pose ── */
+  function rowFor(sel,desk){var st=sel.setting||'Office',pl0=PLACES[st]||PLACES.Office;
+    function placesFor(r){return pl0.filter(function(x){return r.tags.indexOf(x[0])>-1&&(!desk||!/^(w|pr)$/.test(x[0]))})}
+    var fits=TIMES.filter(function(r){return r.sets.indexOf(st)>-1&&placesFor(r).length});if(!fits.length)fits=TIMES.filter(function(r){return placesFor(r).length});if(!fits.length)fits=TIMES.slice();
     if(sel.light&&sel.light!=='Mixed'){var m=fits.filter(function(r){return r.types.indexOf(sel.light)>-1});if(m.length)fits=m}
     if(sel.shot==='Two-shot'){var c=fits.filter(function(r){return !r.screen});if(c.length)fits=c}
     var k=keep('time',function(){return one(fits).k}),row=TIMES.filter(function(r){return r.k===k})[0];
     if(fits.indexOf(row)<0){row=one(fits);R.time=row.k}
-    var places=row.at[st]||row.at.Office||row.at[Object.keys(row.at)[0]];if(desk){var dp=places.filter(function(x){return !/walking|door|hallway|presenting/.test(x)});if(dp.length)places=dp}var pl=keep('place',function(){return one(places)});if(places.indexOf(pl)<0){pl=one(places);R.place=pl}
-    return {row:row,place:pl}}
+    var places=placesFor(row);if(!places.length)places=pl0.filter(function(x){return !/^(w|pr)$/.test(x[0])});
+    var pk=keep('place',function(){return one(places)[1]}),pl=places.filter(function(x){return x[1]===pk})[0];if(!pl){pl=one(places);R.place=pl[1]}
+    var poses=POSES[pl[0]],pose=keep('pose',function(){return one(poses)});if(poses.indexOf(pose)<0){pose=one(poses);R.pose=pose}
+    var rw=RWINS[sel.role]||[],win=keep('win',function(){return rw.length&&Math.random()<0.4?one(rw):one(row.wins)});if(row.wins.indexOf(win)<0&&rw.indexOf(win)<0){win=one(row.wins);R.win=win}
+    var place=pl[1]+(row.act&&!/^(w|pr)$/.test(pl[0])?', '+row.act:'');
+    return {row:row,place:place,pose:pose,tag:pl[0],win:win}}
 
   /* ── frames (sections 6 and 9) ── */
   var LENS={'Close-up':'85mm, close on the face and shoulders','Medium shot':'50mm, waist-up','Two-shot':'50mm, waist-up, the 2 of them together, the light favoring the professional','Wide shot':'35mm, the whole person and the room around them'};
-  var ANGLES=['from eye level','from slightly low','over a colleague’s shoulder','through a soft, out-of-focus foreground object such as a glass or a plant'];
-  function angle(sel,row){var a=ANGLES.slice();if(sel.shot!=='Two-shot'&&!row.company)a.splice(2,1);if(sel.style==='Portrait')a=[ANGLES[0],ANGLES[1]];return keep('angle',function(){return one(a)})}
+  var ANGLES=['from eye level','from slightly low','over a colleague\u2019s shoulder','through a soft, out-of-focus foreground object such as a glass or a plant','at arm\u2019s length, a blurred shoulder or laptop edge soft in the foreground','from a high angle, looking down into the moment','in a tight crop that cuts through a shoulder, the camera right inside the moment','low at table height, the laptop edge soft in the foreground'];
+  var IMMERSED='; immersed and kinetic: the camera is inside the moment, close enough to high-five them';
+  function angle(sel,row){var a=ANGLES.slice();if(sel.shot!=='Two-shot'&&!row.company)a.splice(2,1);if(sel.style==='Portrait')a=[ANGLES[0],ANGLES[1]];var g=keep('angle',function(){return one(a)});if(a.indexOf(g)<0){g=one(a);R.angle=g}return g}
   function copyBit(sel){return sel.copy&&sel.copy!=='None'?'; clear, empty space on one side for a headline':''}
 
   /* ── A pro ── */
   var DETAILS=['a hand resting on the closed laptop, a coffee beside it','fingers lifting off the trackpad after the last click','a hand easing the laptop lid down, a coffee beside it','both hands loose on the keyboard, the work done'];
   function pro(sel){
-    var style=sel.style||'Candid',f=rowFor(sel),row=f.row,L=[];
+    if(sel.style==='Video call')return videoCall(sel);
+    var style=sel.style||'Candid',f=rowFor(sel,style==='Portrait'||style==='Detail'),row=f.row,L=[];
     if(style==='Detail'){
       var d=keep('detail',function(){return one(DETAILS)}),open=!/closed|lid down/.test(d);
       L.push('Photo: an editorial detail photograph of a professional’s hands just after a little win at work, the light landing on the hands and the laptop; candid, settled-in and quietly successful, buoyed by optimism; a real, unretouched moment');
       L.push('Subject: the hands of a '+who(sel)+', '+v('place',f.place)+', at '+v('time',row.time)+'; no face in frame');
-      L.push('Moment: '+v('detail',d)+', right after '+v('time',row.win)+'; the hands settling, the work done;'+STOCK);
+      L.push('Moment: '+v('detail',d)+', right after '+v('win',f.win)+'; the hands settling, the work done;'+STOCK);
       L.push(lightLine(sel,row,{hands:true,what:'hands and laptop'}));
       L.push('Frame: '+v('lens',sel.shot==='Close-up'?'85mm, close on the hands':'50mm, the hands and the laptop')+', '+v('angle',keep('angleD',function(){return one(['from just above the table edge','from eye level across the table','at a low angle along the tabletop'])}))+(open?'; the laptop’s keyboard and trackpad fill the lower half of the frame':'; the closed laptop fills the lower half of the frame')+copyBit(sel));
       L.push(wardrobeLine(sel,true));
@@ -121,23 +161,38 @@
     }
     var portrait=style==='Portrait',solo=sel.shot!=='Two-shot'&&!row.company,fl=sel.float&&sel.float!=='No';
     L.push(portrait?'Photo: an editorial portrait of a professional just after a little win at work, the light landing on them; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment':'Photo: a candid editorial photograph of a professional’s little win at work, the light landing on them and their idea; candid, settled-in, in flow and quietly successful, buoyed by optimism; a real, unretouched moment');
-    var place=f.place;if(!solo&&!/colleague/.test(place))place+=', a colleague beside them';
-    L.push('Subject: a '+who(sel)+', '+v('place',place)+', at '+v('time',row.time));
-    var body=/walking/.test(place)?'mid-stride, shoulders relaxed, the laptop easy in one hand':keep('body',function(){return BODY[one(BODY_FOR[row.post]||[0,1])]});
-    L.push('Moment: '+v('time',row.win)+MOMENT_TAIL+'; '+v('body',body)+';'+STOCK);
+    var place=f.place;if(!solo&&!/colleague/.test(place+f.pose))place+=', a colleague beside them';if(solo&&sel.shot==='Wide shot'&&keep('group',function(){return Math.random()<0.4})&&!/^(w|pr)$/.test(f.tag))place+=', 2 colleagues working around them';if(f.tag==='pr'&&!/colleagues/.test(place))place+=', the backs of 2 colleagues soft in the foreground';
+    L.push('Subject: a '+who(sel)+', '+v('place',place)+', '+v('pose',f.pose)+', at '+v('time',row.time));
+    var body=keep('body',function(){return one(BODY)});
+    L.push('Moment: '+v('win',f.win)+MOMENT_TAIL+'; '+v('body',body)+';'+STOCK);
     L.push(portrait?'Gaze: into the lens with a settled, easy half-smile, unposed, as if a friend just asked how it went':'Gaze: on the work or the person they’re talking to, never at the lens');
     L.push(lightLine(sel,row));
     var lens=portrait?(sel.shot==='Wide shot'?'50mm, waist-up, with the room around them':sel.shot==='Medium shot'?'85mm, chest-up':'85mm, close on the face and shoulders'):LENS[sel.shot]||LENS['Medium shot'];
-    if(/walking/.test(place)&&/85mm, close/.test(lens))lens='50mm, waist-up';
-    var fr='Frame: '+v('lens',lens)+', '+v('angle',angle(sel,row));
+    if(f.tag==='w'&&/85mm/.test(lens))lens='50mm, waist-up';if(f.tag==='w'&&/35mm|50mm/.test(lens)===false)lens='50mm, waist-up';
+    var fr='Frame: '+v('lens',lens)+', '+v('angle',angle(sel,row))+(portrait||fl?'':IMMERSED);
     if(fl)fr+='; frame it wide, with open, uncluttered air around them, above each shoulder and beside the laptop, for blank floating slides added in post';
     L.push(fr+copyBit(sel));
     L.push(wardrobeLine(sel));
     L.push(castLine(sel));
     L.push(HAIR);
-    L.push(row.screen?SCREEN_BLANK(row.screen):'Screen: the laptop screen faces away from the camera');
+    L.push(f.tag==='pr'?SCREEN_BLANK('the wall-mounted screen'):'Screen: the laptop screen faces away from the camera');
     if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.splice(L.length-1,0,'Prop: '+v('prop',pr)+', the only object besides the laptop')}
     else L.splice(L.length-1,0,'Prop: none; only the laptop');
+    return L;
+  }
+  function videoCall(sel){
+    if(!('time' in R))R.time=one(['2:00','2:00','2:00','9:00','4:45','6:15']);
+    var f=rowFor(sel,true),row=f.row,L=[];
+    L.push('Photo: a candid editorial photograph from the point of view of their laptop\u2019s webcam: a professional mid-conversation on a video call, just after a little win, the light landing on them; immersed, close and kinetic, buoyed by optimism; a real, unretouched moment');
+    L.push('Subject: a '+who(sel)+', '+v('place',f.place.replace(/, on a video call$/,''))+', on a video call, at '+v('time',row.time));
+    var g=keep('vcg',function(){return one(['one hand mid-gesture toward the camera','leaning in toward the camera, mid-sentence','sitting back, laughing at something someone on the call just said','both hands open, explaining the next step'])});
+    L.push('Moment: '+v('win',f.win)+MOMENT_TAIL+'; '+v('vcg',g)+';'+STOCK);
+    L.push('Gaze: into the lens, as if into the faces on the call, warm and animated, mid-talk; never posed');
+    L.push(lightLine(sel,row,{what:'face and hands'}));
+    L.push('Frame: '+v('lens','35mm from the laptop\u2019s webcam, just below eye level')+'; the soft top edge of the laptop screen in the lower frame'+IMMERSED+copyBit(sel));
+    L.push(wardrobeLine(sel));L.push(castLine(sel));L.push(HAIR);
+    if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.push('Prop: '+v('prop',pr)+', the only object besides the laptop')}else L.push('Prop: none; only the laptop');
+    L.push('Screen: the camera is the laptop; no screen faces the camera');
     return L;
   }
   var PROPS=['a ceramic mug of coffee','a glass of water','a cup of tea','a small espresso cup','folded reading glasses','wireless earbuds in their case','a reusable water bottle','a small potted plant','a set of keys'];
@@ -220,9 +275,11 @@
   AD.hold=function(){R={}};AD.reroll=function(){R={}};
   AD.snap=function(){return JSON.parse(JSON.stringify(R))};AD.restore=function(s){R=JSON.parse(JSON.stringify(s||{}))};
   AD.lastVars=function(){return LV.slice()};AD.varKey=function(t){return LVK[t]};
-  AD.unset=function(k){delete R[k];if(k==='ramp')delete R.garment;if(k==='time')delete R.place};
+  AD.unset=function(k){delete R[k];if(k==='ramp')delete R.garment;if(k==='time'){delete R.place;delete R.pose;delete R.win}if(k==='place')delete R.pose};
   AD.PSHOTS={'Screen close-up':1,'Over the shoulder':1,'Point of view':1,'Brand graphic space':1};
   AD.LAYOUTS={'Meeting room':1,'Stage':1,'Across the table':1,'Brand graphic space':1};
   AD.GROUNDS={'Light':1,'Dark':1};
+  AD.ROLES={'Marketing':1,'Sales':1,'Business development':1,'Consultants & analysts':1,'Team leader':1,'C-suite':1};
+  AD.SETTINGS={};ALL.forEach(function(k){AD.SETTINGS[k]=1});
   AD.V3=true;
 })();
