@@ -13,7 +13,7 @@
   function v(k,t){t=String(t);LV.push(t);LVK[t]=k;return t}
 
   /* ── fixed lines (section 1) ── */
-  var LOOK='Look: natural, true-to-life grade: warmth only where warm light lands, neutral whites, cool, clean shadows, true skin tones, rich but real color, crisp with moderate contrast, fine grain';
+  var LOOK='Look: natural grade with warm highlights and warm, glowing skin; neutral midtones and neutral shadows, never blue; whites stay clean; rich but real color, crisp with moderate contrast, fine grain';
   var AVOID='Avoid: plastic or airbrushed skin, stock-photo posing, god rays, lens flare, halos, HDR, a teal-orange grade, an orange or golden cast';
   var NEVER='Never include: readable text, words, numbers, logos or signage; no paper, printed pages, printed slides, notebooks, sketches or outlines; no phone in a hand';
   var HAIR='Hair: styled and groomed for a workday, neat and in place, with natural texture and a few fine strands at the hairline; never messy, windswept, frizzy or wet-looking, never helmet-stiff or plastic';
@@ -92,7 +92,7 @@
     return v('ageN',age+'-year-old')+' '+h+' '+p+' '+r+', with '+b}
   function marks(sel,hands){var age=ageOf(sel);if(hands)return keep('marks',function(){return pickN(HAND_MARKS,2)});
     return keep('marks',function(){var ok=MARKS.filter(function(m){return age>=(m[1]||0)&&(!m[2]||m[2]===sel.gender)&&(!m[3]||m[3].indexOf(sel.race)>-1)}).map(function(m){return m[0]});return pickN(ok,2)})}
-  function castLine(sel,hands){var m=marks(sel,hands),st=keep('styling',function(){return styl(hands?HAND_STYLING:STYLING,Math.random()<0.5?1:2)}),as=keep('assist',function(){return Math.random()<1/6?one(hands?['a prosthetic hand']:ASSIST):''});
+  function castLine(sel,hands){var m=marks(sel,hands),st=keep('styling',function(){return styl(hands?HAND_STYLING:(/C-suite|Team leader/.test(sel.role||'')?STYLING.filter(function(x){return x!=='a knit beanie'}):STYLING),Math.random()<0.5?1:2)}),as=keep('assist',function(){return Math.random()<(hands?1/30:1/15)?one(hands?['a prosthetic hand']:ASSIST):''});
     return 'Cast: a real person, never a model; '+v('marks',m.join(', '))+'; '+v('styling',st.join(' and '))+(as?'; '+v('assist',as)+', shown as part of their day':'')}
 
   /* ── wardrobe color (section 5) ── */
@@ -115,7 +115,7 @@
     return 'Wardrobe: '+v('garment',what)+' in '+v('ramp',r[0]+' ('+r[1]+')')+', the same hue as our brand color but the way real clothes look after a few washes: softly faded, slightly uneven dye, a little lighter at the seams and creases, never vivid, uniform or costume-like; it stands out from the light rather than matching it; the rest of the outfit in '+v('pair',pr.join(' and '))+', colors that pair well with it, never another bright color'}
 
   /* ── light (section 2) ── */
-  var TYPE_LINE={Sun:'hard-edged patches of sun across the table, floor and hands',Soft:'soft, even window light with one warm patch of sun near the hands',Backlit:'a window glows behind them and rims their hair and shoulders without blowing out'};
+  var TYPE_LINE={Sun:'hard-edged patches of sun across the table, floor and hands',Soft:'soft, even window light with one warm patch of sun near the hands; a little warm bounce lifts the face',Backlit:'a window glows behind them and rims their hair and shoulders without blowing out; a little warm bounce lifts the face'};
   function lightType(sel,row){var want=sel.light&&sel.light!=='Mixed'?sel.light:null;if(want)return want;return keep('ltype',function(){return one(row.types)})}
   function lightLine(sel,row,opt){opt=opt||{};var t=lightType(sel,row),face=opt.hands?'the hands are the brightest skin in the frame':'the face is the brightest skin in the frame';
     var s='Light: '+v('time',row.light)+' lands on the person and on what they’re working on ('+(opt.what||'hands, laptop, the person they’re talking to')+'); '+face+'; the room falls a stop darker around them, never gloomy; warm where the sun or a lamp lands, neutral everywhere else, never an orange or golden cast; '+v('ltype',opt.hands&&t==='Backlit'?'a window glows behind and rims the hands and the edge of the laptop without blowing out':TYPE_LINE[t]);
