@@ -156,8 +156,8 @@
   var ANGLES=['from eye level',GRAND,'over a colleague\u2019s shoulder','through a soft, out-of-focus foreground object such as a glass or a plant','at arm\u2019s length, a blurred shoulder or laptop edge soft in the foreground','from a high angle, looking down into the moment','in a tight crop that cuts through a shoulder, the camera right inside the moment','low at table height, the laptop edge soft in the foreground'];
   var WALK_CLOSE='85mm, close on the face and shoulders, moving alongside them as they walk';
   var MOTION='; natural, subtle motion: only a slight blur in the hand swinging mid-stride or a lifting strand of hair; the face sharp; the person and the room share the same light and focus falloff, never a streaked background or a cut-out, composited look';
-  var IMMERSED='; immersed and kinetic: the camera is inside the moment, close enough to high-five them';
-  var KINETIC='immersed and kinetic: the camera inside the moment, close enough to high-five them';
+  var IMMERSED='; immersed and intimate: the camera is inside the moment, close enough to reach out and shake their hand';
+  var KINETIC='immersed and intimate: the camera inside the moment, close enough to reach out and shake their hand';
   /* presenting rooms get their own camera positions, each one complete on its own */
   var PR_CAM=['from behind the seated room, the backs of 2 colleagues soft in the foreground','from a high back corner, looking down the length of the table at them','from low near the end of the table, looking up a little, giving them stature and a sense of grandness','from beside the table at seated height, '+KINETIC,'from eye level across the table, between two colleagues’ shoulders'];
   function angle(sel,row,tag){var a=ANGLES.concat([KINETIC,KINETIC]);if(sel.shot!=='Two-shot'&&!row.company)a.splice(2,1);if(sel.style==='Portrait')a=[ANGLES[0],GRAND];if(tag==='w'&&sel.shot==='Close-up')a=[ANGLES[0],GRAND];if(sel.shot==='Wide shot')a=a.filter(function(x){return x!==KINETIC&&!/tight crop/.test(x)});if(tag==='pr')a=PR_CAM;var g=keep('angle',function(){return one(a)});if(a.indexOf(g)<0){g=one(a);R.angle=g}return g}
@@ -217,17 +217,33 @@
   function videoCall(sel){
     if(!('time' in R))R.time=one(['2:00','2:00','2:00','9:00','4:45','6:15']);
     var f=rowFor(sel,true),row=f.row,L=[];
-    L.push('Photo: a candid editorial photograph from the point of view of their laptop\u2019s webcam: a professional presenting or talking on a video call, in a little win, the light landing on them; immersed, close and kinetic, buoyed by optimism; a real, unretouched moment');
+    L.push('Photo: a candid editorial photograph from the point of view of their laptop\u2019s webcam: a professional on a video call, in a little win, the light landing on them; close and intimate, buoyed by optimism; a real, unretouched moment');
     L.push('Subject: a '+who(sel)+', '+v('place',f.place.replace(/, on a video call$/,''))+', on a video call, at '+v('time',row.time));
-    var VCG=['one hand mid-gesture toward the camera','leaning in toward the camera, mid-sentence','sitting back, laughing at something someone on the call just said','both hands open, explaining the next step','presenting their shared slides, eyes flicking between the lens and the screen','pausing to let the point land, eyebrows raised, waiting for the reaction','counting the next three steps on their fingers, mid-explanation','sitting forward, elbows on the desk, answering a tough question','sketching the shape of the idea in the air','nodding slowly as the client talks, about to come back in'];
+    /* each pose: [what they do, where they look, talk or listen]; listening poses never land on the peak */
+    var VCP=[
+      ['one hand mid-gesture, low and loose','into the lens, mid-sentence','t'],
+      ['leaning in toward the camera, mid-sentence','into the lens, earnest and direct','t'],
+      ['sitting back, laughing at something someone on the call just said','just off the lens, toward a face on the screen, still laughing','l'],
+      ['presenting their shared slides, eyes flicking between the lens and the screen','down at their screen for a beat, about to look back up','t'],
+      ['pausing to let the point land, eyebrows raised, hands still','into the lens, waiting for the reaction','l'],
+      ['counting the next three steps on their fingers, mid-explanation','into the lens, mid-sentence','t'],
+      ['sitting forward, elbows on the desk, answering a tough question','into the lens, steady and sure','t'],
+      ['nodding slowly as the client talks, about to come back in','into the lens, listening closely','l'],
+      ['sitting back, one hand around '+'a drink'+', listening','into the lens, relaxed and listening','l'],
+      ['one elbow on the desk, chin clear of the hand, taking it in','into the lens, thoughtful','l'],
+      ['leaning toward the lens to hear the question','into the lens, attentive','l'],
+      ['tilting the laptop screen as the call begins, a quick smile','just below the lens, at the faces arriving on screen','l'],
+      ['a slow half-smile as the decision comes in','into the lens, quietly pleased','l'],
+      ['hands resting on the desk, letting the client finish','into the lens, patient and present','l']];
+    var VCG=VCP.map(function(x){return x[0]});
     var VCW=['the client asks to see that slide again','the pitch on the call wins the room','the toughest question on the call gets the best answer','the decision-maker unmutes to say yes','every face on the call is nodding','the room on the other end leans in'];
     var g=keep('vcg',function(){return one(VCG)});if(VCG.indexOf(g)<0){g=one(VCG);R.vcg=g}
     var vw=keep('vcw',function(){return Math.random()<0.5?one(VCW):''}),win=vw||f.win;
-    var vph=keep('vcph',function(){return one(['before','peak','peak','after'])}),VT={before:PHASE.before,peak:PHASE.peak,after:PHASE.after}[vph];
-    L.push('Moment: '+VT.lead+v(vw?'vcw':'win',win)+VT.tail+'; '+v('vcg',g)+';'+STOCK);
-    L.push('Gaze: into the lens, as if into the faces on the call, warm and animated, mid-talk; never posed');
+    var gp=VCP[VCG.indexOf(g)],vopt=gp[2]==='t'?['before','peak','peak','after']:['before','after'],vph=keep('vcph',function(){return one(vopt)});if(vopt.indexOf(vph)<0){vph=one(vopt);R.vcph=vph}var VT=PHASE[vph];
+    L.push('Moment: '+VT.lead+v(vw?'vcw':'win',win)+VT.tail+'; '+v('vcg',g)+';'+STOCK+', no both hands raised toward the camera');
+    L.push('Gaze: '+gp[1]+', as if into the faces on the call; never posed');
     L.push(lightLine(sel,row,{what:'face and hands'}));
-    L.push('Frame: '+v('lens',keep('vcLens',function(){return one(['35mm from the laptop\u2019s webcam, just below eye level','35mm from the laptop\u2019s webcam, a touch low, looking up a little, giving them quiet stature'])}))+'; the soft top edge of the laptop screen in the lower frame'+IMMERSED+copyBit(sel));
+    L.push('Frame: '+v('lens',keep('vcLens',function(){return one(['35mm from the laptop\u2019s webcam, just below eye level','35mm from the laptop\u2019s webcam, a touch low, looking up a little, giving them quiet stature'])}))+'; the soft top edge of the laptop screen in the lower frame'+copyBit(sel));
     var hp=keep('vcHead',function(){return Math.random()<1/10});
     L.push(wardrobeLine(sel));L.push(castLine(sel)+(hp?'; slim wireless headphones on, quiet and secondary':''));L.push(SKIN);L.push(HAIR);
     if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.push('Prop: '+v('prop',pr)+', the only object besides the laptop')}else L.push('Prop: none; only the laptop');
