@@ -13,7 +13,7 @@
   function v(k,t){t=String(t);LV.push(t);LVK[t]=k;return t}
 
   /* ── fixed lines (section 1) ── */
-  var LOOK='Look: natural editorial grade, true skin tones, slightly lifted blacks, soft halation on bright edges, fine grain';
+  var LOOK='Look: natural, true-to-life grade: warmth only where warm light lands, neutral whites, cool, clean shadows, true skin tones, rich but real color, crisp with moderate contrast, fine grain';
   var AVOID='Avoid: plastic or airbrushed skin, stock-photo posing, god rays, lens flare, halos, HDR, a teal-orange grade, an orange or golden cast';
   var NEVER='Never include: readable text, words, numbers, logos or signage; no paper, printed pages, printed slides, notebooks, sketches or outlines; no phone in a hand';
   var HAIR='Hair: styled and groomed for a workday, neat and in place, with natural texture and a few fine strands at the hairline; never messy, windswept, frizzy or wet-looking, never helmet-stiff or plastic';
@@ -118,7 +118,7 @@
   var TYPE_LINE={Sun:'hard-edged patches of sun across the table, floor and hands',Soft:'soft, even window light with one warm patch of sun near the hands',Backlit:'a window glows behind them and rims their hair and shoulders without blowing out'};
   function lightType(sel,row){var want=sel.light&&sel.light!=='Mixed'?sel.light:null;if(want)return want;return keep('ltype',function(){return one(row.types)})}
   function lightLine(sel,row,opt){opt=opt||{};var t=lightType(sel,row),face=opt.hands?'the hands are the brightest skin in the frame':'the face is the brightest skin in the frame';
-    var s='Light: '+v('time',row.light)+' lands on the person and on what they’re working on ('+(opt.what||'hands, laptop, the person they’re talking to')+'); '+face+'; the room falls a stop darker around them, never gloomy; true-to-life color and a neutral white balance, never an orange or golden cast; '+v('ltype',opt.hands&&t==='Backlit'?'a window glows behind and rims the hands and the edge of the laptop without blowing out':TYPE_LINE[t]);
+    var s='Light: '+v('time',row.light)+' lands on the person and on what they’re working on ('+(opt.what||'hands, laptop, the person they’re talking to')+'); '+face+'; the room falls a stop darker around them, never gloomy; warm where the sun or a lamp lands, neutral everywhere else, never an orange or golden cast; '+v('ltype',opt.hands&&t==='Backlit'?'a window glows behind and rims the hands and the edge of the laptop without blowing out':TYPE_LINE[t]);
     if(row.dim)s+='; the screen adds only a faint, neutral fill on the hands or chin, never tinted, never the main light on the face';
     return s+'; never the sun disc in frame, haze beams or a spotlight on a black background'}
 
