@@ -13,10 +13,12 @@
   function v(k,t){t=String(t);LV.push(t);LVK[t]=k;return t}
 
   /* ── fixed lines (section 1) ── */
-  var LOOK='Look: warm editorial grade, true skin tones, slightly lifted blacks, soft halation on bright edges, fine grain';
-  var AVOID='Avoid: plastic or airbrushed skin, stock-photo posing, god rays, lens flare, halos, HDR, a teal-orange grade';
+  var LOOK='Look: natural editorial grade, true skin tones, slightly lifted blacks, soft halation on bright edges, fine grain';
+  var AVOID='Avoid: plastic or airbrushed skin, stock-photo posing, god rays, lens flare, halos, HDR, a teal-orange grade, an orange or golden cast';
   var NEVER='Never include: readable text, words, numbers, logos or signage; no paper, printed pages, printed slides, notebooks, sketches or outlines; no phone in a hand';
   var HAIR='Hair: styled and groomed for a workday, neat and in place, with natural texture and a few fine strands at the hairline; never messy, windswept, frizzy or wet-looking, never helmet-stiff or plastic';
+  var SKIN='Skin: real, detailed skin on every skin tone: visible pores, fine lines and natural unevenness; deep and dark skin keeps its full texture and true undertones, matte with only a soft natural sheen on the high points, never glossy, waxy, smoothed or airbrushed';
+  var SKIN_H='Skin: real, detailed skin on the hands for every skin tone: knuckle creases, fine lines and visible texture, never glossy, waxy or smoothed';
   var SCREEN_BLANK=function(dev){return 'Screen: '+dev+' is on and completely blank: a flat, even light grey rectangle inside its thin bezel, all 4 corners visible, nothing overlapping it, no interface, icons or text, ready for a screenshot in post'};
 
   /* ── times, wins, places and poses (sections 3 and 6) ──
@@ -35,9 +37,9 @@
       wins:['the idea gets a laugh','a colleague says "that’s the slide"','the plan comes together over lunch','a rough idea becomes a slide in minutes','they both agree on the headline','a quick win worth a grin']},
     {k:'2:00',time:'2:00 p.m.',light:'soft, even afternoon light',types:['Soft'],sets:['Office','Home office','Home','Coworking','Hotel','Café'],tags:['s','pe'],act:'on a video call',
       wins:['the client on the call says "send me that"','the call ends 10 minutes early','the client asks to share the deck with their team','the follow-up deck is sent before the call ends','the client asks, "can we use this for the board?"','the client nods along on the video call']},
-    {k:'4:45',time:'4:45 p.m.',light:'low, warm late-afternoon sun',types:['Sun','Backlit','Soft'],sets:ALL,tags:['so','le','s','pe','st'],
+    {k:'4:45',time:'4:45 p.m.',light:'low late-afternoon sun, clear rather than golden',types:['Sun','Backlit','Soft'],sets:ALL,tags:['so','le','s','pe','st'],
       wins:['the deck is sent: the exhale','the last comment is resolved','the proposal goes out on time','the deck is approved without a change','the inbox finally goes quiet','the laptop eases halfway closed, done']},
-    {k:'6:15',time:'6:15 p.m.',light:'golden light turning to dusk',types:['Backlit','Sun','Soft'],sets:['Office','Home office','Coworking','Hotel','In transit','Home'],tags:['s','pe','le','w','st'],dim:true,
+    {k:'6:15',time:'6:15 p.m.',light:'the last daylight fading toward dusk, cool outside, with a few lamps on inside',types:['Backlit','Sun','Soft'],sets:['Office','Home office','Coworking','Hotel','In transit','Home'],tags:['s','pe','le','w','st'],dim:true,
       wins:["tomorrow's deck is done",'the week’s last deck goes out','the team’s slides are merged and clean','the deck is locked and the coat goes on','the morning review is prepped','the room empties and the work is done']}
   ];
   /* role wins mix in about 2 times in 5, so a leader's win reads like a leader's */
@@ -60,8 +62,8 @@
     'Hotel':[['s','at the desk in a hotel room'],['so','in a hotel lobby armchair'],['h','at a tall table in a hotel lobby'],['s','at a table in a hotel café'],['le','on the window seat of a hotel room'],['w','through a hotel lobby'],['pr','in a hotel conference room, at a wall-mounted screen']]
   };
   var POSES={
-    s:['sitting back in the chair, one arm loose over the backrest','leaning in, elbows on the table','turned a little in the chair toward the window','one leg crossed over the other, the laptop square in front of them','sitting forward, both hands on the keyboard','half turned toward someone just out of frame, one hand on the trackpad','settled back, a cup in one hand','sitting sideways on the chair, one arm over the back'],
-    st:['standing, one hip against the counter','standing, weight on one leg, a hand on the laptop','standing over the laptop, leaning on both palms','standing with a cup in one hand, scrolling with the other','standing, half turned toward someone just out of frame'],
+    s:['sitting back in the chair, one arm loose over the backrest','leaning in, elbows on the table','turned a little in the chair toward the window','one leg crossed over the other, the laptop square in front of them','sitting forward, both hands on the keyboard','half turned toward someone just out of frame, one hand on the trackpad','settled back, reaching for a cup without looking','sitting sideways on the chair, one arm over the back'],
+    st:['standing, one hip against the counter','standing, weight on one leg, a hand on the laptop','standing over the laptop, leaning on both palms','standing, reaching across to the trackpad mid-thought','standing, half turned toward someone just out of frame'],
     pe:['perched, one foot on the floor','perched, the laptop balanced on one knee','perched, arms loosely folded, eyes on the screen','perched, leaning back on one hand'],
     le:['leaning on the ledge, the laptop open beside them','sitting on the ledge, knees up, the laptop resting on them','leaning a shoulder on the window frame, the laptop on one forearm','half sitting on the ledge, one foot on the floor'],
     so:['cross-legged, the laptop on their knees','curled into the corner, the laptop on a cushion','feet up on the coffee table, the laptop on their lap','sitting forward on the edge of the cushion','stretched out, one arm along the back'],
@@ -70,8 +72,8 @@
     h:['leaning on the tall table, the laptop between their hands','on a stool, one foot on the rung','standing at the tall table, a cup beside the laptop','leaning in over the table, mid-laugh']
   };
   var BODY=['shoulders relaxed, settled in their body','shoulders loose, breathing out','easy and unhurried, the tension gone','settled in, a hand resting on the laptop'];
-  var MOMENT_TAIL=', caught just after the peak: the smile settling, the nod finishing';
-  var STOCK=' no fist pumps, high fives, thumbs up, jumping or finger guns';
+  var MOMENT_TAIL=', caught mid-movement and unaware of the camera, just after the peak: the expression settling on its own, never a smile for the camera';
+  var STOCK=' no hands on the chin or face, no posed smiles at the screen, no fist pumps, high fives, thumbs up, jumping or finger guns';
 
   /* ── casting (section 4) ── */
   var AGE_RANGE={'20s':[24,29],'30s':[31,39],'40s':[41,49],'50s':[51,59]};
@@ -110,13 +112,13 @@
   ];
   function wardrobeLine(sel,sleeve){var r=keep('ramp',function(){return one(RAMPS)}),g=keep('garment',function(){return one(r[3])});if(r[3].indexOf(g)<0){g=one(r[3]);R.garment=g}var pr=keep('pair',function(){return pickN(PAIRS[r[2]],2)});if(pr.some(function(x){return PAIRS[r[2]].indexOf(x)<0})){pr=pickN(PAIRS[r[2]],2);R.pair=pr}
     var what=sleeve?'the sleeve of a '+g:'a '+g;
-    return 'Wardrobe: '+v('garment',what)+' in '+v('ramp',r[0]+' ('+r[1]+')')+', the same hue as our brand color but the way real clothes look after a few washes: softly faded, slightly uneven dye, a little lighter at the seams and creases, never vivid, uniform or costume-like; it stands out from the warm light rather than matching it; the rest of the outfit in '+v('pair',pr.join(' and '))+', colors that pair well with it, never another bright color'}
+    return 'Wardrobe: '+v('garment',what)+' in '+v('ramp',r[0]+' ('+r[1]+')')+', the same hue as our brand color but the way real clothes look after a few washes: softly faded, slightly uneven dye, a little lighter at the seams and creases, never vivid, uniform or costume-like; it stands out from the light rather than matching it; the rest of the outfit in '+v('pair',pr.join(' and '))+', colors that pair well with it, never another bright color'}
 
   /* ── light (section 2) ── */
   var TYPE_LINE={Sun:'hard-edged patches of sun across the table, floor and hands',Soft:'soft, even window light with one warm patch of sun near the hands',Backlit:'a window glows behind them and rims their hair and shoulders without blowing out'};
   function lightType(sel,row){var want=sel.light&&sel.light!=='Mixed'?sel.light:null;if(want)return want;return keep('ltype',function(){return one(row.types)})}
   function lightLine(sel,row,opt){opt=opt||{};var t=lightType(sel,row),face=opt.hands?'the hands are the brightest skin in the frame':'the face is the brightest skin in the frame';
-    var s='Light: '+v('time',row.light)+' lands on the person and on what they’re working on ('+(opt.what||'hands, laptop, the person they’re talking to')+'); '+face+'; the room falls a stop darker around them, warm, never gloomy; '+v('ltype',opt.hands&&t==='Backlit'?'a window glows behind and rims the hands and the edge of the laptop without blowing out':TYPE_LINE[t]);
+    var s='Light: '+v('time',row.light)+' lands on the person and on what they’re working on ('+(opt.what||'hands, laptop, the person they’re talking to')+'); '+face+'; the room falls a stop darker around them, never gloomy; true-to-life color and a neutral white balance, never an orange or golden cast; '+v('ltype',opt.hands&&t==='Backlit'?'a window glows behind and rims the hands and the edge of the laptop without blowing out':TYPE_LINE[t]);
     if(row.dim)s+='; the screen adds only a faint, neutral fill on the hands or chin, never tinted, never the main light on the face';
     return s+'; never the sun disc in frame, haze beams or a spotlight on a black background'}
 
@@ -155,13 +157,13 @@
       L.push(lightLine(sel,row,{hands:true,what:'hands and laptop'}));
       L.push('Frame: '+v('lens',sel.shot==='Close-up'?'85mm, close on the hands':'50mm, the hands and the laptop')+', '+v('angle',keep('angleD',function(){return one(['from just above the table edge','from eye level across the table','at a low angle along the tabletop'])}))+(open?'; the laptop’s keyboard and trackpad fill the lower half of the frame':'; the closed laptop fills the lower half of the frame')+copyBit(sel));
       L.push(wardrobeLine(sel,true));
-      L.push(castLine(sel,true));
+      L.push(castLine(sel,true));L.push(SKIN_H);
       L.push(open?'Screen: the laptop screen faces away from the camera or sits out of frame':'Screen: the laptop is closed');
       return L;
     }
     var portrait=style==='Portrait',solo=sel.shot!=='Two-shot'&&!row.company,fl=sel.float&&sel.float!=='No';
     L.push(portrait?'Photo: an editorial portrait of a professional just after a little win at work, the light landing on them; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment':'Photo: a candid editorial photograph of a professional’s little win at work, the light landing on them and their idea; candid, settled-in, in flow and quietly successful, buoyed by optimism; a real, unretouched moment');
-    var place=f.place;if(!solo&&!/colleague/.test(place+f.pose))place+=', a colleague beside them';if(solo&&sel.shot==='Wide shot'&&keep('group',function(){return Math.random()<0.4})&&!/^(w|pr)$/.test(f.tag))place+=', 2 colleagues working around them';if(f.tag==='pr'&&!/colleagues/.test(place))place+=', the backs of 2 colleagues soft in the foreground';
+    var place=f.place;if(!solo&&!/colleague/.test(place+f.pose))place+=', a colleague beside them, mid-reaction and unposed';if(solo&&sel.shot==='Wide shot'&&keep('group',function(){return Math.random()<0.4})&&!/^(w|pr)$/.test(f.tag))place+=', 2 colleagues working around them';if(f.tag==='pr'&&!/colleagues/.test(place))place+=', the backs of 2 colleagues soft in the foreground';
     L.push('Subject: a '+who(sel)+', '+v('place',place)+', '+v('pose',f.pose)+', at '+v('time',row.time));
     var body=keep('body',function(){return one(BODY)});
     L.push('Moment: '+v('win',f.win)+MOMENT_TAIL+'; '+v('body',body)+';'+STOCK);
@@ -173,7 +175,7 @@
     if(fl)fr+='; frame it wide, with open, uncluttered air around them, above each shoulder and beside the laptop, for blank floating slides added in post';
     L.push(fr+copyBit(sel));
     L.push(wardrobeLine(sel));
-    L.push(castLine(sel));
+    L.push(castLine(sel));L.push(SKIN);
     L.push(HAIR);
     L.push(f.tag==='pr'?SCREEN_BLANK('the wall-mounted screen'):'Screen: the laptop screen faces away from the camera');
     if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.splice(L.length-1,0,'Prop: '+v('prop',pr)+', the only object besides the laptop')}
@@ -190,7 +192,7 @@
     L.push('Gaze: into the lens, as if into the faces on the call, warm and animated, mid-talk; never posed');
     L.push(lightLine(sel,row,{what:'face and hands'}));
     L.push('Frame: '+v('lens','35mm from the laptop\u2019s webcam, just below eye level')+'; the soft top edge of the laptop screen in the lower frame'+IMMERSED+copyBit(sel));
-    L.push(wardrobeLine(sel));L.push(castLine(sel));L.push(HAIR);
+    L.push(wardrobeLine(sel));L.push(castLine(sel));L.push(SKIN);L.push(HAIR);
     if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.push('Prop: '+v('prop',pr)+', the only object besides the laptop')}else L.push('Prop: none; only the laptop');
     L.push('Screen: the camera is the laptop; no screen faces the camera');
     return L;
@@ -226,7 +228,7 @@
     L.push(lightLine(sel,row,{hands:mode!=='Over the shoulder',what:'hands and the '+dev}));
     L.push('Frame: '+v('lens',frame)+copyBit(sel));
     L.push(wardrobeLine(sel,mode!=='Over the shoulder'));
-    L.push(castLine(sel,mode!=='Over the shoulder'));
+    L.push(castLine(sel,mode!=='Over the shoulder'));L.push(mode==='Over the shoulder'?SKIN:SKIN_H);
     if(mode==='Over the shoulder')L.push(HAIR);
     L.push(SCREEN_BLANK('the '+dev+' screen'));
     return L;
@@ -240,16 +242,16 @@
     if(mode==='Meeting room'){
       L.push('Photo: a candid editorial photograph of a meeting room just before a presentation, the room ready and calm, buoyed by optimism; a real, unretouched moment');
       L.push('Subject: an empty meeting room, chairs pulled in, a laptop open at the head of the table, the '+v('scr',keep('scr',function(){return one(['wall-mounted TV','projector screen'])}))+' on and waiting');
-      L.push('Light: clear morning window light runs down the table and lands on the screen wall; the room falls a stop darker around it, warm, never gloomy; never the sun disc in frame, haze beams or god rays');
+      L.push('Light: clear morning window light runs down the table and lands on the screen wall; the room falls a stop darker around it, never gloomy; true-to-life color, never an orange or golden cast; never the sun disc in frame, haze beams or god rays');
       L.push('Frame: 35mm, from the far end of the table at seated eye level, the screen in the upper third'+copyBit(sel));
       L.push(SCREEN_BLANK('the '+R.scr));
     }else if(mode==='Stage'){
       L.push('Photo: a candid editorial photograph of a professional presenting on a stage, the room leaning in; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment');
       L.push('Subject: a '+who(p)+', presenting at the side of a stage beside a large projection screen');
       L.push('Moment: the room leans in'+MOMENT_TAIL+'; standing easy, one hand open toward the screen;'+STOCK);
-      L.push('Light: warm stage light lands on the presenter and the screen; the audience falls a stop darker, warm, never gloomy; never haze beams, god rays or a spotlight on a black background');
+      L.push('Light: clean, neutral stage light lands on the presenter and the screen; the audience falls a stop darker, never gloomy; true-to-life color, never an orange or golden cast; never haze beams, god rays or a spotlight on a black background');
       L.push('Frame: 35mm, from mid-audience, the soft backs of the audience out of focus in the foreground'+copyBit(sel));
-      L.push(wardrobeLine(p));L.push(castLine(p));L.push(HAIR);
+      L.push(wardrobeLine(p));L.push(castLine(p));L.push(SKIN);L.push(HAIR);
       L.push(SCREEN_BLANK('the projection screen'));
     }else{
       var dev=keep('device',function(){return one(['laptop','tablet'])});
@@ -257,9 +259,9 @@
       L.push('Subject: a '+who(p)+', turning a '+v('device',dev)+' toward a colleague across a table');
       L.push('Moment: the idea lands with the colleague'+MOMENT_TAIL+';'+STOCK);
       L.push('Gaze: on the colleague, never at the lens');
-      L.push('Light: soft window light lands on the two of them and the '+dev+'; the faces are the brightest skin in the frame; the room falls a stop darker, warm, never gloomy; never the sun disc in frame or haze beams');
+      L.push('Light: soft window light lands on the two of them and the '+dev+'; the faces are the brightest skin in the frame; the room falls a stop darker, never gloomy; true-to-life color, never an orange or golden cast; never the sun disc in frame or haze beams');
       L.push('Frame: 50mm, from beside the colleague’s shoulder, the '+dev+' angled so its screen faces the camera'+copyBit(sel));
-      L.push(wardrobeLine(p));L.push(castLine(p));L.push(HAIR);
+      L.push(wardrobeLine(p));L.push(castLine(p));L.push(SKIN);L.push(HAIR);
       L.push(SCREEN_BLANK('the '+dev+' screen'));
     }
     return L;
