@@ -14,8 +14,8 @@
 
   /* ── fixed lines (section 1) ── */
   var LOOK='Look: natural grade with warm highlights and warm, glowing skin; neutral midtones and neutral shadows, never blue; whites stay clean; rich but real color, crisp with moderate contrast, fine grain';
-  var AVOID='Avoid: plastic or airbrushed skin, stock-photo posing, god rays, lens flare, halos, HDR, a teal-orange grade, an orange or golden cast';
-  var NEVER='Never include: readable text, words, numbers, logos or signage; no paper, printed pages, printed slides, notebooks, sketches or outlines; no phone in a hand';
+  var AVOID='Avoid: plastic or airbrushed skin, a cut-out or composited look, stock-photo posing, god rays, lens flare, halos, HDR, a teal-orange grade, an orange or golden cast';
+  var NEVER='Never include: readable text, words, numbers, logos or signage; no paper, printed pages, printed slides, notebooks, sketches or outlines; no phone in a hand; no cans or bottles';
   var HAIR='Hair: styled and groomed for a workday, neat and in place, with natural texture and a few fine strands at the hairline; never messy, windswept, frizzy or wet-looking, never helmet-stiff or plastic';
   var SKIN='Skin: real, detailed skin on every skin tone: visible pores, fine lines and natural unevenness; deep and dark skin keeps its full texture and true undertones, matte with only a soft natural sheen on the high points, never glossy, waxy, smoothed or airbrushed';
   var SKIN_H='Skin: real, detailed skin on the hands for every skin tone: knuckle creases, fine lines and visible texture, never glossy, waxy or smoothed';
@@ -95,7 +95,7 @@
   function styl(pool,n){var o=[],c=pickN(pool,pool.length);c.forEach(function(x){if(o.length<n&&!(/glasses/.test(x)&&o.some(function(y){return /glasses/.test(y)}))&&!(/watch/.test(x)&&o.some(function(y){return /watch/.test(y)})))o.push(x)});return o}
   var HAND_STYLING=['a simple ring','a steel watch','a woven bracelet','a leather-strap watch'];
   var ASSIST=['a hearing aid','a cane resting against the table','a wheelchair','a prosthetic hand'];
-  function beanieOK(sel){return !/C-suite|Team leader/.test(sel.role||'')&&(/^Home/.test(sel.setting||'')||/20s|30s/.test(sel.age||''))}
+  function beanieOK(sel){return !sel._pr&&!/C-suite|Team leader/.test(sel.role||'')&&(/^Home/.test(sel.setting||'')||/20s|30s/.test(sel.age||''))}
   function ageOf(sel){var r=AGE_RANGE[sel.age]||[31,39];return keep('ageN',function(){return r[0]+Math.floor(Math.random()*(r[1]-r[0]+1))})}
   function who(sel){var age=ageOf(sel),h=HERITAGE[sel.race]||sel.race,p=PERSON[sel.gender]||'person',b=(AD.BUILDS&&AD.BUILDS[sel.build])||'an average build',r=ROLE[sel.role]||'in marketing';if(r==='C')r='who is the company\u2019s '+v('chief',keep('chief',function(){return one(CHIEF)}));
     return v('ageN',age+'-year-old')+' '+h+' '+p+' '+r+', with '+b}
@@ -154,7 +154,8 @@
   var LENS={'Close-up':'85mm, close on the face and shoulders','Medium shot':'50mm, waist-up','Two-shot':'50mm, waist-up, the 2 of them together, the light favoring the professional','Wide shot':'35mm, the whole person and the room around them'};
   var GRAND='from a slight low angle, looking up a little, giving them quiet stature and a sense of grandness';
   var ANGLES=['from eye level',GRAND,'over a colleague\u2019s shoulder','through a soft, out-of-focus foreground object such as a glass or a plant','at arm\u2019s length, a blurred shoulder or laptop edge soft in the foreground','from a high angle, looking down into the moment','in a tight crop that cuts through a shoulder, the camera right inside the moment','low at table height, the laptop edge soft in the foreground'];
-  var WALK_CLOSE='85mm, close on the face and shoulders, tracking alongside them as they walk; a slow-shutter pan: the background streaks, and hair, hands and the far edge of the face soften with the motion, while the near eye stays sharp';
+  var WALK_CLOSE='85mm, close on the face and shoulders, moving alongside them as they walk';
+  var MOTION='; natural, subtle motion: only a slight blur in the hand swinging mid-stride or a lifting strand of hair; the face sharp; the person and the room share the same light and focus falloff, never a streaked background or a cut-out, composited look';
   var IMMERSED='; immersed and kinetic: the camera is inside the moment, close enough to high-five them';
   var KINETIC='immersed and kinetic: the camera inside the moment, close enough to high-five them';
   /* presenting rooms get their own camera positions, each one complete on its own */
@@ -165,7 +166,7 @@
   /* ── A pro ── */
   /* portrait: at ease and confident; a device can rest in the lap or hand, never in use */
   var PPOSE={
-    sit:['sitting back at ease, one arm resting on the table','forearms loosely on the table, hands relaxed together','seated sideways to the table, an elbow over the back of the chair','one hand loosely around a mug','the laptop closed on their lap, a hand resting on it','a phone held loosely in one hand on their lap, screen away, not in use'],
+    sit:['sitting back at ease, one arm resting on the table','forearms loosely on the table, hands relaxed together','seated sideways to the table, an elbow over the back of the chair','one hand loosely around a drink','the laptop closed on their lap, a hand resting on it','a phone held loosely in one hand on their lap, screen away, not in use'],
     stand:['leaning against the table edge, hands resting at their sides','standing easy, a closed laptop held loosely at their side','standing, a tablet held loosely against them, not in use','leaning a shoulder on the wall, arms loosely folded']};
   var PBEFORE=['just before they sit down to build the presentation that has to land','just before they walk on stage','just before they face the room','just before the video call that matters begins'];
   var PAFTER=['right after the presentation goes well','right after they finish the perfect slide','right after the room says yes'];
@@ -174,7 +175,7 @@
     var m=keep('pm',function(){return ph==='before'?one(PBEFORE):(Math.random()<0.5?'right after '+f.win:one(PAFTER))});
     var feel=keep('pfeel',function(){return one(PFEEL)});
     return 'Moment: '+v('pm',m)+'; the feeling is '+v('pfeel',feel)+'; at ease in their own space, nothing in their hands is working; the setting tells their professional story, not the pose; no typing, pointing or holding the laptop open toward us, no hands on the chin or face'}
-  var DETAILS=['a hand resting on the closed laptop, a coffee beside it','fingers lifting off the trackpad after the last click','a hand easing the laptop lid down, a coffee beside it','both hands loose on the keyboard, the work done'];
+  var DETAILS=['a hand resting on the closed laptop, a drink beside it','fingers lifting off the trackpad after the last click','a hand easing the laptop lid down, a drink beside it','both hands loose on the keyboard, the work done'];
   function pro(sel){
     if(sel.style==='Video call')return videoCall(sel);
     var style=sel.style||'Candid',f=rowFor(sel,style==='Portrait'||style==='Detail'),row=f.row,L=[];
@@ -202,11 +203,11 @@
     L.push(lightLine(sel,row));
     var lens=portrait?(sel.shot==='Wide shot'?'50mm, waist-up, with the room around them':sel.shot==='Medium shot'?'85mm, chest-up':'85mm, close on the face and shoulders'):LENS[sel.shot]||LENS['Medium shot'];
     if(f.tag==='w'&&sel.shot==='Close-up')lens=WALK_CLOSE;else if(f.tag==='w'&&!/35mm|50mm/.test(lens))lens='50mm, waist-up';
-    var fr='Frame: '+v('lens',lens)+', '+v('angle',angle(sel,row,f.tag));
+    var fr='Frame: '+v('lens',lens)+', '+v('angle',angle(sel,row,f.tag))+(f.tag==='w'?MOTION:'');
     if(fl)fr+='; frame it wide, with open, uncluttered air around them, above each shoulder and beside the laptop, for blank floating slides added in post';
     L.push(fr+copyBit(sel));
     L.push(wardrobeLine(sel));
-    L.push(castLine(sel));L.push(SKIN);
+    L.push(castLine(f.tag==='pr'?Object.assign({},sel,{_pr:true}):sel));L.push(SKIN);
     L.push(HAIR);
     L.push(f.tag==='pr'?SCREEN_BLANK('the wall-mounted screen'):portrait?'Screen: no screen faces the camera; any laptop, tablet or phone is closed, set aside or resting, never in use':'Screen: the laptop screen faces away from the camera');
     if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.splice(L.length-1,0,'Prop: '+v('prop',pr)+', the only object besides the laptop')}
@@ -233,7 +234,9 @@
     L.push('Screen: the camera is the laptop; no screen faces the camera');
     return L;
   }
-  var PROPS=['a ceramic mug of coffee','a glass of water','a cup of tea','a small espresso cup','folded reading glasses','a reusable water bottle','a small potted plant','a set of keys'];
+  var CUPS=['a matte black stoneware mug','a speckled handmade ceramic mug','a clear double-walled glass of tea','a brushed-steel insulated tumbler','a slim thermos-style travel cup','a small espresso cup on its saucer','a plain white diner-style mug','a squat glazed mug in a deep blue','a tall, minimal porcelain cup','a café cortado in a small glass','a plain takeaway cup with a lid, no logo','a short enamel camp mug'];
+  function cup(){return keep('cup',function(){return one(CUPS)})}
+  var PROPS=['a drink','a glass of water','folded reading glasses','a small potted plant','a set of keys'];
 
   /* ── brand graphic space (section 8) ── */
   var GFX_LIGHT={Side:'a soft clear azure blue glow (#00B9FF) from the left and a soft rose pink glow (#DB2475) from the right',Halo:'a soft azure and rose glow behind the panel, so it reads as lit from behind',Corner:'a soft azure glow rising from the bottom-left corner and a soft rose glow from the top-right corner, the panel floating in the dark between them'};
@@ -288,7 +291,7 @@
       L.push('Moment: '+PHASE[sph].lead+v('stageWin',sw)+PHASE[sph].tail+'; '+v('stPose',keep('stPose',function(){return sph==='before'?one(['stepping out onto the stage','walking to the center of the stage, finding the first line','pausing at the edge of the stage, taking in the room']):one(['mid-sentence to the room, hands low and natural, the screen behind them, never gestured at','walking the stage as they talk','stopped center stage, letting the key line land','turned toward one side of the audience, answering a question','one hand at chest height, shaping the idea'])}))+';'+STOCK);
       L.push('Light: clean, neutral stage light lands on the presenter and the screen; the audience falls a stop darker, never gloomy; true-to-life color, never an orange or golden cast; never haze beams, god rays or a spotlight on a black background');
       L.push('Frame: '+v('stCam',keep('stCam',function(){return one(['35mm, from mid-audience, the soft backs of the audience out of focus in the foreground','35mm, from low in the front row, looking up a little at them, giving them stature and a sense of grandness','50mm, from the side of the stage, the audience soft beyond them','35mm, from the back of the room, the full stage and screen ahead'])}))+copyBit(sel));
-      L.push(wardrobeLine(p));L.push(castLine(p));L.push(SKIN);L.push(HAIR);
+      L.push(wardrobeLine(p));L.push(castLine(Object.assign({},p,{_pr:true})));L.push(SKIN);L.push(HAIR);
       L.push(SCREEN_BLANK('the projection screen'));
     }else{
       var dev=keep('device',function(){return one(['laptop','tablet'])});
@@ -307,6 +310,9 @@
   /* ── public API ── */
   function build(facet,sel){LV=[];LVK={};
     var L=facet==='Product'?product(sel):facet==='Presentation'?slides(sel):pro(sel);
+    var gfxM=(facet==='Product'&&sel.pshot==='Brand graphic space')||(facet==='Presentation'&&sel.layout==='Brand graphic space');
+    if(!gfxM){var c=cup();L=L.map(function(l){return l.replace(/\ba drink\b/g,c)});
+      if(!L.some(function(l){return l.indexOf(c)>-1})){var i=L.findIndex(function(l){return /^Screen:/.test(l)});L.splice(i<0?L.length:i,0,'Cup: if a drink is in frame, it is '+v('cup',c)+'; at most 1')}}
     var gfxMode=(facet==='Product'&&sel.pshot==='Brand graphic space')||(facet==='Presentation'&&sel.layout==='Brand graphic space');
     if(!gfxMode){L.push(LOOK,facet==='Professional'&&sel.style==='Portrait'?NEVER.replace('no phone in a hand','no phone held up or in use'):NEVER,AVOID)}
     return L.join('\n')}
