@@ -13,8 +13,8 @@
   function v(k,t){t=String(t);LV.push(t);LVK[t]=k;return t}
 
   /* ── fixed lines (section 1) ── */
-  var LOOK='Look: natural grade with warm highlights and warm, glowing skin; neutral midtones and neutral shadows, never blue; whites stay clean; rich but real color, crisp with moderate contrast, fine grain';
-  var AVOID='Avoid: plastic or airbrushed skin, a cut-out or composited look, fold lines or packaging creases in clothing, stock-photo posing, god rays, lens flare, halos, HDR, a teal-orange grade, an orange or golden cast';
+  var LOOK='Look: natural grade with warm highlights and warm, glowing skin; neutral midtones and neutral shadows, never blue; whites stay clean; rich but real color, crisp with moderate contrast, fine grain; real lens character: very slight lateral chromatic aberration on high-contrast edges toward the frame edges, and a gentle bloom around lamps and bright windows, never obvious or exaggerated';
+  var AVOID='Avoid: plastic or airbrushed skin, a cut-out or composited look, fold lines or packaging creases in clothing, stock-photo posing, god rays, lens flare, sharpening halos or glow around people, HDR, a teal-orange grade, an orange or golden cast';
   var NEVER='Never include: readable text, words, numbers, logos or signage, except that any visible keyboard is a US English QWERTY layout in a clean sans-serif: the number row 1 to 0, then Q W E R T Y U I O P, A S D F G H J K L, Z X C V B N M, and a long space bar between the command and option keys; no paper, printed pages, printed slides, notebooks, sketches or outlines; no phone in a hand; no cans or bottles';
   var HAIR='Hair: styled and groomed for a workday, neat and in place, with natural texture and a few fine strands at the hairline only, never across the face or drawn on the skin; never messy, windswept, frizzy or wet-looking, never helmet-stiff or plastic';
   var SKIN='Skin: real skin on every skin tone, one continuous surface photographed in focus: fine pores show where the key light rakes across and stay present, only softer, on the shadow side, with gentle, natural variation in tone; deep and dark skin keeps visible texture and true undertones on both the lit and shadow sides, even in a wider shot; matte with only a soft natural sheen on the high points; never patchy, blotchy or mottled, never scratch-like lines or stray hairs on the cheek, never a texture laid over the face, never glossy, waxy, smoothed or airbrushed';
@@ -331,7 +331,7 @@
     var L=facet==='Product'?product(sel):facet==='Presentation'?slides(sel):pro(sel);
     var gfxM=(facet==='Product'&&sel.pshot==='Brand graphic space')||(facet==='Presentation'&&sel.layout==='Brand graphic space');
     if(!gfxM){var c=cup();L=L.map(function(l){return l.replace(/\ba drink\b/g,c)});
-      if(!L.some(function(l){return l.indexOf(c)>-1})){var i=L.findIndex(function(l){return /^Screen:/.test(l)});L.splice(i<0?L.length:i,0,'Cup: if a drink is in frame, it is '+v('cup',c)+'; at most 1')}
+      if(!L.some(function(l){return l.indexOf(c)>-1})){var i=L.findIndex(function(l){return /^Screen:/.test(l)});var hasDrink=keep('drink',function(){return Math.random()<0.5});L.splice(i<0?L.length:i,0,hasDrink?'Cup: '+v('cup',c)+', within reach; at most 1':'Cup: no drink or cup in frame')}
       var j=L.findIndex(function(l){return /^Screen:/.test(l)});L.splice(j<0?L.length:j,0,SET)}
     var gfxMode=(facet==='Product'&&sel.pshot==='Brand graphic space')||(facet==='Presentation'&&sel.layout==='Brand graphic space');
     if(!gfxMode){L.push(LOOK,facet==='Professional'&&sel.style==='Portrait'?NEVER.replace('no phone in a hand','no phone held up or in use'):NEVER,AVOID)}
