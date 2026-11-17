@@ -32,7 +32,7 @@
     {k:'10:55',time:'10:55 a.m.',light:'open window light',types:['Soft','Backlit'],sets:['Office','Coworking','Hotel','Café','Home office','Home'],tags:['w','st'],
       wins:['they walk in ready','the deck is up on screen before anyone sits down','the last check is done at the door','a colleague says "this looks sharp" on the way in','they walk in with time to spare','the one-pager is open and ready']},
     {k:'11:30',time:'11:30 a.m.',light:'bright midday light',types:['Soft','Sun'],sets:['Office','Coworking','Hotel'],tags:['pr'],screen:true,
-      wins:['the room leans in','the room goes quiet on the key slide','someone asks for the deck before it ends','the chart makes the point on its own','the questions are the good kind','the decision gets made in the room']},
+      wins:['they win the room','the high-stakes pitch hits its turning point','the room leans in','the room goes quiet on the key slide','someone asks for the deck before it ends','the chart makes the point on its own','the questions are the good kind','the decision gets made in the room']},
     {k:'12:30',time:'12:30 p.m.',light:'hard midday sun',types:['Sun'],sets:ALL,tags:['h','s','st'],company:true,
       wins:['the idea gets a laugh','a colleague says "that’s the slide"','the plan comes together over lunch','a rough idea becomes a slide in minutes','they both agree on the headline','a quick win worth a grin']},
     {k:'2:00',time:'2:00 p.m.',light:'soft, even afternoon light',types:['Soft'],sets:['Office','Home office','Home','Coworking','Hotel','Café'],tags:['s','pe'],act:'on a video call',
@@ -72,7 +72,14 @@
     h:['leaning on the tall table, the laptop between their hands','on a stool, one foot on the rung','standing at the tall table, a cup beside the laptop','leaning in over the table, mid-laugh']
   };
   var BODY=['shoulders relaxed, settled in their body','shoulders loose, breathing out','easy and unhurried, the tension gone','settled in, a hand resting on the laptop'];
+  var BODY_BEFORE=['alert and leaning in','shoulders square, moving with purpose','energy gathering, ready to go','quick and light, a step ahead of the moment'];
   var MOMENT_TAIL=', caught mid-movement and unaware of the camera, just after the peak: the expression settling on its own, never a smile for the camera';
+  /* the moment can sit just before, at or just after the peak; the peak is for presenting, before and after for everything else */
+  var PHASE={
+    before:{lead:'just before ',tail:', caught mid-movement and unaware of the camera, the momentum building: focused, sure and leaning into it, never a smile for the camera'},
+    peak:{lead:'',tail:', caught at the peak, unaware of the camera: fully in it, mid-delivery and convincing, the energy at its height; never a pose for the camera'},
+    after:{lead:'',tail:MOMENT_TAIL}};
+  function phaseFor(tag){var opts=tag==='pr'?['before','peak','peak','after']:['before','after'];var p=keep('phase',function(){return one(opts)});if(opts.indexOf(p)<0){p=one(opts);R.phase=p}return p}
   var STOCK=' no hands on the chin or face, no posed smiles at the screen, no fist pumps, high fives, thumbs up, jumping or finger guns';
 
   /* ── casting (section 4) ── */
@@ -87,32 +94,35 @@
   function styl(pool,n){var o=[],c=pickN(pool,pool.length);c.forEach(function(x){if(o.length<n&&!(/glasses/.test(x)&&o.some(function(y){return /glasses/.test(y)}))&&!(/watch/.test(x)&&o.some(function(y){return /watch/.test(y)})))o.push(x)});return o}
   var HAND_STYLING=['a simple ring','a steel watch','a woven bracelet','a leather-strap watch'];
   var ASSIST=['a hearing aid','a cane resting against the table','a wheelchair','a prosthetic hand'];
+  function beanieOK(sel){return !/C-suite|Team leader/.test(sel.role||'')&&(/^Home/.test(sel.setting||'')||/20s|30s/.test(sel.age||''))}
   function ageOf(sel){var r=AGE_RANGE[sel.age]||[31,39];return keep('ageN',function(){return r[0]+Math.floor(Math.random()*(r[1]-r[0]+1))})}
   function who(sel){var age=ageOf(sel),h=HERITAGE[sel.race]||sel.race,p=PERSON[sel.gender]||'person',b=(AD.BUILDS&&AD.BUILDS[sel.build])||'an average build',r=ROLE[sel.role]||'in marketing';if(r==='C')r='who is the company\u2019s '+v('chief',keep('chief',function(){return one(CHIEF)}));
     return v('ageN',age+'-year-old')+' '+h+' '+p+' '+r+', with '+b}
   function marks(sel,hands){var age=ageOf(sel);if(hands)return keep('marks',function(){return pickN(HAND_MARKS,2)});
     return keep('marks',function(){var ok=MARKS.filter(function(m){return age>=(m[1]||0)&&(!m[2]||m[2]===sel.gender)&&(!m[3]||m[3].indexOf(sel.race)>-1)}).map(function(m){return m[0]});return pickN(ok,2)})}
-  function castLine(sel,hands){var m=marks(sel,hands),st=keep('styling',function(){return styl(hands?HAND_STYLING:(/C-suite|Team leader/.test(sel.role||'')?STYLING.filter(function(x){return x!=='a knit beanie'}):STYLING),Math.random()<0.5?1:2)}),as=keep('assist',function(){return Math.random()<(hands?1/30:1/15)?one(hands?['a prosthetic hand']:ASSIST):''});
+  function castLine(sel,hands){var m=marks(sel,hands),st=keep('styling',function(){return styl(hands?HAND_STYLING:(beanieOK(sel)?STYLING:STYLING.filter(function(x){return x!=='a knit beanie'})),Math.random()<0.5?1:2)}),as=keep('assist',function(){return Math.random()<(hands?1/30:1/15)?one(hands?['a prosthetic hand']:ASSIST):''});
     return 'Cast: a real person, never a model; '+v('marks',m.join(', '))+'; '+v('styling',st.join(' and '))+(as?'; '+v('assist',as)+', shown as part of their day':'')}
 
   /* ── wardrobe color (section 5) ── */
   /* each hue carries the warm, natural colors that pair with it for the rest of the outfit */
   var PAIRS={a:['cream','camel','khaki','charcoal','oatmeal'],n:['cream','camel','white','stone','tan'],r:['oatmeal','warm grey','olive','cream','camel'],m:['denim blue','cream','chocolate brown','olive','stone']};
   var RAMPS=[
-    ['faded azure, like well-washed chambray','#5C9DBA','a',['chambray shirt','oxford-cloth shirt','poplin shirt']],
-    ['deep azure denim, broken in','#2E5A6B','a',['denim jacket','wool crewneck','corduroy overshirt']],
-    ['soft greyed azure','#CCDEE6','a',['knit sweater','linen shirt']],
-    ['darkest navy that reads near-black','#002533','n',['wool blazer','crewneck sweater']],
-    ['dusty raspberry wool','#8F4565','r',['wool blazer','knit sweater']],
-    ['muted magenta wine','#57293E','r',['ribbed knit sweater','velvet blazer','leather jacket']],
-    ['soft greyed rose','#E4CDD7','r',['linen shirt','silk shirt']],
-    ['garment-dyed marigold cotton, slightly faded','#D39A58','m',['cotton overshirt','cotton shirt']],
-    ['washed ochre, like an old work shirt','#A9733C','m',['canvas jacket','suede jacket']],
-    ['muted rust brown','#764E2D','m',['knit cardigan','corduroy jacket']]
+    ['faded azure, like well-washed chambray','#5C9DBA','a',['chambray shirt','oxford-cloth shirt','crisp poplin shirt','fine-gauge knit polo']],
+    ['deep azure denim, broken in','#2E5A6B','a',['denim jacket','wool crewneck','corduroy overshirt','unstructured wool-blend blazer']],
+    ['soft greyed azure','#CCDEE6','a',['knit sweater','linen shirt','fine merino crewneck','washed-silk shirt']],
+    ['darkest navy that reads near-black','#002533','n',['wool blazer','crewneck sweater','fine merino turtleneck','unstructured wool-blend blazer']],
+    ['dusty raspberry wool','#8F4565','r',['wool blazer','knit sweater','fine merino crewneck','suede jacket']],
+    ['muted magenta wine','#57293E','r',['ribbed knit sweater','velvet blazer','leather jacket','fine merino turtleneck']],
+    ['soft greyed rose','#E4CDD7','r',['linen shirt','silk shirt','fine-gauge knit polo']],
+    ['garment-dyed marigold cotton, slightly faded','#D39A58','m',['cotton overshirt','cotton shirt','fine merino crewneck']],
+    ['washed ochre','#A9733C','m',['canvas jacket','suede jacket','fine merino turtleneck']],
+    ['muted rust brown','#764E2D','m',['knit cardigan','corduroy jacket','wool-blend overshirt']]
   ];
   function wardrobeLine(sel,sleeve){var r=keep('ramp',function(){return one(RAMPS)}),g=keep('garment',function(){return one(r[3])});if(r[3].indexOf(g)<0){g=one(r[3]);R.garment=g}var pr=keep('pair',function(){return pickN(PAIRS[r[2]],2)});if(pr.some(function(x){return PAIRS[r[2]].indexOf(x)<0})){pr=pickN(PAIRS[r[2]],2);R.pair=pr}
     var what=sleeve?'the sleeve of a '+g:'a '+g;
-    return 'Wardrobe: '+v('garment',what)+' in '+v('ramp',r[0]+' ('+r[1]+')')+', the same hue as our brand color but the way real clothes look after a few washes: softly faded, slightly uneven dye, a little lighter at the seams and creases, never vivid, uniform or costume-like; it stands out from the light rather than matching it; the rest of the outfit in '+v('pair',pr.join(' and '))+', colors that pair well with it, never another bright color'}
+    return 'Wardrobe: '+v('garment',what)+' in '+v('ramp',r[0]+' ('+r[1]+')')+', the same hue as our brand color, worn the way real clothes are: sophisticated but lived in, its material shown with true fidelity (the knit of merino, the nap of suede, the weave of wool, the soft sheen of silk); the color belongs in this room and in a workplace, never vivid, uniform or costume-like; it stands out from the light rather than matching it; the rest of the outfit in '+v('pair',pr.join(' and '))+', colors that pair well with it, never another bright color; '+v('sil',silFor(sel))+'; contemporary workwear that fits who they are, never sloppy, athletic or logoed'}
+  /* silhouettes span the workplace: tailored to oversized; oversized is for the fashion-forward, mostly 20s and 30s */
+  function silFor(sel){var young=/20s|30s/.test(sel.age||''),opts=young?['tailored and well fitted','a relaxed, easy fit','an oversized, fashion-forward silhouette with a clean drape']:['tailored and well fitted','tailored and well fitted','a relaxed, easy fit'];var s=keep('sil',function(){return one(opts)});if(opts.indexOf(s)<0){s=one(opts);R.sil=s}return s}
 
   /* ── light (section 2) ── */
   var TYPE_LINE={Sun:'hard-edged patches of sun across the table, floor and hands',Soft:'soft, even window light with one warm patch of sun near the hands; a little warm bounce lifts the face',Backlit:'a window glows behind them and rims their hair and shoulders without blowing out; a little warm bounce lifts the face'};
@@ -140,15 +150,28 @@
   /* ── frames (sections 6 and 9) ── */
   var LENS={'Close-up':'85mm, close on the face and shoulders','Medium shot':'50mm, waist-up','Two-shot':'50mm, waist-up, the 2 of them together, the light favoring the professional','Wide shot':'35mm, the whole person and the room around them'};
   var ANGLES=['from eye level','from slightly low','over a colleague\u2019s shoulder','through a soft, out-of-focus foreground object such as a glass or a plant','at arm\u2019s length, a blurred shoulder or laptop edge soft in the foreground','from a high angle, looking down into the moment','in a tight crop that cuts through a shoulder, the camera right inside the moment','low at table height, the laptop edge soft in the foreground'];
+  var WALK_CLOSE='85mm, close on the face and shoulders, tracking alongside them as they walk; a slow-shutter pan: the background streaks, and hair, hands and the far edge of the face soften with the motion, while the near eye stays sharp';
   var IMMERSED='; immersed and kinetic: the camera is inside the moment, close enough to high-five them';
-  function angle(sel,row){var a=ANGLES.slice();if(sel.shot!=='Two-shot'&&!row.company)a.splice(2,1);if(sel.style==='Portrait')a=[ANGLES[0],ANGLES[1]];var g=keep('angle',function(){return one(a)});if(a.indexOf(g)<0){g=one(a);R.angle=g}return g}
+  function angle(sel,row,tag){var a=ANGLES.slice();if(sel.shot!=='Two-shot'&&!row.company)a.splice(2,1);if(sel.style==='Portrait')a=[ANGLES[0],ANGLES[1]];if(tag==='w'&&sel.shot==='Close-up')a=[ANGLES[0],ANGLES[1],ANGLES[6]];var g=keep('angle',function(){return one(a)});if(a.indexOf(g)<0){g=one(a);R.angle=g}return g}
   function copyBit(sel){return sel.copy&&sel.copy!=='None'?'; clear, empty space on one side for a headline':''}
 
   /* ── A pro ── */
+  /* portrait: at ease and confident; a device can rest in the lap or hand, never in use */
+  var PPOSE={
+    sit:['sitting back at ease, one arm resting on the table','forearms loosely on the table, hands relaxed together','seated sideways to the table, an elbow over the back of the chair','one hand loosely around a mug','the laptop closed on their lap, a hand resting on it','a phone held loosely in one hand on their lap, screen away, not in use'],
+    stand:['leaning against the table edge, hands resting at their sides','standing easy, a closed laptop held loosely at their side','standing, a tablet held loosely against them, not in use','leaning a shoulder on the wall, arms loosely folded']};
+  var PBEFORE=['just before they sit down to build the presentation that has to land','just before they walk on stage','just before they face the room','just before the video call that matters begins'];
+  var PAFTER=['right after the presentation goes well','right after they finish the perfect slide','right after the room says yes'];
+  var PFEEL=['quiet satisfaction','pride','excitement','determination','dedication and commitment','openness, ready to collaborate'];
+  function portraitMoment(f){var ph=keep('phase',function(){return one(['before','after'])});if(ph==='peak'){ph='after';R.phase=ph}
+    var m=keep('pm',function(){return ph==='before'?one(PBEFORE):(Math.random()<0.5?'right after '+f.win:one(PAFTER))});
+    var feel=keep('pfeel',function(){return one(PFEEL)});
+    return 'Moment: '+v('pm',m)+'; the feeling is '+v('pfeel',feel)+'; at ease in their own space, nothing in their hands is working; the setting tells their professional story, not the pose; no typing, pointing or holding the laptop open toward us, no hands on the chin or face'}
   var DETAILS=['a hand resting on the closed laptop, a coffee beside it','fingers lifting off the trackpad after the last click','a hand easing the laptop lid down, a coffee beside it','both hands loose on the keyboard, the work done'];
   function pro(sel){
     if(sel.style==='Video call')return videoCall(sel);
     var style=sel.style||'Candid',f=rowFor(sel,style==='Portrait'||style==='Detail'),row=f.row,L=[];
+    if(style==='Portrait'){var pp=/^(st|le)$/.test(f.tag)?PPOSE.stand:PPOSE.sit,pq=keep('ppose',function(){return one(pp)});if(pp.indexOf(pq)<0){pq=one(pp);R.ppose=pq}f.pose=v('ppose',pq)}
     if(style==='Detail'){
       var d=keep('detail',function(){return one(DETAILS)}),open=!/closed|lid down/.test(d);
       L.push('Photo: an editorial detail photograph of a professional’s hands just after a little win at work, the light landing on the hands and the laptop; candid, settled-in and quietly successful, buoyed by optimism; a real, unretouched moment');
@@ -162,24 +185,25 @@
       return L;
     }
     var portrait=style==='Portrait',solo=sel.shot!=='Two-shot'&&!row.company,fl=sel.float&&sel.float!=='No';
-    L.push(portrait?'Photo: an editorial portrait of a professional just after a little win at work, the light landing on them; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment':'Photo: a candid editorial photograph of a professional’s little win at work, the light landing on them and their idea; candid, settled-in, in flow and quietly successful, buoyed by optimism; a real, unretouched moment');
+    L.push(portrait?'Photo: an editorial portrait of a professional in their element, the light landing on them; comfortably confident and quietly successful, buoyed by optimism; a real, unretouched moment':'Photo: a candid editorial photograph of a professional’s little win at work, the light landing on them and their idea; candid, settled-in, in flow and quietly successful, buoyed by optimism; a real, unretouched moment');
     var place=f.place;if(!solo&&!/colleague/.test(place+f.pose))place+=', a colleague beside them, mid-reaction and unposed';if(solo&&sel.shot==='Wide shot'&&keep('group',function(){return Math.random()<0.4})&&!/^(w|pr)$/.test(f.tag))place+=', 2 colleagues working around them';if(f.tag==='pr'&&!/colleagues/.test(place))place+=', the backs of 2 colleagues soft in the foreground';
-    L.push('Subject: a '+who(sel)+', '+v('place',place)+', '+v('pose',f.pose)+', at '+v('time',row.time));
+    L.push('Subject: a '+who(sel)+', '+v('place',place)+', '+(portrait?f.pose:v('pose',f.pose))+', at '+v('time',row.time));
     var body=keep('body',function(){return one(BODY)});
-    L.push('Moment: '+v('win',f.win)+MOMENT_TAIL+'; '+v('body',body)+';'+STOCK);
-    L.push(portrait?'Gaze: into the lens with a settled, easy half-smile, unposed, as if a friend just asked how it went':'Gaze: on the work or the person they’re talking to, never at the lens');
+    if(portrait)L.push(portraitMoment(f));
+    else{var ph=phaseFor(f.tag);if(ph==='before'){body=keep('bodyB',function(){return one(BODY_BEFORE)});L.push('Moment: '+PHASE[ph].lead+v('win',f.win)+PHASE[ph].tail+'; '+v('bodyB',body)+';'+STOCK)}else L.push('Moment: '+PHASE[ph].lead+v('win',f.win)+PHASE[ph].tail+'; '+v('body',body)+';'+STOCK)}
+    L.push(portrait?'Gaze: into the lens, settled and comfortably confident, an easy half-smile or a calm, steady look, as if a friend just asked how it’s going; never a posed grin':'Gaze: on the work or the person they’re talking to, never at the lens');
     L.push(lightLine(sel,row));
     var lens=portrait?(sel.shot==='Wide shot'?'50mm, waist-up, with the room around them':sel.shot==='Medium shot'?'85mm, chest-up':'85mm, close on the face and shoulders'):LENS[sel.shot]||LENS['Medium shot'];
-    if(f.tag==='w'&&/85mm/.test(lens))lens='50mm, waist-up';if(f.tag==='w'&&/35mm|50mm/.test(lens)===false)lens='50mm, waist-up';
-    var fr='Frame: '+v('lens',lens)+', '+v('angle',angle(sel,row))+(portrait||fl?'':IMMERSED);
+    if(f.tag==='w'&&sel.shot==='Close-up')lens=WALK_CLOSE;else if(f.tag==='w'&&!/35mm|50mm/.test(lens))lens='50mm, waist-up';
+    var fr='Frame: '+v('lens',lens)+', '+v('angle',angle(sel,row,f.tag))+(portrait||fl?'':IMMERSED);
     if(fl)fr+='; frame it wide, with open, uncluttered air around them, above each shoulder and beside the laptop, for blank floating slides added in post';
     L.push(fr+copyBit(sel));
     L.push(wardrobeLine(sel));
     L.push(castLine(sel));L.push(SKIN);
     L.push(HAIR);
-    L.push(f.tag==='pr'?SCREEN_BLANK('the wall-mounted screen'):'Screen: the laptop screen faces away from the camera');
+    L.push(f.tag==='pr'?SCREEN_BLANK('the wall-mounted screen'):portrait?'Screen: no screen faces the camera; any laptop, tablet or phone is closed, set aside or resting, never in use':'Screen: the laptop screen faces away from the camera');
     if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.splice(L.length-1,0,'Prop: '+v('prop',pr)+', the only object besides the laptop')}
-    else L.splice(L.length-1,0,'Prop: none; only the laptop');
+    else L.splice(L.length-1,0,portrait?'Prop: nothing beyond the laptop, tablet, phone or cup the pose names':'Prop: none; only the laptop');
     return L;
   }
   function videoCall(sel){
@@ -248,7 +272,8 @@
     }else if(mode==='Stage'){
       L.push('Photo: a candid editorial photograph of a professional presenting on a stage, the room leaning in; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment');
       L.push('Subject: a '+who(p)+', presenting at the side of a stage beside a large projection screen');
-      L.push('Moment: the room leans in'+MOMENT_TAIL+'; standing easy, one hand open toward the screen;'+STOCK);
+      var sph=phaseFor('pr'),sw=keep('stageWin',function(){return one(['they win the room','the room leans in','the room goes quiet on the key slide','the big idea lands with the whole room'])});
+      L.push('Moment: '+PHASE[sph].lead+v('stageWin',sw)+PHASE[sph].tail+'; '+(sph==='before'?'stepping out toward the screen, one hand already lifting toward it':'standing easy, one hand open toward the screen')+';'+STOCK);
       L.push('Light: clean, neutral stage light lands on the presenter and the screen; the audience falls a stop darker, never gloomy; true-to-life color, never an orange or golden cast; never haze beams, god rays or a spotlight on a black background');
       L.push('Frame: 35mm, from mid-audience, the soft backs of the audience out of focus in the foreground'+copyBit(sel));
       L.push(wardrobeLine(p));L.push(castLine(p));L.push(SKIN);L.push(HAIR);
@@ -271,7 +296,7 @@
   function build(facet,sel){LV=[];LVK={};
     var L=facet==='Product'?product(sel):facet==='Presentation'?slides(sel):pro(sel);
     var gfxMode=(facet==='Product'&&sel.pshot==='Brand graphic space')||(facet==='Presentation'&&sel.layout==='Brand graphic space');
-    if(!gfxMode){L.push(LOOK,NEVER,AVOID)}
+    if(!gfxMode){L.push(LOOK,facet==='Professional'&&sel.style==='Portrait'?NEVER.replace('no phone in a hand','no phone held up or in use'):NEVER,AVOID)}
     return L.join('\n')}
   AD.build=build;
   AD.hold=function(){R={}};AD.reroll=function(){R={}};
