@@ -90,7 +90,7 @@
   var HERITAGE={'Mixed heritage':'mixed-heritage'};
   var MARKS=[['freckles'],['a mole on the cheek'],['a small scar through one brow'],['crooked lower teeth'],['a chipped front tooth'],['faint acne scars'],['sun spots on the cheeks',40],['laugh lines',30],['a few grey strands',36],['salt-and-pepper stubble',38,'Male'],['a receding hairline',38,'Male'],['uneven single eyelids',0,null,['East Asian','Southeast Asian']]];
   var HAND_MARKS=['sun spots on the backs of the hands','a small scar on one knuckle','short, unpolished nails','visible veins on the backs of the hands'];
-  var STYLING=['tortoiseshell glasses','gold-rimmed glasses','rimless glasses','bold, thick-framed glasses','a simple ring','stacked silver rings','a steel watch','small hoop earrings','a woven bracelet','reading glasses pushed up on the head','over-ear headphones around the neck','a knit beanie'];
+  var STYLING=['tortoiseshell glasses','gold-rimmed glasses','rimless glasses','bold, thick-framed glasses','a simple ring','stacked silver rings','a steel watch','small hoop earrings','a woven bracelet','reading glasses pushed up on the head','a knit beanie'];
   function styl(pool,n){var o=[],c=pickN(pool,pool.length);c.forEach(function(x){if(o.length<n&&!(/glasses/.test(x)&&o.some(function(y){return /glasses/.test(y)}))&&!(/watch/.test(x)&&o.some(function(y){return /watch/.test(y)})))o.push(x)});return o}
   var HAND_STYLING=['a simple ring','a steel watch','a woven bracelet','a leather-strap watch'];
   var ASSIST=['a hearing aid','a cane resting against the table','a wheelchair','a prosthetic hand'];
@@ -105,7 +105,7 @@
 
   /* ── wardrobe color (section 5) ── */
   /* each hue carries the warm, natural colors that pair with it for the rest of the outfit */
-  var PAIRS={a:['cream','camel','khaki','charcoal','oatmeal'],n:['cream','camel','white','stone','tan'],r:['oatmeal','warm grey','olive','cream','camel'],m:['denim blue','cream','chocolate brown','olive','stone']};
+  var PAIRS={a:['cream','camel','khaki','charcoal','oatmeal'],n:['cream','camel','white','stone','tan'],r:['oatmeal','warm grey','olive','cream','camel'],m:['denim blue','cream','olive','stone','charcoal']};
   var RAMPS=[
     ['faded azure, like well-washed chambray','#5C9DBA','a',['chambray shirt','oxford-cloth shirt','crisp poplin shirt','fine-gauge knit polo']],
     ['deep azure denim, broken in','#2E5A6B','a',['denim jacket','wool crewneck','corduroy overshirt','unstructured wool-blend blazer']],
@@ -114,9 +114,11 @@
     ['dusty raspberry wool','#8F4565','r',['wool blazer','knit sweater','fine merino crewneck','suede jacket']],
     ['muted magenta wine','#57293E','r',['ribbed knit sweater','velvet blazer','leather jacket','fine merino turtleneck']],
     ['soft greyed rose','#E4CDD7','r',['linen shirt','silk shirt','fine-gauge knit polo']],
-    ['garment-dyed marigold cotton, slightly faded','#D39A58','m',['cotton overshirt','cotton shirt','fine merino crewneck']],
     ['washed ochre','#A9733C','m',['canvas jacket','suede jacket','fine merino turtleneck']],
-    ['muted rust brown','#764E2D','m',['knit cardigan','corduroy jacket','wool-blend overshirt']]
+    ['dusty azure blue, softened','#7FB4CC','a',['fine merino crewneck','poplin shirt','knit cardigan']],
+    ['deep, inky azure','#1D5670','a',['wool blazer','fine merino turtleneck','suede jacket']],
+    ['muted brand magenta, dusty and deep','#9C3E68','r',['fine merino crewneck','washed-silk shirt','wool-blend overshirt']],
+    ['soft greyed magenta-pink','#C890AA','r',['knit cardigan','poplin shirt','fine-gauge knit polo']]
   ];
   function wardrobeLine(sel,sleeve){var r=keep('ramp',function(){return one(RAMPS)}),g=keep('garment',function(){return one(r[3])});if(r[3].indexOf(g)<0){g=one(r[3]);R.garment=g}var pr=keep('pair',function(){return pickN(PAIRS[r[2]],2)});if(pr.some(function(x){return PAIRS[r[2]].indexOf(x)<0})){pr=pickN(PAIRS[r[2]],2);R.pair=pr}
     var what=sleeve?'the sleeve of a '+g:'a '+g;
@@ -216,12 +218,13 @@
     L.push('Gaze: into the lens, as if into the faces on the call, warm and animated, mid-talk; never posed');
     L.push(lightLine(sel,row,{what:'face and hands'}));
     L.push('Frame: '+v('lens','35mm from the laptop\u2019s webcam, just below eye level')+'; the soft top edge of the laptop screen in the lower frame'+IMMERSED+copyBit(sel));
-    L.push(wardrobeLine(sel));L.push(castLine(sel));L.push(SKIN);L.push(HAIR);
+    var hp=keep('vcHead',function(){return Math.random()<1/10});
+    L.push(wardrobeLine(sel));L.push(castLine(sel)+(hp?'; slim wireless headphones on, quiet and secondary':''));L.push(SKIN);L.push(HAIR);
     if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.push('Prop: '+v('prop',pr)+', the only object besides the laptop')}else L.push('Prop: none; only the laptop');
     L.push('Screen: the camera is the laptop; no screen faces the camera');
     return L;
   }
-  var PROPS=['a ceramic mug of coffee','a glass of water','a cup of tea','a small espresso cup','folded reading glasses','wireless earbuds in their case','a reusable water bottle','a small potted plant','a set of keys'];
+  var PROPS=['a ceramic mug of coffee','a glass of water','a cup of tea','a small espresso cup','folded reading glasses','a reusable water bottle','a small potted plant','a set of keys'];
 
   /* ── brand graphic space (section 8) ── */
   var GFX_LIGHT={Side:'a soft clear azure blue glow (#00B9FF) from the left and a soft rose pink glow (#DB2475) from the right',Halo:'a soft azure and rose glow behind the panel, so it reads as lit from behind',Corner:'a soft azure glow rising from the bottom-left corner and a soft rose glow from the top-right corner, the panel floating in the dark between them'};
