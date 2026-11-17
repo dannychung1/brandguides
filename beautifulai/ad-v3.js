@@ -32,7 +32,7 @@
     {k:'10:55',time:'10:55 a.m.',light:'open window light',types:['Soft','Backlit'],sets:['Office','Coworking','Hotel','Café','Home office','Home'],tags:['w','st'],
       wins:['they walk in ready','the deck is up on screen before anyone sits down','the last check is done at the door','a colleague says "this looks sharp" on the way in','they walk in with time to spare','the one-pager is open and ready']},
     {k:'11:30',time:'11:30 a.m.',light:'bright midday light',types:['Soft','Sun'],sets:['Office','Coworking','Hotel'],tags:['pr'],screen:true,
-      wins:['they win the room','the high-stakes pitch hits its turning point','the room leans in','the room goes quiet on the key slide','someone asks for the deck before it ends','the chart makes the point on its own','the questions are the good kind','the decision gets made in the room']},
+      wins:['they win the room','the high-stakes pitch hits its turning point','the toughest question gets the best answer','the skeptic at the table starts nodding','the room asks for the next slide before it comes up','the pitch lands the way it was rehearsed','the room leans in','the room goes quiet on the key slide','someone asks for the deck before it ends','the chart makes the point on its own','the questions are the good kind','the decision gets made in the room']},
     {k:'12:30',time:'12:30 p.m.',light:'hard midday sun',types:['Sun'],sets:ALL,tags:['h','s','st'],company:true,
       wins:['the idea gets a laugh','a colleague says "that’s the slide"','the plan comes together over lunch','a rough idea becomes a slide in minutes','they both agree on the headline','a quick win worth a grin']},
     {k:'2:00',time:'2:00 p.m.',light:'soft, even afternoon light',types:['Soft'],sets:['Office','Home office','Home','Coworking','Hotel','Café'],tags:['s','pe'],act:'on a video call',
@@ -68,10 +68,11 @@
     le:['leaning on the ledge, the laptop open beside them','sitting on the ledge, knees up, the laptop resting on them','leaning a shoulder on the window frame, the laptop on one forearm','half sitting on the ledge, one foot on the floor'],
     so:['cross-legged, the laptop on their knees','curled into the corner, the laptop on a cushion','feet up on the coffee table, the laptop on their lap','sitting forward on the edge of the cushion','stretched out, one arm along the back'],
     w:['mid-stride, the laptop under one arm','walking with the laptop open on one forearm, eyes on the last slide','slowing at the door, glancing at the laptop one last time','walking side by side with a colleague','turning back mid-stride to answer someone'],
-    pr:['standing beside the screen, one hand open toward it','standing at the head of the table, mid-sentence','stepping back from the screen to let the slide speak','standing, a clicker loose in one hand, turned toward the room','leaning on the table edge, answering a question'],
+    pr:['standing at the head of the table, mid-sentence','stepping back from the screen to let the slide speak','standing, a clicker loose in one hand, turned toward the room','leaning on the table edge, answering a question','walking the length of the table as they talk','seated at the table, presenting from their chair, leaning in','standing behind a chair, both hands resting on its back, mid-point','pausing mid-sentence, letting the key line land','half turned to the screen, glancing back at the room','listening to a question, head tilted, about to answer','sketching the shape of the idea in the air, hands low','perched on the table corner, talking straight to the decision-maker'],
     h:['leaning on the tall table, the laptop between their hands','on a stool, one foot on the rung','standing at the tall table, a cup beside the laptop','leaning in over the table, mid-laugh']
   };
   var BODY=['shoulders relaxed, settled in their body','shoulders loose, breathing out','easy and unhurried, the tension gone','settled in, a hand resting on the laptop'];
+  var BODY_PEAK=['weight forward, fully in it','energy high, voice carrying the room','grounded and sure, every gesture deliberate','animated and present, the room with them'];
   var BODY_BEFORE=['alert and leaning in','shoulders square, moving with purpose','energy gathering, ready to go','quick and light, a step ahead of the moment'];
   var MOMENT_TAIL=', caught mid-movement and unaware of the camera, just after the peak: the expression settling on its own, never a smile for the camera';
   /* the moment can sit just before, at or just after the peak; the peak is for presenting, before and after for everything else */
@@ -151,10 +152,14 @@
 
   /* ── frames (sections 6 and 9) ── */
   var LENS={'Close-up':'85mm, close on the face and shoulders','Medium shot':'50mm, waist-up','Two-shot':'50mm, waist-up, the 2 of them together, the light favoring the professional','Wide shot':'35mm, the whole person and the room around them'};
-  var ANGLES=['from eye level','from slightly low','over a colleague\u2019s shoulder','through a soft, out-of-focus foreground object such as a glass or a plant','at arm\u2019s length, a blurred shoulder or laptop edge soft in the foreground','from a high angle, looking down into the moment','in a tight crop that cuts through a shoulder, the camera right inside the moment','low at table height, the laptop edge soft in the foreground'];
+  var GRAND='from a slight low angle, looking up a little, giving them quiet stature and a sense of grandness';
+  var ANGLES=['from eye level',GRAND,'over a colleague\u2019s shoulder','through a soft, out-of-focus foreground object such as a glass or a plant','at arm\u2019s length, a blurred shoulder or laptop edge soft in the foreground','from a high angle, looking down into the moment','in a tight crop that cuts through a shoulder, the camera right inside the moment','low at table height, the laptop edge soft in the foreground'];
   var WALK_CLOSE='85mm, close on the face and shoulders, tracking alongside them as they walk; a slow-shutter pan: the background streaks, and hair, hands and the far edge of the face soften with the motion, while the near eye stays sharp';
   var IMMERSED='; immersed and kinetic: the camera is inside the moment, close enough to high-five them';
-  function angle(sel,row,tag){var a=ANGLES.slice();if(sel.shot!=='Two-shot'&&!row.company)a.splice(2,1);if(sel.style==='Portrait')a=[ANGLES[0],ANGLES[1]];if(tag==='w'&&sel.shot==='Close-up')a=[ANGLES[0],ANGLES[1],ANGLES[6]];var g=keep('angle',function(){return one(a)});if(a.indexOf(g)<0){g=one(a);R.angle=g}return g}
+  var KINETIC='immersed and kinetic: the camera inside the moment, close enough to high-five them';
+  /* presenting rooms get their own camera positions, each one complete on its own */
+  var PR_CAM=['from behind the seated room, the backs of 2 colleagues soft in the foreground','from a high back corner, looking down the length of the table at them','from low near the end of the table, looking up a little, giving them stature and a sense of grandness','from beside the table at seated height, '+KINETIC,'from eye level across the table, between two colleagues’ shoulders'];
+  function angle(sel,row,tag){var a=ANGLES.concat([KINETIC,KINETIC]);if(sel.shot!=='Two-shot'&&!row.company)a.splice(2,1);if(sel.style==='Portrait')a=[ANGLES[0],GRAND];if(tag==='w'&&sel.shot==='Close-up')a=[ANGLES[0],GRAND];if(sel.shot==='Wide shot')a=a.filter(function(x){return x!==KINETIC&&!/tight crop/.test(x)});if(tag==='pr')a=PR_CAM;var g=keep('angle',function(){return one(a)});if(a.indexOf(g)<0){g=one(a);R.angle=g}return g}
   function copyBit(sel){return sel.copy&&sel.copy!=='None'?'; clear, empty space on one side for a headline':''}
 
   /* ── A pro ── */
@@ -188,16 +193,16 @@
     }
     var portrait=style==='Portrait',solo=sel.shot!=='Two-shot'&&!row.company,fl=sel.float&&sel.float!=='No';
     L.push(portrait?'Photo: an editorial portrait of a professional in their element, the light landing on them; comfortably confident and quietly successful, buoyed by optimism; a real, unretouched moment':'Photo: a candid editorial photograph of a professional’s little win at work, the light landing on them and their idea; candid, settled-in, in flow and quietly successful, buoyed by optimism; a real, unretouched moment');
-    var place=f.place;if(!solo&&!/colleague/.test(place+f.pose))place+=', a colleague beside them, mid-reaction and unposed';if(solo&&sel.shot==='Wide shot'&&keep('group',function(){return Math.random()<0.4})&&!/^(w|pr)$/.test(f.tag))place+=', 2 colleagues working around them';if(f.tag==='pr'&&!/colleagues/.test(place))place+=', the backs of 2 colleagues soft in the foreground';
+    var place=f.place;if(!solo&&!/colleague/.test(place+f.pose))place+=', a colleague beside them, mid-reaction and unposed';if(solo&&sel.shot==='Wide shot'&&keep('group',function(){return Math.random()<0.4})&&!/^(w|pr)$/.test(f.tag))place+=', 2 colleagues working around them';if(f.tag==='pr'&&!/colleagues/.test(place))place+=', colleagues seated around the table';
     L.push('Subject: a '+who(sel)+', '+v('place',place)+', '+(portrait?f.pose:v('pose',f.pose))+', at '+v('time',row.time));
     var body=keep('body',function(){return one(BODY)});
     if(portrait)L.push(portraitMoment(f));
-    else{var ph=phaseFor(f.tag);if(ph==='before'){body=keep('bodyB',function(){return one(BODY_BEFORE)});L.push('Moment: '+PHASE[ph].lead+v('win',f.win)+PHASE[ph].tail+'; '+v('bodyB',body)+';'+STOCK)}else L.push('Moment: '+PHASE[ph].lead+v('win',f.win)+PHASE[ph].tail+'; '+v('body',body)+';'+STOCK)}
+    else{var ph=phaseFor(f.tag);if(ph==='peak'){body=keep('bodyP',function(){return one(BODY_PEAK)});L.push('Moment: '+PHASE[ph].lead+v('win',f.win)+PHASE[ph].tail+'; '+v('bodyP',body)+';'+STOCK)}else if(ph==='before'){body=keep('bodyB',function(){return one(BODY_BEFORE)});L.push('Moment: '+PHASE[ph].lead+v('win',f.win)+PHASE[ph].tail+'; '+v('bodyB',body)+';'+STOCK)}else L.push('Moment: '+PHASE[ph].lead+v('win',f.win)+PHASE[ph].tail+'; '+v('body',body)+';'+STOCK)}
     L.push(portrait?'Gaze: into the lens, settled and comfortably confident, an easy half-smile or a calm, steady look, as if a friend just asked how it’s going; never a posed grin':'Gaze: on the work or the person they’re talking to, never at the lens');
     L.push(lightLine(sel,row));
     var lens=portrait?(sel.shot==='Wide shot'?'50mm, waist-up, with the room around them':sel.shot==='Medium shot'?'85mm, chest-up':'85mm, close on the face and shoulders'):LENS[sel.shot]||LENS['Medium shot'];
     if(f.tag==='w'&&sel.shot==='Close-up')lens=WALK_CLOSE;else if(f.tag==='w'&&!/35mm|50mm/.test(lens))lens='50mm, waist-up';
-    var fr='Frame: '+v('lens',lens)+', '+v('angle',angle(sel,row,f.tag))+(portrait||fl?'':IMMERSED);
+    var fr='Frame: '+v('lens',lens)+', '+v('angle',angle(sel,row,f.tag));
     if(fl)fr+='; frame it wide, with open, uncluttered air around them, above each shoulder and beside the laptop, for blank floating slides added in post';
     L.push(fr+copyBit(sel));
     L.push(wardrobeLine(sel));
@@ -211,13 +216,17 @@
   function videoCall(sel){
     if(!('time' in R))R.time=one(['2:00','2:00','2:00','9:00','4:45','6:15']);
     var f=rowFor(sel,true),row=f.row,L=[];
-    L.push('Photo: a candid editorial photograph from the point of view of their laptop\u2019s webcam: a professional mid-conversation on a video call, just after a little win, the light landing on them; immersed, close and kinetic, buoyed by optimism; a real, unretouched moment');
+    L.push('Photo: a candid editorial photograph from the point of view of their laptop\u2019s webcam: a professional presenting or talking on a video call, in a little win, the light landing on them; immersed, close and kinetic, buoyed by optimism; a real, unretouched moment');
     L.push('Subject: a '+who(sel)+', '+v('place',f.place.replace(/, on a video call$/,''))+', on a video call, at '+v('time',row.time));
-    var g=keep('vcg',function(){return one(['one hand mid-gesture toward the camera','leaning in toward the camera, mid-sentence','sitting back, laughing at something someone on the call just said','both hands open, explaining the next step'])});
-    L.push('Moment: '+v('win',f.win)+MOMENT_TAIL+'; '+v('vcg',g)+';'+STOCK);
+    var VCG=['one hand mid-gesture toward the camera','leaning in toward the camera, mid-sentence','sitting back, laughing at something someone on the call just said','both hands open, explaining the next step','presenting their shared slides, eyes flicking between the lens and the screen','pausing to let the point land, eyebrows raised, waiting for the reaction','counting the next three steps on their fingers, mid-explanation','sitting forward, elbows on the desk, answering a tough question','sketching the shape of the idea in the air','nodding slowly as the client talks, about to come back in'];
+    var VCW=['the client asks to see that slide again','the pitch on the call wins the room','the toughest question on the call gets the best answer','the decision-maker unmutes to say yes','every face on the call is nodding','the room on the other end leans in'];
+    var g=keep('vcg',function(){return one(VCG)});if(VCG.indexOf(g)<0){g=one(VCG);R.vcg=g}
+    var vw=keep('vcw',function(){return Math.random()<0.5?one(VCW):''}),win=vw||f.win;
+    var vph=keep('vcph',function(){return one(['before','peak','peak','after'])}),VT={before:PHASE.before,peak:PHASE.peak,after:PHASE.after}[vph];
+    L.push('Moment: '+VT.lead+v(vw?'vcw':'win',win)+VT.tail+'; '+v('vcg',g)+';'+STOCK);
     L.push('Gaze: into the lens, as if into the faces on the call, warm and animated, mid-talk; never posed');
     L.push(lightLine(sel,row,{what:'face and hands'}));
-    L.push('Frame: '+v('lens','35mm from the laptop\u2019s webcam, just below eye level')+'; the soft top edge of the laptop screen in the lower frame'+IMMERSED+copyBit(sel));
+    L.push('Frame: '+v('lens',keep('vcLens',function(){return one(['35mm from the laptop\u2019s webcam, just below eye level','35mm from the laptop\u2019s webcam, a touch low, looking up a little, giving them quiet stature'])}))+'; the soft top edge of the laptop screen in the lower frame'+IMMERSED+copyBit(sel));
     var hp=keep('vcHead',function(){return Math.random()<1/10});
     L.push(wardrobeLine(sel));L.push(castLine(sel)+(hp?'; slim wireless headphones on, quiet and secondary':''));L.push(SKIN);L.push(HAIR);
     if(sel.prop==='Prop'){var pr=keep('prop',function(){return one(PROPS)});L.push('Prop: '+v('prop',pr)+', the only object besides the laptop')}else L.push('Prop: none; only the laptop');
@@ -247,9 +256,9 @@
     var f=rowFor(sel,true),row=f.row,L=[],dev=keep('device',function(){return mode==='Screen close-up'?one(['laptop','laptop','tablet']):'laptop'});
     L.push('Photo: a candid editorial photograph of our product at work: a professional’s '+v('device',dev)+' in a real working moment, the light landing on their hands and the screen; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment');
     var frame,subj;
-    if(mode==='Screen close-up'){subj='the hands of a '+who(sel)+', on the '+dev+', '+f.place;frame='50mm, close on the screen and hands, light raking across them'+(dev==='laptop'?'; the laptop’s keyboard and trackpad fill the lower half of the frame':'; the tablet fills the lower half of the frame')}
+    if(mode==='Screen close-up'){subj='the hands of a '+who(sel)+', on the '+dev+', '+f.place;frame='50mm, close on the screen and hands, '+v('pAng',keep('pAng',function(){return one(['light raking across them','from just below the table edge, looking up a little at the screen, giving the product stature'])}))+(dev==='laptop'?'; the laptop’s keyboard and trackpad fill the lower half of the frame':'; the tablet fills the lower half of the frame')}
     else if(mode==='Point of view'){subj='a '+who(sel)+', seen through their own eyes, '+f.place;frame='35mm point of view, looking down past their hands to the laptop; the keyboard and trackpad fill the lower half of the frame'}
-    else {subj='a '+who(sel)+', seen from behind, '+f.place;frame='50mm over the shoulder: the back of their head and shoulder soft in the near foreground, the screen facing the camera in the middle of the frame'}
+    else {subj='a '+who(sel)+', seen from behind, '+f.place;frame='50mm over the shoulder'+v('pAng',keep('pAngO',function(){return one(['',', from a little below the shoulder, looking up past it'])}))+': the back of their head and shoulder soft in the near foreground, the screen facing the camera in the middle of the frame'}
     L.push('Subject: '+v('place',subj)+', at '+v('time',row.time));
     L.push('Moment: the last piece of the work just came together, caught just after the peak: the hands easing off the keyboard;'+STOCK);
     L.push(lightLine(sel,row,{hands:mode!=='Over the shoulder',what:'hands and the '+dev}));
@@ -270,15 +279,15 @@
       L.push('Photo: a candid editorial photograph of a meeting room just before a presentation, the room ready and calm, buoyed by optimism; a real, unretouched moment');
       L.push('Subject: an empty meeting room, chairs pulled in, a laptop open at the head of the table, the '+v('scr',keep('scr',function(){return one(['wall-mounted TV','projector screen'])}))+' on and waiting');
       L.push('Light: clear morning window light runs down the table and lands on the screen wall; the room falls a stop darker around it, never gloomy; true-to-life color, never an orange or golden cast; never the sun disc in frame, haze beams or god rays');
-      L.push('Frame: 35mm, from the far end of the table at seated eye level, the screen in the upper third'+copyBit(sel));
+      L.push('Frame: 35mm, '+v('mrCam',keep('mrCam',function(){return one(['from the far end of the table at seated eye level','from low at the far end of the table, looking up a little, giving the room and the screen a sense of grandness','from a high corner, looking down the length of the table'])}))+', the screen in the upper third'+copyBit(sel));
       L.push(SCREEN_BLANK('the '+R.scr));
     }else if(mode==='Stage'){
       L.push('Photo: a candid editorial photograph of a professional presenting on a stage, the room leaning in; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment');
       L.push('Subject: a '+who(p)+', presenting at the side of a stage beside a large projection screen');
       var sph=phaseFor('pr'),sw=keep('stageWin',function(){return one(['they win the room','the room leans in','the room goes quiet on the key slide','the big idea lands with the whole room'])});
-      L.push('Moment: '+PHASE[sph].lead+v('stageWin',sw)+PHASE[sph].tail+'; '+(sph==='before'?'stepping out toward the screen, one hand already lifting toward it':'standing easy, one hand open toward the screen')+';'+STOCK);
+      L.push('Moment: '+PHASE[sph].lead+v('stageWin',sw)+PHASE[sph].tail+'; '+v('stPose',keep('stPose',function(){return sph==='before'?one(['stepping out onto the stage','walking to the center of the stage, finding the first line','pausing at the edge of the stage, taking in the room']):one(['mid-sentence to the room, hands low and natural, the screen behind them, never gestured at','walking the stage as they talk','stopped center stage, letting the key line land','turned toward one side of the audience, answering a question','one hand at chest height, shaping the idea'])}))+';'+STOCK);
       L.push('Light: clean, neutral stage light lands on the presenter and the screen; the audience falls a stop darker, never gloomy; true-to-life color, never an orange or golden cast; never haze beams, god rays or a spotlight on a black background');
-      L.push('Frame: 35mm, from mid-audience, the soft backs of the audience out of focus in the foreground'+copyBit(sel));
+      L.push('Frame: '+v('stCam',keep('stCam',function(){return one(['35mm, from mid-audience, the soft backs of the audience out of focus in the foreground','35mm, from low in the front row, looking up a little at them, giving them stature and a sense of grandness','50mm, from the side of the stage, the audience soft beyond them','35mm, from the back of the room, the full stage and screen ahead'])}))+copyBit(sel));
       L.push(wardrobeLine(p));L.push(castLine(p));L.push(SKIN);L.push(HAIR);
       L.push(SCREEN_BLANK('the projection screen'));
     }else{
