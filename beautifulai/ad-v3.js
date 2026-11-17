@@ -17,9 +17,9 @@
   var AVOID='Avoid: plastic or airbrushed skin, a cut-out or composited look, fold lines or packaging creases in clothing, stock-photo posing, god rays, lens flare, sharpening halos or glow around people, HDR, a teal-orange grade, an orange or golden cast';
   var NEVER='Never include: readable text, words, numbers, logos or signage, except that any visible keyboard is a US English QWERTY layout in a clean sans-serif: the number row 1 to 0, then Q W E R T Y U I O P, A S D F G H J K L, Z X C V B N M, and a long space bar between the command and option keys; no paper, printed pages, printed slides, notebooks, sketches or outlines; no phone in a hand; no cans or bottles';
   var HAIR='Hair: styled and groomed for a workday, neat and in place, with natural texture and a few fine strands at the hairline only, never across the face or drawn on the skin; never messy, windswept, frizzy or wet-looking, never helmet-stiff or plastic';
-  var SKIN='Skin: real skin on every skin tone, one continuous surface photographed in focus: fine pores show where the key light rakes across and stay present, only softer, on the shadow side, with gentle, natural variation in tone; deep and dark skin keeps visible texture and true undertones on both the lit and shadow sides, even in a wider shot; matte with only a soft natural sheen on the high points; never patchy, blotchy or mottled, never scratch-like lines or stray hairs on the cheek, never a texture laid over the face, never glossy, waxy, smoothed or airbrushed';
+  var SKIN='Skin: real skin on every skin tone, one continuous surface photographed in focus: fine pores show where the key light rakes across and stay present, only softer, on the shadow side, with gentle, natural variation in tone; deep and dark skin keeps visible texture and true undertones on both the lit and shadow sides, even in a wider shot; matte with only a soft natural sheen on the high points; never patchy, blotchy or mottled, never scratch-like lines or stray hairs on the cheek, never a texture laid over the face, never glossy, waxy, smoothed or airbrushed; skin keeps its own true color, clothing color never spills onto it';
   var SET='Set dressing: lived in, not styled; any cup, pen or object sits within easy reach of their hand, where they would really set it down, never in a corner of the frame or behind the laptop; a plant or two can live in the room, but never placed to fill the space beside them, and never on the desk next to the laptop; nothing arranged as a still life; every object rests on a surface or the floor with a contact shadow, nothing floats; the room is clean and minimal, a few real, recognizable things (furniture, a lamp, a window) in simple, orderly shapes; shadows and the space below desks and tables stay plain and quiet, never filled with undefined objects or clutter';
-  var SKIN_H='Skin: real, detailed skin on the hands for every skin tone: knuckle creases, fine lines and visible texture, never glossy, waxy or smoothed';
+  var SKIN_H='Skin: real, detailed skin on the hands for every skin tone: knuckle creases, fine lines and visible texture, never glossy, waxy or smoothed; skin keeps its own true color, clothing color never spills onto it';
   var SCREEN_BLANK=function(dev){return 'Screen: '+dev+' is on and completely blank: a flat, even light grey rectangle inside its thin bezel, all 4 corners visible, nothing overlapping it, no interface, icons or text, ready for a screenshot in post'};
 
   /* ── times, wins, places and poses (sections 3 and 6) ──
@@ -48,14 +48,14 @@
     'Marketing':['the campaign story finally clicks','the launch deck gets a yes from the brand team','the hero slide lands on the first try','the results slide makes the numbers sing','the creative review ends early'],
     'Sales':['the prospect asks for the proposal by Friday','the renewal deck gets a nod','the pricing slide answers the question before it’s asked','the demo deck lands with the buyer','the forecast review goes smoothly'],
     'Business development':['the partner says "let’s do this"','the pitch earns a second meeting','the market map makes the case in one slide','the deal summary is ready ahead of the call','the intro deck opens the door'],
-    'Consultants & analysts':['the client signs off on the recommendation','the findings deck tells the story in 10 slides','the steering committee nods along','the workshop readout is done by noon','the analysis finally fits on one slide'],
+    'Consultants & analysts':['the client signs off on the recommendation','the findings deck tells the story in 10 slides','the steering committee nods along','the workshop readout lands with the client','the analysis finally fits on one slide'],
     'Team leader':['the team’s deck comes together in one pass','the team review ends with everyone aligned','a teammate’s slide gets the credit it deserves','the all-hands deck is locked','the quarterly plan lands with the team'],
     'C-suite':['the board deck is locked a day early','the investor update reads clear and calm','the all-hands story lands with the whole company','the strategy slide gets a yes from the board','the budget review wraps in half the time']
   };
   /* places per setting, each tagged with its posture: s seated · st standing · pe perched · le ledge · so sofa · w walking or arriving · pr presenting · h tall table */
   var PLACES={
     'Office':[['s','at a wide desk by the window on the open office floor'],['s','in a glass-walled meeting room'],['s','at a long shared table on the open office floor, glass meeting rooms behind'],['s','in a quiet library-style booth'],['h','at a tall table in the break-out area'],['st','at the kitchen bar in the office'],['so','on a low sofa in the office lounge'],['pe','on the edge of a desk on the open floor'],['le','at a window ledge in a quiet corner of the office'],['st','at a standing desk on the open office floor'],['w','across the open floor'],['w','in the hallway outside a meeting room'],['w','at a meeting-room door, about to step in'],['pr','in a meeting room, at a wall-mounted screen'],['pr','at the head of a long boardroom table, beside a wall-mounted screen']],
-    'Home':[['st','at the kitchen counter'],['s','at the dining table'],['so','on the sofa'],['so','in an armchair by a bookcase'],['le','on a window seat'],['st','at a breakfast bar'],['s','at a table in a sunroom'],['s','at a balcony table, the door open behind them'],['s','at the kitchen table after breakfast'],['h','on a stool at the kitchen island'],['w','down the hallway at home, on the way out']],
+    'Home':[['st','at the kitchen counter'],['s','at the dining table'],['so','on the sofa'],['so','in an armchair by a bookcase'],['le','on a window seat'],['st','at a breakfast bar'],['s','at a table in a sunroom'],['s','at a balcony table, the door open behind them'],['s','at the kitchen table'],['h','on a stool at the kitchen island'],['w','down the hallway at home, on the way out']],
     'Home office':[['s','at their desk by the window'],['s','at a desk in a converted spare room'],['st','at a standing desk'],['le','at the window ledge'],['s','at a desk in a garden studio'],['pe','on the edge of their desk'],['st','at the kitchen counter before heading to the desk'],['so','on a reading chair in the corner of the study']],
     'Café':[['s','at a café window table'],['h','at a tall café table'],['so','in a deep café armchair by the window'],['s','at a small marble table'],['s','on a long bench in a bakery café'],['s','at a café terrace table under an awning'],['h','on a stool at the coffee bar'],['s','at a table in a bookshop café'],['w','stepping out of a café door']],
     'In transit':[['s','in a train seat by the window'],['s','at a quiet airport gate'],['so','in an airport lounge armchair'],['h','at a counter in a station café'],['s','at a train table seat'],['s','in a ferry lounge seat by the window'],['w','through a bright airport concourse'],['s','in a quiet carriage on a high-speed train']],
@@ -162,7 +162,7 @@
   var IMMERSED='; immersed and intimate: the camera is inside the moment, close enough to reach out and shake their hand';
   var KINETIC='immersed and intimate: the camera inside the moment, close enough to reach out and shake their hand';
   /* presenting rooms get their own camera positions, each one complete on its own */
-  var PR_CAM=['from behind the seated room, the backs of 2 colleagues soft in the foreground','from a high back corner, looking down the length of the table at them','from low near the end of the table, looking up a little, giving them stature and a sense of grandness','from beside the table at seated height, '+KINETIC,'from eye level across the table, between two colleagues’ shoulders'];
+  var PR_CAM=['from behind the seated room, the backs of 2 colleagues soft in the foreground','from a camera mounted high in the back corner near the ceiling, looking steeply down the length of the table at them','from low near the end of the table, looking up a little, giving them stature and a sense of grandness','from beside the table at seated height, '+KINETIC,'from eye level across the table, between two colleagues’ shoulders'];
   function angle(sel,row,tag){var a=ANGLES.concat([KINETIC,KINETIC]);if(sel.shot!=='Two-shot'&&!row.company)a.splice(2,1);if(sel.style==='Portrait')a=[ANGLES[0],GRAND];if(tag==='w'&&sel.shot==='Close-up')a=[ANGLES[0],GRAND];if(sel.shot==='Wide shot')a=a.filter(function(x){return x!==KINETIC&&!/tight crop/.test(x)});if(tag==='w')a=a.filter(function(x){return !/table height|tabletop|laptop edge|foreground object/.test(x)});if(tag==='pr')a=PR_CAM;var g=keep('angle',function(){return one(a)});if(a.indexOf(g)<0){g=one(a);R.angle=g}return g}
   function copyBit(sel){return sel.copy&&sel.copy!=='None'?'; clear, empty space on one side for a headline':''}
 
@@ -301,7 +301,7 @@
       L.push('Photo: a candid editorial photograph of a meeting room just before a presentation, the room ready and calm, buoyed by optimism; a real, unretouched moment');
       L.push('Subject: an empty meeting room, chairs pulled in, a laptop open at the head of the table, the '+v('scr',keep('scr',function(){return one(['wall-mounted TV','projector screen'])}))+' on and waiting');
       L.push('Light: clear morning window light runs down the table and lands on the screen wall; the room falls a stop darker around it, never gloomy; true-to-life color, never an orange or golden cast; never the sun disc in frame, haze beams or god rays');
-      L.push('Frame: 35mm, '+v('mrCam',keep('mrCam',function(){return one(['from the far end of the table at seated eye level','from low at the far end of the table, looking up a little, giving the room and the screen a sense of grandness','from a high corner, looking down the length of the table'])}))+', the screen in the upper third'+copyBit(sel));
+      L.push('Frame: 35mm, '+v('mrCam',keep('mrCam',function(){return one(['from the far end of the table at seated eye level','from low at the far end of the table, looking up a little, giving the room and the screen a sense of grandness','from a camera mounted high in a corner near the ceiling, looking steeply down the length of the table'])}))+', the screen in the upper third'+copyBit(sel));
       L.push(SCREEN_BLANK('the '+R.scr));
     }else if(mode==='Stage'){
       L.push('Photo: a candid editorial photograph of a professional presenting on a stage, the room leaning in; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment');
@@ -315,11 +315,11 @@
     }else{
       var dev=keep('device',function(){return one(['laptop','tablet'])});
       L.push('Photo: a candid editorial photograph of a professional sharing their slides with a colleague across a table, the light landing on them and their idea; settled-in, in flow and quietly successful, buoyed by optimism; a real, unretouched moment');
-      L.push('Subject: a '+who(p)+', turning a '+v('device',dev)+' toward a colleague across a table');
+      L.push('Subject: a '+who(p)+', with a '+v('device',dev)+' resting on the table between them, turned toward a colleague across the table, one hand lightly steadying it; never held up to show the camera');
       L.push('Moment: the idea lands with the colleague'+MOMENT_TAIL+';'+STOCK);
       L.push('Gaze: on the colleague, never at the lens');
       L.push('Light: soft window light lands on the two of them and the '+dev+'; the faces are the brightest skin in the frame; the room falls a stop darker, never gloomy; true-to-life color, never an orange or golden cast; never the sun disc in frame or haze beams');
-      L.push('Frame: 50mm, from beside the colleague’s shoulder, the '+dev+' angled so its screen faces the camera'+copyBit(sel));
+      L.push('Frame: 50mm, from beside the colleague’s shoulder, the '+dev+(dev==='tablet'?' lying on the table, its screen tilted toward the camera':' open on the table, its screen turned toward the camera')+copyBit(sel));
       L.push(wardrobeLine(p));L.push(castLine(p));L.push(SKIN);L.push(HAIR);
       L.push(SCREEN_BLANK('the '+dev+' screen'));
     }
@@ -336,7 +336,22 @@
     var gfxMode=(facet==='Product'&&sel.pshot==='Brand graphic space')||(facet==='Presentation'&&sel.layout==='Brand graphic space');
     if(!gfxMode){L.push(LOOK,facet==='Professional'&&sel.style==='Portrait'?NEVER.replace('no phone in a hand','no phone held up or in use'):NEVER,AVOID)}
     return L.join('\n')}
-  AD.build=build;
+  /* trim (tested Nov 17): say each rule once, and put the camera second so framing carries weight */
+  var STOCKRE=/; no hands on the chin or face, no posed smiles at the screen, no fist pumps, high fives, thumbs up, jumping or finger guns(, no both hands raised toward the camera)?/;
+  function trimLines(t){var L=t.split('\n'),xa=[];
+    function ix(k){for(var i=0;i<L.length;i++)if(L[i].indexOf(k+': ')===0)return i;return -1}
+    function set(k,f){var i=ix(k);if(i>-1)L[i]=f(L[i])}
+    set('Moment',function(l){var m=l.match(STOCKRE);if(m&&m[1])xa.push('both hands raised toward the camera');return l.replace(STOCKRE,'').replace(/;\s*$/,'')});
+    set('Photo',function(l){return l.replace('; candid, settled-in, in flow and quietly successful, buoyed by optimism; a real, unretouched moment','; quietly successful, buoyed by optimism; real and unretouched').replace('; settled-in, in flow and quietly successful, buoyed by optimism; a real, unretouched moment','; quietly successful, buoyed by optimism; real and unretouched').replace('; settled-in and quietly successful, buoyed by optimism; a real, unretouched moment','; quietly successful; real and unretouched').replace('; candid, settled-in and quietly successful, buoyed by optimism; a real, unretouched moment','; quietly successful; real and unretouched')});
+    set('Light',function(l){return l.replace(/; it lands on the person and on what they’re working on \([^)]*\)/,'').replace('; warm where the sun or a lamp lands, neutral everywhere else, never an orange or golden cast','').replace('; never the sun disc in frame, haze beams or a spotlight on a black background','')});
+    set('Wardrobe',function(l){return l.replace(' (the knit of merino, the nap of suede, the weave of wool, the soft sheen of silk)','').replace('; it stands out from the light rather than matching it','').replace(', colors that pair well with it, never another bright color',', never another bright color')});
+    set('Hair',function(){return 'Hair: groomed for a workday, neat, with natural texture; any fine strands stay at the hairline; never messy, wet-looking or helmet-stiff'});
+    set('Set dressing',function(){return 'Set dressing: lived in, not styled, clean and minimal; any object sits within reach where they would set it down, resting on a surface with a contact shadow, nothing floats or is arranged as a still life; plants live in the room, never beside them or on the desk; shadows and the space below desks stay plain, never cluttered'});
+    set('Skin',function(l){return l.replace('real skin on every skin tone, one continuous surface photographed in focus: ','real skin, one continuous surface: ').replace(', with gentle, natural variation in tone','')});
+    set('Avoid',function(l){return l+', staged gestures (hands on the chin, posed smiles, fist pumps, high fives, thumbs up, finger guns'+(xa.length?', '+xa.join(', '):'')+'), the sun disc in frame, haze beams'});
+    var fi=ix('Frame');if(fi>1){var fr=L.splice(fi,1)[0];L.splice(1,0,fr)}
+    return L.join('\n')}
+  AD.build=function(facet,sel){var t=build(facet,sel);return /^Image: /.test(t)?t:trimLines(t)};
   AD.hold=function(){R={}};AD.reroll=function(){R={}};
   AD.snap=function(){return JSON.parse(JSON.stringify(R))};AD.restore=function(s){R=JSON.parse(JSON.stringify(s||{}))};
   AD.lastVars=function(){return LV.slice()};AD.varKey=function(t){return LVK[t]};
