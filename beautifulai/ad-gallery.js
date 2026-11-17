@@ -135,19 +135,19 @@
       ['race','Race or ethnicity',AD.RACES,'Professional Product','select'],
       ['build','Body type',Object.keys(AD.BUILDS),'Professional Product','select'],
       ['setting','Setting',Object.keys(AD.SETTINGS),'Professional Product','select'],
-      ['layout','Slides arranged',Object.keys(AD.LAYOUTS),'Presentation','select'],
-      ['ground','Background',Object.keys(AD.GROUNDS),'Presentation'],
-      ['style','Moment',['Candid','Portrait'],'Professional'],
+      ['layout','Scene',Object.keys(AD.LAYOUTS),'Presentation','select'],
+      ['ground','Background',Object.keys(AD.GROUNDS),'Product Presentation'],
+      ['style','Moment',['Candid','Portrait','Detail'],'Professional'],
       ['shot','Framing',Object.keys(AD.SHOTS),'Professional','frame'],
       ['pshot','Framing',Object.keys(AD.PSHOTS),'Product','frame'],
       ['prop','Props',['Prop','No prop'],'Professional'],
-      ['light','Light',['Mixed','Sun','Soft'],'Professional Product'],
-      ['float','Floating slides or UI?',['No','Slides','UI'],'Professional'],
+      ['light','Light',['Mixed','Sun','Soft','Backlit'],'Professional Product'],
+      ['float','Floating slides?',['No','Slides'],'Professional'],
       ['panels','How many?',[1,6],'Professional','range'],
       ['copy','Space for copy?',['None','Yes'],'all']
     ];
     FIELDS.forEach(function(fd){if(fd[4]!=='range')sel[fd[0]]=fd[2][0]});
-    var FRAME={'Portrait':['Portrait','Soft light, plain wall','portrait'],'Close-up':['Close-up','Face and shoulders','face'],'Medium shot':['Medium','Waist up','person'],'Over the shoulder':['Over the shoulder','Their view, from behind','co_present'],'Point of view':['Point of view','Through their eyes','visibility'],'Lifestyle':['Lifestyle','Screen turned to camera','laptop_chromebook'],'Two-shot':['Two-shot','With a colleague','group'],'Wide shot':['Wide','Whole person, room','panorama']};
+    var FRAME={'Portrait':['Portrait','Soft light, plain wall','portrait'],'Close-up':['Close-up','Face and shoulders','face'],'Medium shot':['Medium','Waist up','person'],'Over the shoulder':['Over the shoulder','Their view, from behind','co_present'],'Point of view':['Point of view','Through their eyes','visibility'],'Lifestyle':['Lifestyle','Screen turned to camera','laptop_chromebook'],'Two-shot':['Two-shot','With a colleague','group'],'Screen close-up':['Close-up','Screen and hands','touch_app'],'Brand graphic space':['Brand graphic','Blank 3D render','deployed_code'],'Wide shot':['Wide','Whole person, room','panorama']};
     var SHOW={ground:{Light:'Light, Gallery Grey',Dark:'Dark, Base Blue',Sampled:'Sampled from the slides'},copy:{None:'No',Yes:'Yes'},slides:{Attached:'I will attach them',Blank:'Leave blank, add later'},length:{Full:'ChatGPT',Short:'Figma'},facet:{Professional:'A professional',Product:'Our product',Presentation:'Slides'},shot:{Portrait:'Close-up',Working:'At work',Together:'With a colleague',Environmental:'Wide'},light:{'Hard sun':'Bright sun','Soft window':'Window light'},role:{'Consultants & analysts':'Consulting'},layout:{'Fanned deck':'Strip','Stacked deck':'Front stack','Single slide':'Floating single','Fanned':'Strip','Stacked':'Front stack','Floating':'Floating multiple','Flying':'Strip','Exploded':'Front stack'}};
     function lab(k,v){var t=(SHOW[k]&&SHOW[k][v])||v;return t.charAt(0).toUpperCase()+t.slice(1)}
     var form=bd.querySelector('.bd-form'),out=bd.querySelector('.bd-out pre'),note=bd.querySelector('.bd-note');
@@ -284,6 +284,7 @@
     sCv.addEventListener('click',function(e){var r=sCv.getBoundingClientRect(),px=Math.floor((e.clientX-r.left)*sCv.width/r.width),py=Math.floor((e.clientY-r.top)*sCv.height/r.height),x=sCv.getContext('2d'),d=x.getImageData(Math.max(0,px-2),Math.max(0,py-2),5,5).data,s=[0,0,0],n=0;for(var i=0;i<d.length;i+=4){s[0]+=d[i];s[1]+=d[i+1];s[2]+=d[i+2];n++}setSample(s.map(function(v){return Math.round(v/n)}),'color you picked')});
     function render(){
       rows.forEach(function(r){r.hidden=!(r._show==='all'||r._show.split(' ').indexOf(sel.facet)>-1)});var flOn=sel.facet==='Professional'&&sel.float!=='No',NOFL={};if(NOFL[sel.shot])sel.shot='Medium shot';rows.forEach(function(r){if(r._fd[0]==='panels'){r.hidden=!flOn;r._range.value=sel.panels;r._rout.textContent=sel.panels;r._rout.textContent=sel.panels+(sel.float==='UI'?(sel.panels>1?' panels':' panel'):(sel.panels>1?' slides':' slide'))}});if(flOn&&sel.copy!=='None')sel.copy='None';rows.forEach(function(r){if(r._fd[0]!=='copy')return;if(flOn&&sel.facet==='Professional')r.hidden=true;r._chips.querySelectorAll('.gv-chip').forEach(function(c){var on=c.dataset.v===sel.copy;c.classList.toggle('is-on',on);c.setAttribute('aria-pressed',on)})});rows.forEach(function(r){if(r._fd[0]!=='shot')return;r._chips.querySelectorAll('.gv-chip').forEach(function(c){c.style.display=NOFL[c.dataset.v]?'none':'';var on=c.dataset.v===sel.shot;c.classList.toggle('is-on',on);c.setAttribute('aria-pressed',on)})});
+      if(sel.style==='Detail'&&sel.float!=='No')sel.float='No';rows.forEach(function(r){var k=r._fd[0];if(k==='ground')r.hidden=!((sel.facet==='Product'&&sel.pshot==='Brand graphic space')||(sel.facet==='Presentation'&&sel.layout==='Brand graphic space'));if(k==='light'&&sel.facet==='Product'&&sel.pshot==='Brand graphic space')r.hidden=true;if(sel.facet==='Professional'&&sel.style==='Detail'&&(k==='float'||k==='panels'||k==='prop'))r.hidden=true;if(k==='float'&&r._chips)r._chips.querySelectorAll('.gv-chip').forEach(function(c){var on=c.dataset.v===sel.float;c.classList.toggle('is-on',on);c.setAttribute('aria-pressed',on)})});
       if(typeof sRow!=='undefined')sRow.hidden=!(sel.facet==='Presentation'&&sel.ground==='Sampled');
       var t=AD.build(sel.facet,sel,sel.length==='Short'?'Short':'GPT Image');
       var one=false;if(one){var PL='Slides: use the attached images, our real slides, as the slide faces, 1 per face, in the order attached, with the first on the front face. Use only as many faces as there are slides. Apply each slide with only a perspective transform, pinned to its face\u2019s 4 corners and kept exactly 16:9. Never redraw, stretch, squeeze or crop a slide, and keep every word, number, chart and photo identical.';var t0=t;t=t.replace(/Every slide face is plain white and evenly lit, ready for real slides to be placed in post\.?/,PL);if(t===t0)t=t+'\n'+PL;t=t.replace(/,? ?blank white slide faces?/gi,' slide faces').replace(/Never include: writing, words, letters, numbers or logos anywhere in the frame\.?/,'Never add writing, words, letters, numbers or logos anywhere outside the attached slides.')}
