@@ -94,7 +94,7 @@
   var STYLING=['tortoiseshell glasses','gold-rimmed glasses','rimless glasses','bold, thick-framed glasses','a simple ring','stacked silver rings','a steel watch','small hoop earrings','a woven bracelet','reading glasses pushed up on the head','a knit beanie'];
   function styl(pool,n){var o=[],c=pickN(pool,pool.length);c.forEach(function(x){if(o.length<n&&!(/glasses/.test(x)&&o.some(function(y){return /glasses/.test(y)}))&&!(/watch/.test(x)&&o.some(function(y){return /watch/.test(y)})))o.push(x)});return o}
   var HAND_STYLING=['a simple ring','a steel watch','a woven bracelet','a leather-strap watch'];
-  var ASSIST=['a hearing aid','a cane resting against the table','a wheelchair','a prosthetic hand'];
+  var ASSIST=['a hearing aid','a simple wooden walking cane with a clean, curved crook handle, hooked over the edge of the table','a wheelchair','a prosthetic hand'];
   function beanieOK(sel){return !sel._pr&&!/C-suite|Team leader/.test(sel.role||'')&&(/^Home/.test(sel.setting||'')||/20s|30s/.test(sel.age||''))}
   function ageOf(sel){var r=AGE_RANGE[sel.age]||[31,39];return keep('ageN',function(){return r[0]+Math.floor(Math.random()*(r[1]-r[0]+1))})}
   function who(sel){var age=ageOf(sel),h=HERITAGE[sel.race]||sel.race,p=PERSON[sel.gender]||'person',b=(AD.BUILDS&&AD.BUILDS[sel.build])||'an average build',r=ROLE[sel.role]||'in marketing';if(r==='C')r='who is the company\u2019s '+v('chief',keep('chief',function(){return one(CHIEF)}));
@@ -121,7 +121,7 @@
     ['muted brand magenta, dusty and deep','#9C3E68','r',['fine merino crewneck','washed-silk shirt','wool-blend overshirt']],
     ['soft greyed magenta-pink','#C890AA','r',['knit cardigan','poplin shirt','fine-gauge knit polo']]
   ];
-  function wardrobeLine(sel,sleeve){var r=keep('ramp',function(){return one(RAMPS)}),g=keep('garment',function(){return one(r[3])});if(r[3].indexOf(g)<0){g=one(r[3]);R.garment=g}var pr=keep('pair',function(){return pickN(PAIRS[r[2]],2)});if(pr.some(function(x){return PAIRS[r[2]].indexOf(x)<0})){pr=pickN(PAIRS[r[2]],2);R.pair=pr}
+  function wardrobeLine(sel,sleeve){var r=keep('ramp',function(){return one(RAMPS)}),gs=r[3];if(r[2]==='r'&&sel.gender==='Male'){var nj=gs.filter(function(x){return !/blazer|jacket|overshirt/.test(x)});if(nj.length)gs=nj}var g=keep('garment',function(){return one(gs)});if(gs.indexOf(g)<0){g=one(gs);R.garment=g}var pr=keep('pair',function(){return pickN(PAIRS[r[2]],2)});if(pr.some(function(x){return PAIRS[r[2]].indexOf(x)<0})){pr=pickN(PAIRS[r[2]],2);R.pair=pr}
     var what=sleeve?'the sleeve of a '+g:'a '+g;
     return 'Wardrobe: '+v('garment',what)+' in '+v('ramp',r[0]+' ('+r[1]+')')+', the same hue as our brand color, worn the way real clothes are: sophisticated but lived in, its material shown with true fidelity (the knit of merino, the nap of suede, the weave of wool, the soft sheen of silk); the color belongs in this room and in a workplace, never vivid, uniform or costume-like; it stands out from the light rather than matching it; the rest of the outfit in '+v('pair',pr.join(' and '))+', colors that pair well with it, never another bright color; '+v('sil',silFor(sel))+'; contemporary workwear that fits who they are, never sloppy, athletic or logoed'}
   /* silhouettes span the workplace: tailored to oversized; oversized is for the fashion-forward, mostly 20s and 30s */
@@ -131,7 +131,7 @@
   var TYPE_LINE={Sun:'hard-edged patches of sun across the table, floor and hands',Soft:'soft, even window light with one warm patch of sun near the hands; a little warm bounce lifts the face',Backlit:'a window glows behind them and rims their hair and shoulders without blowing out; a little warm bounce lifts the face'};
   function lightType(sel,row){var want=sel.light&&sel.light!=='Mixed'?sel.light:null;if(want)return want;return keep('ltype',function(){return one(row.types)})}
   function lightLine(sel,row,opt){opt=opt||{};var t=lightType(sel,row),face=opt.hands?'the hands are the brightest skin in the frame':'the face is the brightest skin in the frame';
-    var s='Light: '+v('time',row.light)+' lands on the person and on what they’re working on ('+(opt.what||'hands, laptop, the person they’re talking to')+'); '+face+'; the room falls a stop darker around them, never gloomy; warm where the sun or a lamp lands, neutral everywhere else, never an orange or golden cast; '+v('ltype',opt.hands&&t==='Backlit'?'a window glows behind and rims the hands and the edge of the laptop without blowing out':TYPE_LINE[t]);
+    var s='Light: '+v('time',row.light)+' lands on the person and on what they’re working on ('+(opt.what||'hands, laptop, the person they’re talking to')+'); '+face+'; the room falls a stop darker around them, never gloomy; warm where the sun or a lamp lands, neutral everywhere else, never an orange or golden cast; '+v('ltype',row.dim&&t==='Sun'?'warm pools of lamplight across the table and hands, the windows cool':opt.hands&&t==='Backlit'?'a window glows behind and rims the hands and the edge of the laptop without blowing out':TYPE_LINE[t]);
     if(row.dim)s+='; the screen adds only a faint, neutral fill on the hands or chin, never tinted, never the main light on the face';
     return s+'; never the sun disc in frame, haze beams or a spotlight on a black background'}
 
@@ -241,7 +241,7 @@
     var vw=keep('vcw',function(){return Math.random()<0.5?one(VCW):''}),win=vw||f.win;
     var gp=VCP[VCG.indexOf(g)],vopt=gp[2]==='t'?['before','peak','peak','after']:['before','after'],vph=keep('vcph',function(){return one(vopt)});if(vopt.indexOf(vph)<0){vph=one(vopt);R.vcph=vph}var VT=PHASE[vph];
     L.push('Moment: '+VT.lead+v(vw?'vcw':'win',win)+VT.tail+'; '+v('vcg',g)+';'+STOCK+', no both hands raised toward the camera');
-    L.push('Gaze: '+gp[1]+', as if into the faces on the call; never posed');
+    L.push('Gaze: '+gp[1]+', as if into the faces on the call'+(gp[2]==='l'?'; warm and open, a hint of a smile, clearly on their side; never skeptical, bored, stern or impatient':'')+'; never posed');
     L.push(lightLine(sel,row,{what:'face and hands'}));
     L.push('Frame: '+v('lens',keep('vcLens',function(){return one(['35mm from the laptop\u2019s webcam, just below eye level','35mm from the laptop\u2019s webcam, a touch low, looking up a little, giving them quiet stature'])}))+'; the soft top edge of the laptop screen in the lower frame'+copyBit(sel));
     var hp=keep('vcHead',function(){return Math.random()<1/10});
