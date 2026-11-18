@@ -101,6 +101,23 @@ html body .pb-main .bd-bar .bd-dest{align-self:flex-start}
 html body .pb-main .bd-bar .bd-bar-acts{display:flex;flex-wrap:nowrap;gap:var(--space-2,8px);width:100%;margin:0}
 html body .pb-main .bd-bar .bd-bar-acts .bd-btn{flex:0 0 auto}
 html body .pb-main .bd-bar .bd-bar-acts .bd-go{flex:1 1 auto;justify-content:center}
+/* destination toggle: steady layout, linked buttons */
+html body .pb-main .bd-out .bd-meta{flex-direction:column;align-items:flex-start;flex-wrap:nowrap;gap:var(--space-1,4px)}
+html body .pb-main .bd-dest{position:relative;isolation:isolate}
+html body .pb-main .bd-dest::before{content:"";position:absolute;z-index:-1;top:3px;bottom:3px;left:0;width:var(--pill-w,0);transform:translateX(var(--pill-x,0));border-radius:var(--radius-s,6px);background:var(--color-blue,#00B9FF);transition:transform .4s var(--ease-standard),width .4s var(--ease-standard)}
+html body .pb-main .bd-dest.pill-ready .bd-dest-b,html body .pb-main .bd-dest.pill-ready .bd-dest-b.is-on{background:transparent!important}
+html body .pb-main .bd-dest-b{transition:color .3s var(--ease-standard)}
+html body .pb-main .bd-bar-acts .bd-btn:not(.bd-go){display:inline-flex!important;overflow:hidden;white-space:nowrap;max-width:140px;transition:max-width .4s var(--ease-standard),opacity .3s var(--ease-standard),padding .4s var(--ease-standard),margin .4s var(--ease-standard),border-width .4s var(--ease-standard)}
+html body .pb-main .bd-bar-acts .bd-btn[hidden]:not(.bd-go){max-width:0;opacity:0;padding-left:0;padding-right:0;border-width:0;margin-right:calc(-1 * var(--space-2,8px));pointer-events:none}
+html body .pb-main .bd-bar .bd-dest{align-self:stretch;display:grid;grid-template-columns:1fr 1fr}
+html body .pb-main .bd-bar .bd-dest-b{text-align:center}
+html body .pb-main .bd .bd-dest .bd-dest-b.is-on,html body .pb-main .bd .bd-out .bd-dest .bd-dest-b.is-on{color:var(--color-neutral-darkest)!important;font-weight:500}
+html body .pb-main .bd-go{overflow:hidden}
+html body .pb-main .bd-go.swap-r{animation:goR .45s var(--ease-standard)}
+html body .pb-main .bd-go.swap-l{animation:goL .45s var(--ease-standard)}
+@keyframes goR{0%{padding-left:0;padding-right:72px;color:transparent}100%{padding-left:18px;padding-right:18px}}
+@keyframes goL{0%{padding-left:72px;padding-right:0;color:transparent}100%{padding-left:18px;padding-right:18px}}
+@media (prefers-reduced-motion:reduce){html body .pb-main .bd-dest::before,html body .pb-main .bd-bar-acts .bd-btn{transition:none}html body .pb-main .bd-go.swap-r,html body .pb-main .bd-go.swap-l{animation:none}}
 </style>
 </head>
 <body class="subpage pb-app">
@@ -220,6 +237,14 @@ d.addEventListener("keydown",function(e){if(e.key==="ArrowRight"&&i<3)set(i+1);i
 if(how)how.addEventListener("click",open);
 var seen=false;try{seen=localStorage.getItem(KEY)==="1"}catch(e){}
 if(!seen)setTimeout(open,400)})();</script>
+<script>(function(){
+var dir=1;
+function pill(seg){var on=seg.querySelector('.bd-dest-b.is-on');if(!on||!seg.offsetWidth)return;seg.style.setProperty('--pill-x',on.offsetLeft+'px');seg.style.setProperty('--pill-w',on.offsetWidth+'px');if(!seg.classList.contains('pill-ready'))seg.classList.add('pill-ready')}
+function wire(seg){if(seg._w)return;seg._w=1;pill(seg);seg.addEventListener('click',function(e){var b=e.target.closest('.bd-dest-b');if(!b)return;var bs=[].slice.call(seg.querySelectorAll('.bd-dest-b'));var cur=seg.querySelector('.bd-dest-b.is-on');dir=bs.indexOf(b)>=bs.indexOf(cur)?1:-1},true);
+  new MutationObserver(function(ms){if(ms.some(function(m){return m.target!==seg}))pill(seg)}).observe(seg,{subtree:true,attributes:true,attributeFilter:['class']})}
+function wireGo(go){if(go._w)return;go._w=1;var last=go.textContent;new MutationObserver(function(){var t=go.textContent;if(/Copied|Opening/.test(t)||t===last)return;last=t;go.classList.remove('swap-l','swap-r');void go.offsetWidth;go.classList.add(dir>0?'swap-r':'swap-l')}).observe(go,{childList:true,subtree:true,characterData:true})}
+function scan(){document.querySelectorAll('.pb-main .bd-dest').forEach(function(s){wire(s);pill(s)});document.querySelectorAll('.pb-main .bd-go').forEach(wireGo)}
+var m=document.querySelector('.pb-main');if(!m)return;var q=0;new MutationObserver(function(){if(q)return;q=requestAnimationFrame(function(){q=0;scan()})}).observe(m,{childList:true,subtree:true});addEventListener('resize',scan);if(document.fonts)document.fonts.ready.then(scan);scan();setTimeout(scan,400)})();</script>
 <script>window.COPY_EDITS = /*EDITMODE-BEGIN*/{
   "A|0|Imagery rulesopen_in_new": "Back to Imagery\u003cspan class=\"material-symbols-outlined\" aria-hidden=\"true\">open_in_new\u003c\/span>",
   "P|0|Make on-brand images of professionals and their ideas in a few picks. The builder writes every prompt to our imagery rules, so each image shows the professional and the idea in their best light.": "Start with on-brand images of professionals, their presentations, and our product in action."
