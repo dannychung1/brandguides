@@ -72,28 +72,28 @@ html body .pb-main .bd-head::after{content:none!important;display:none!important
 @media (prefers-reduced-motion:reduce){.pb-ob[open]{animation:none}.pb-ob .ob-bar i::after,.pb-ob .ob-media video{transition:none}}
 /* fit: one-window builder (2026-11-18) */
 @media(min-width:901px){
-.pb-hero{padding-top:32px;padding-bottom:32px;row-gap:0;align-items:end}
+.pb-hero{padding-top:var(--padding-section-small,48px);padding-bottom:var(--padding-section-small,48px);row-gap:0;align-items:end}
 .pb-hero>div:first-child{grid-row:1;grid-column:1/-1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut,32px);align-items:end}
 .pb-hero>div:first-child h1{grid-column:1/span 7}
-.pb-hero>div:first-child .lede{grid-column:8/-1;margin:0 0 34px;font-size:var(--text-body-l,1.125rem)}
+.pb-hero>div:first-child .lede{grid-column:8/-1;margin:0 0 calc(24px + var(--space-4,16px));font-size:var(--text-body-l,1.125rem)}
 .pb-hero .pb-how{grid-row:1;grid-column:8/-1;justify-self:start;align-self:end;margin:0}
-html body .pb-main .bd{padding:32px!important}
+html body .pb-main .bd{padding:var(--content-padding-medium,32px)!important}
 html body .pb-main .bd-head:has(.bd-actions:empty){display:none!important}
-html body .pb-main .bd-body{gap:40px}
-html body .pb-main .bd-form{padding:32px!important;row-gap:14px;column-gap:16px;grid-template-columns:repeat(12,minmax(0,1fr))!important;position:relative}
+html body .pb-main .bd-body{gap:var(--space-12,48px)}
+html body .pb-main .bd-form{padding:var(--content-padding-medium,32px)!important;row-gap:var(--space-3,12px);column-gap:var(--space-4,16px);grid-template-columns:repeat(12,minmax(0,1fr))!important;position:relative}
 html body .pb-main .bd-form>*{grid-column:1/-1}
 html body .pb-main .bd-form>.bd-row-dd{grid-column:span 4}
+html body .pb-main .bd-body{grid-template-columns:minmax(0,2fr) minmax(0,1fr)!important}
 html body .pb-main .bd-form>.bd-row-dd:has(.gv-chips){grid-column:span 3}
 html body .pb-main .bd-form>.bd-row-dd:has(.gv-chip:nth-child(3)){grid-column:span 4}
 html body .pb-main .bd-form>.bd-row-dd:has(.gv-chip:nth-child(4)){grid-column:span 6}
-html body .pb-main .bd-form>.bd-row-dd:not(.bd-row-chip):has(.gv-chip:nth-child(4)){grid-column:span 8}
-html body .pb-main .bd-form>.bd-row-dd:not(.bd-row-chip):has(.gv-chip:nth-child(4))+.bd-row-chip{grid-column:span 4}
-html body .pb-main .bd-form>.bd-remix-row{position:absolute;top:32px;right:32px;margin:0;z-index:2}
+html body .pb-main .bd-form>.bd-row-dd:not(.bd-row-chip):has(.gv-chip:nth-child(4)){grid-column:span 9}
+html body .pb-main .bd-form .gv-chips{flex-wrap:nowrap}
+html body .pb-main .bd-form>.bd-remix-row{position:absolute;top:var(--content-padding-medium,32px);right:var(--content-padding-medium,32px);margin:0;z-index:2}
 html body .pb-main .bd-frame{padding:6px 4px 8px}
 html body .pb-main .bd-frame .bd-frame-i{font-size:28px;margin-bottom:2px}
-html body .pb-main .bd-out{gap:14px}
+html body .pb-main .bd-out{gap:var(--space-4,16px)}
 html body .pb-main .bd-out .copy-block pre{height:150px}
-.pb-check{margin:4px 0}.pb-check h5{margin:12px 0 4px}.pb-check li,.pb-check p{font-size:14px;line-height:1.45;margin-bottom:2px}.pb-check p{margin-top:12px}
 }
 </style>
 </head>
@@ -115,7 +115,7 @@ html body .pb-main .bd-out .copy-block pre{height:150px}
         <div class="bd-out">
           <div class="bd-step bd-step1" hidden><span class="eyebrow">Step 1: make the scene</span><p class="bd-step-tx"></p></div>
           <div class="copy-block" data-nocopy><pre></pre></div>
-          <div class="pb-check"><span class="eyebrow">Step 3: check and upscale</span><h5>Check at 200%</h5><ul><li>Hands and fingers: count them, check how they grip</li><li>Fabric: folds that look generic, or creases from packaging</li><li>Keys and small parts: keyboards, watch faces, cables</li><li>Edges and shadows: anything floating, melting or undefined</li><li>Skin: texture that looks laid on, or too smooth</li></ul><h5>Fix</h5><ul><li>1 or 2 small areas: fix each one with a generative edit.</li><li>More than 2: generate again. The best of 3 tries is normal.</li></ul><p><b>Upscale</b> before step 4, so your real slides stay sharp.</p><p><b>Keep</b> soft bloom around lamps and windows, and very slight color fringing at the edges. They’re part of the look.</p></div>
+          
           <div class="bd-real"><div class="bd-step"><span class="eyebrow">Step 4: place your screens</span><p class="bd-step-tx">Attach the image from step 3 first, then each real file as its own image, and run this prompt. It works in photos and in open space. To place slides and product in 1 scene, run the product prompt first, then the slides prompt on its result.</p></div><div class="rp-row" data-for="Professional"><div class="rp-prompt"><span class="eyebrow">Place floating slides</span><div class="copy-block" data-copy-label="Copy prompt"><pre>Edit the first image. Place the other images, our slides or product screenshots, as thin, flat, rigid panels floating in the open space around the professional, 1 per image, in order, the first nearest the camera and largest. Use 3 to 6 panels at varied depths. The nearest panel may run off the frame edge. Change nothing else.
 Perspective: build every panel inside the photo's own perspective. Find the photo's horizon and vanishing points from the room's lines, such as window frames, walls, shelves and the desk edge, and set each panel in that space so its top and bottom edges run toward the same vanishing points as the room and its sides stay parallel to the room's verticals. A farther panel is smaller and sits closer to the horizon. A panel turned from the camera shortens only as much as that perspective demands. The perspective must be absolutely believable, as if the panels were photographed in the room.
 Never cover the professional's face or hands. Only the nearest, lowest panel may overlap the edge of the laptop.
@@ -132,7 +132,7 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
       </div>
     </div>
 </main>
-<p class="pb-foot">Every prompt follows the rules in <a href="05-art-direction.html" target="_blank" rel="noopener">Imagery</a>. Check each image against How we look before you use it.</p>
+
 <script src="ad-data.js?v=269"></script>
 <script src="ad-v3.js?v=20"></script>
 <script src="ad-gallery.js?v=235"></script>
