@@ -25,7 +25,7 @@ body.pb-app{margin:0;background:var(--scheme5-bg,var(--color-neutral-lightest,#F
 .pb-hero{max-width:var(--content-max);margin:0 auto;padding:clamp(48px,8vh,96px) var(--gutter,4vw) 48px;box-sizing:border-box;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut,32px);row-gap:48px}
 .pb-hero h1{grid-column:1/span 7;margin:0;font-size:var(--text-h1-size);line-height:1;letter-spacing:-.04em;font-weight:500;color:var(--color-neutral-darkest,#001A24)}
 .pb-hero .lede{grid-column:1/span 6;margin:24px 0 0;font-size:var(--text-body-xl,1.25rem);line-height:1.5;color:var(--color-neutral-dark,#4C5255)}
-.pb-steps{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gut,32px);margin:0;padding:0;list-style:none;counter-reset:s}
+.pb-steps{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gut,32px);margin:0;padding:0;list-style:none;counter-reset:s}
 .pb-steps li{counter-increment:s;background:#fff;border-radius:var(--radius-l,12px);box-shadow:var(--shadow-xxsmall);padding:24px;display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:10px;row-gap:10px;align-content:start;align-items:center}
 .pb-steps li::before{content:counter(s);grid-column:1;grid-row:1;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#001A24;color:#fff;font-size:12px;font-weight:500;line-height:1}
 .pb-steps b{grid-column:2;grid-row:1;display:block;margin:0;font-size:18px;font-weight:500;line-height:1.2;color:var(--color-neutral-darkest,#001A24)}
@@ -43,6 +43,10 @@ html body .pb-main .bd-head::after{content:none!important;display:none!important
 .pb-glow .g2{right:-12vw;width:74vw;transform-origin:66% 100%;background:radial-gradient(ellipse 50% 84% at 66% 100%,rgba(219,36,117,.32) 0%,rgba(219,36,117,.19) 38%,rgba(219,36,117,.08) 66%,transparent 84%)}
 .pb-glow::after{content:"";position:absolute;inset:0;background:url(grain.png) repeat;background-size:160px 160px;opacity:.035;mix-blend-mode:multiply}
 .pb-hero,.pb-main,.pb-foot{position:relative;z-index:1}
+@media(max-width:1180px) and (min-width:901px){.pb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.pb-check{margin:24px 0}.pb-check .eyebrow{display:block;margin-bottom:12px}
+.pb-check h5{margin:16px 0 6px;font-size:15px;font-weight:500;line-height:1.3;color:#fff}
+.pb-check ul{margin:0;padding:0 0 0 18px}.pb-check li,.pb-check p{margin:0 0 4px;font-size:15px;line-height:1.5;color:color-mix(in oklch,#fff 72%,transparent)}.pb-check p{margin-top:16px}.pb-check p b{color:#fff;font-weight:500}
 </style>
 </head>
 <body class="subpage pb-app">
@@ -51,9 +55,10 @@ html body .pb-main .bd-head::after{content:none!important;display:none!important
 <section class="pb-hero">
   <div style="grid-column:1/-1"><h1>Image prompt builder</h1><p class="lede">Make on-brand images of professionals and their ideas in a few picks. The builder writes every prompt to our imagery rules, so each image shows the professional and the idea in their best light.</p></div>
   <ol class="pb-steps">
-    <li><b>Pick the details</b><span>Choose the hero, the setting, the framing and the light, or let Surprise me pick for you.</span></li>
-    <li><b>Make the scene</b><span>Copy the prompt into ChatGPT or Figma and generate the image.</span></li>
-    <li><b>Place your real work</b><span>Run the second prompt to place real slides and product screens into the image.</span></li>
+    <li><b>Choose your hero</b><span>A pro, our product or our slides. Or let Surprise me pick for you.</span></li>
+    <li><b>Choose the scene</b><span>Set the person, place, framing and light, then copy the prompt into ChatGPT or Figma.</span></li>
+    <li><b>Check and upscale</b><span>Look at the image at 200%, fix any small tells, then upscale it.</span></li>
+    <li><b>Place your screens</b><span>If the scene has a blank screen or slide, run the second prompt to place your real work.</span></li>
   </ol>
 </section>
 <main class="pb-main" id="photography">
@@ -67,7 +72,8 @@ html body .pb-main .bd-head::after{content:none!important;display:none!important
         <div class="bd-out">
           <div class="bd-step bd-step1" hidden><span class="eyebrow">Step 1: make the scene</span><p class="bd-step-tx"></p></div>
           <div class="copy-block" data-nocopy><pre></pre></div>
-          <div class="bd-real"><div class="bd-step"><span class="eyebrow">Step 2: place your real work</span><p class="bd-step-tx">Attach the image from step 1 first, then each real file as its own image, and run this prompt. It works in photos and in open space. To place slides and product in 1 scene, run the product prompt first, then the slides prompt on its result.</p></div><div class="rp-row" data-for="Professional"><div class="rp-prompt"><span class="eyebrow">Place floating slides</span><div class="copy-block" data-copy-label="Copy prompt"><pre>Edit the first image. Place the other images, our slides or product screenshots, as thin, flat, rigid panels floating in the open space around the professional, 1 per image, in order, the first nearest the camera and largest. Use 3 to 6 panels at varied depths. The nearest panel may run off the frame edge. Change nothing else.
+          <div class="pb-check"><span class="eyebrow">Step 3: check and upscale</span><h5>Check at 200%</h5><ul><li>Hands and fingers: count them, check how they grip</li><li>Fabric: folds that look generic, or creases from packaging</li><li>Keys and small parts: keyboards, watch faces, cables</li><li>Edges and shadows: anything floating, melting or undefined</li><li>Skin: texture that looks laid on, or too smooth</li></ul><h5>Fix</h5><ul><li>1 or 2 small areas: fix each one with a generative edit.</li><li>More than 2: generate again. The best of 3 tries is normal.</li></ul><p><b>Upscale</b> before step 4, so your real slides stay sharp.</p><p><b>Keep</b> soft bloom around lamps and windows, and very slight color fringing at the edges. They’re part of the look.</p></div>
+          <div class="bd-real"><div class="bd-step"><span class="eyebrow">Step 4: place your screens</span><p class="bd-step-tx">Attach the image from step 3 first, then each real file as its own image, and run this prompt. It works in photos and in open space. To place slides and product in 1 scene, run the product prompt first, then the slides prompt on its result.</p></div><div class="rp-row" data-for="Professional"><div class="rp-prompt"><span class="eyebrow">Place floating slides</span><div class="copy-block" data-copy-label="Copy prompt"><pre>Edit the first image. Place the other images, our slides or product screenshots, as thin, flat, rigid panels floating in the open space around the professional, 1 per image, in order, the first nearest the camera and largest. Use 3 to 6 panels at varied depths. The nearest panel may run off the frame edge. Change nothing else.
 Perspective: build every panel inside the photo's own perspective. Find the photo's horizon and vanishing points from the room's lines, such as window frames, walls, shelves and the desk edge, and set each panel in that space so its top and bottom edges run toward the same vanishing points as the room and its sides stay parallel to the room's verticals. A farther panel is smaller and sits closer to the horizon. A panel turned from the camera shortens only as much as that perspective demands. The perspective must be absolutely believable, as if the panels were photographed in the room.
 Never cover the professional's face or hands. Only the nearest, lowest panel may overlap the edge of the laptop.
 Apply each image with only a perspective transform, pinned to its panel's 4 corners. Keep each image at its own ratio. Never redraw, stretch, squeeze or crop it.
@@ -86,7 +92,7 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
 <p class="pb-foot">Every prompt follows the rules in <a href="05-art-direction.html" target="_blank" rel="noopener">Imagery</a>. Check each image against How we look before you use it.</p>
 <script src="ad-data.js?v=269"></script>
 <script src="ad-v3.js?v=20"></script>
-<script src="ad-gallery.js?v=234"></script>
+<script src="ad-gallery.js?v=235"></script>
 <script src="copy-block.js?v=131"></script>
 <script src="site-reveal.js?v=1"></script>
 <script>
