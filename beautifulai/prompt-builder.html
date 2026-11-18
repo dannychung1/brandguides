@@ -70,6 +70,31 @@ html body .pb-main .bd-head::after{content:none!important;display:none!important
 .pb-ob .ob-x{position:absolute;top:14px;right:14px;z-index:2;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}.pb-ob .ob-x:hover{background:rgba(255,255,255,.26)}
 @media(max-width:600px){.pb-ob .ob-body{padding:20px 20px 22px}.pb-ob h2{font-size:22px}.pb-ob .ob-tx{font-size:15px}}
 @media (prefers-reduced-motion:reduce){.pb-ob[open]{animation:none}.pb-ob .ob-bar i::after,.pb-ob .ob-media video{transition:none}}
+/* fit: one-window builder (2026-11-18) */
+@media(min-width:901px){
+.pb-hero{padding-top:32px;padding-bottom:32px;row-gap:0;align-items:end}
+.pb-hero>div:first-child{grid-row:1;grid-column:1/-1;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut,32px);align-items:end}
+.pb-hero>div:first-child h1{grid-column:1/span 7}
+.pb-hero>div:first-child .lede{grid-column:8/-1;margin:0 0 34px;font-size:var(--text-body-l,1.125rem)}
+.pb-hero .pb-how{grid-row:1;grid-column:8/-1;justify-self:start;align-self:end;margin:0}
+html body .pb-main .bd{padding:32px!important}
+html body .pb-main .bd-head:has(.bd-actions:empty){display:none!important}
+html body .pb-main .bd-body{gap:40px}
+html body .pb-main .bd-form{padding:32px!important;row-gap:14px;column-gap:16px;grid-template-columns:repeat(12,minmax(0,1fr))!important;position:relative}
+html body .pb-main .bd-form>*{grid-column:1/-1}
+html body .pb-main .bd-form>.bd-row-dd{grid-column:span 4}
+html body .pb-main .bd-form>.bd-row-dd:has(.gv-chips){grid-column:span 3}
+html body .pb-main .bd-form>.bd-row-dd:has(.gv-chip:nth-child(3)){grid-column:span 4}
+html body .pb-main .bd-form>.bd-row-dd:has(.gv-chip:nth-child(4)){grid-column:span 6}
+html body .pb-main .bd-form>.bd-row-dd:not(.bd-row-chip):has(.gv-chip:nth-child(4)){grid-column:span 8}
+html body .pb-main .bd-form>.bd-row-dd:not(.bd-row-chip):has(.gv-chip:nth-child(4))+.bd-row-chip{grid-column:span 4}
+html body .pb-main .bd-form>.bd-remix-row{position:absolute;top:32px;right:32px;margin:0;z-index:2}
+html body .pb-main .bd-frame{padding:6px 4px 8px}
+html body .pb-main .bd-frame .bd-frame-i{font-size:28px;margin-bottom:2px}
+html body .pb-main .bd-out{gap:14px}
+html body .pb-main .bd-out .copy-block pre{height:150px}
+.pb-check{margin:4px 0}.pb-check h5{margin:12px 0 4px}.pb-check li,.pb-check p{font-size:14px;line-height:1.45;margin-bottom:2px}.pb-check p{margin-top:12px}
+}
 </style>
 </head>
 <body class="subpage pb-app">
@@ -191,7 +216,7 @@ var seen=false;try{seen=localStorage.getItem(KEY)==="1"}catch(e){}
 if(!seen)setTimeout(open,400)})();</script>
 <script>window.COPY_EDITS = /*EDITMODE-BEGIN*/{
   "A|0|Imagery rulesopen_in_new": "Back to Imagery\u003cspan class=\"material-symbols-outlined\" aria-hidden=\"true\">open_in_new\u003c\/span>",
-  "P|0|Make on-brand images of professionals and their ideas in a few picks. The builder writes every prompt to our imagery rules, so each image shows the professional and the idea in their best light.": "Start with on-brand images."
+  "P|0|Make on-brand images of professionals and their ideas in a few picks. The builder writes every prompt to our imagery rules, so each image shows the professional and the idea in their best light.": "Start with on-brand images of professionals, their presentations, and our product in action."
 }/*EDITMODE-END*/;</script>
 <script src="copy-edit.js?v=2" defer></script>
 </body>
