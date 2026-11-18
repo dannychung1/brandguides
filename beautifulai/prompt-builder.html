@@ -95,6 +95,12 @@ html body .pb-main .bd-frame .bd-frame-i{font-size:28px;margin-bottom:2px}
 html body .pb-main .bd-out{gap:var(--space-4,16px)}
 html body .pb-main .bd-out .copy-block pre{height:150px}
 }
+/* action bar: a clean stack, never a Z wrap */
+html body .pb-main .bd-bar{display:flex;flex-direction:column;align-items:stretch;flex-wrap:nowrap;gap:var(--space-3,12px)}
+html body .pb-main .bd-bar .bd-dest{align-self:flex-start}
+html body .pb-main .bd-bar .bd-bar-acts{display:flex;flex-wrap:nowrap;gap:var(--space-2,8px);width:100%;margin:0}
+html body .pb-main .bd-bar .bd-bar-acts .bd-btn{flex:0 0 auto}
+html body .pb-main .bd-bar .bd-bar-acts .bd-go{flex:1 1 auto;justify-content:center}
 </style>
 </head>
 <body class="subpage pb-app">
