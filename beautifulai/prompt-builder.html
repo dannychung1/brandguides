@@ -25,11 +25,6 @@ body.pb-app{margin:0;background:var(--scheme5-bg,var(--color-neutral-lightest,#F
 .pb-hero{max-width:var(--content-max);margin:0 auto;padding:clamp(48px,8vh,96px) var(--gutter,4vw) 48px;box-sizing:border-box;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut,32px);row-gap:48px}
 .pb-hero h1{grid-column:1/span 7;margin:0;font-size:var(--text-h1-size);line-height:1;letter-spacing:-.04em;font-weight:500;color:var(--color-neutral-darkest,#001A24)}
 .pb-hero .lede{grid-column:1/span 6;margin:24px 0 0;font-size:var(--text-body-xl,1.25rem);line-height:1.5;color:var(--color-neutral-dark,#4C5255)}
-.pb-steps{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gut,32px);margin:0;padding:0;list-style:none;counter-reset:s}
-.pb-steps li{counter-increment:s;background:#fff;border-radius:var(--radius-l,12px);box-shadow:var(--shadow-xxsmall);padding:24px;display:grid;grid-template-columns:24px minmax(0,1fr);column-gap:10px;row-gap:10px;align-content:start;align-items:center}
-.pb-steps li::before{content:counter(s);grid-column:1;grid-row:1;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#001A24;color:#fff;font-size:12px;font-weight:500;line-height:1}
-.pb-steps b{grid-column:2;grid-row:1;display:block;margin:0;font-size:18px;font-weight:500;line-height:1.2;color:var(--color-neutral-darkest,#001A24)}
-.pb-steps span{grid-column:1/-1;grid-row:2;display:block;margin:0;font-size:15px;line-height:1.5;color:var(--color-neutral-dark,#4C5255)}
 .pb-main{max-width:var(--content-max);margin:0 auto;padding:0 var(--gutter,4vw) clamp(48px,8vh,96px);box-sizing:border-box}
 .pb-main .bd{margin-top:0}.pb-main .bd-title{display:none}.pb-main .bd-head{justify-content:flex-end}
 .pb-foot{max-width:var(--content-max);margin:0 auto;padding:0 var(--gutter,4vw) 48px;box-sizing:border-box;font-size:var(--text-body-s,.875rem);color:var(--color-neutral-dark,#4C5255)}
@@ -43,10 +38,38 @@ html body .pb-main .bd-head::after{content:none!important;display:none!important
 .pb-glow .g2{right:-12vw;width:74vw;transform-origin:66% 100%;background:radial-gradient(ellipse 50% 84% at 66% 100%,rgba(219,36,117,.32) 0%,rgba(219,36,117,.19) 38%,rgba(219,36,117,.08) 66%,transparent 84%)}
 .pb-glow::after{content:"";position:absolute;inset:0;background:url(grain.png) repeat;background-size:160px 160px;opacity:.035;mix-blend-mode:multiply}
 .pb-hero,.pb-main,.pb-foot{position:relative;z-index:1}
-@media(max-width:1180px) and (min-width:901px){.pb-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .pb-check{margin:24px 0}.pb-check .eyebrow{display:block;margin-bottom:12px}
 .pb-check h5{margin:16px 0 6px;font-size:15px;font-weight:500;line-height:1.3;color:#fff}
 .pb-check ul{margin:0;padding:0 0 0 18px}.pb-check li,.pb-check p{margin:0 0 4px;font-size:15px;line-height:1.5;color:color-mix(in oklch,#fff 72%,transparent)}.pb-check p{margin-top:16px}.pb-check p b{color:#fff;font-weight:500}
+.pb-how{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:8px;margin:0;padding:0;border:0;background:none;font:inherit;font-size:var(--text-body-m,1rem);font-weight:500;color:var(--color-link,#007EAD);cursor:pointer}
+.pb-how:hover{text-decoration:underline}.pb-how .material-symbols-outlined{font-size:22px}
+.pb-ob{width:min(720px,calc(100vw - 32px));max-height:calc(100vh - 32px);padding:0;border:0;border-radius:20px;background:#fff;color:#001A24;box-shadow:0 32px 80px rgba(0,26,36,.35);overflow:auto}
+.pb-ob::backdrop{background:rgba(0,26,36,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pb-ob[open]{animation:obIn .5s cubic-bezier(.7,0,.3,1)}
+@keyframes obIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.pb-ob .ob-media{position:relative;aspect-ratio:16/9;background:#001A24;overflow:hidden}
+.pb-ob .ob-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s cubic-bezier(.7,0,.3,1)}
+.pb-ob .ob-media video.on{opacity:1}
+.pb-ob .ob-body{padding:24px 32px 28px}
+.pb-ob .ob-prog{display:flex;align-items:center;gap:12px;margin:0 0 18px}
+.pb-ob .ob-bar{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.pb-ob .ob-bar i{height:4px;border-radius:2px;background:#E3E6E8;overflow:hidden;position:relative}
+.pb-ob .ob-bar i::after{content:"";position:absolute;inset:0;background:#00B9FF;transform:scaleX(0);transform-origin:0 50%;transition:transform .5s cubic-bezier(.7,0,.3,1)}
+.pb-ob .ob-bar i.done::after{transform:scaleX(1)}
+.pb-ob .ob-count{font-size:13px;letter-spacing:.06em;color:#4C5255;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pb-ob h2{margin:0 0 8px;font-size:28px;line-height:1.15;font-weight:500;color:#001A24}
+.pb-ob .ob-tx{margin:0;font-size:17px;line-height:1.5;color:#4C5255;min-height:51px}
+.pb-ob .ob-act{display:flex;align-items:center;gap:12px;margin-top:24px}
+.pb-ob .ob-act .sp{flex:1}
+.pb-ob button{font:inherit}
+.pb-ob .ob-skip{border:0;background:none;padding:0;font-size:15px;color:#4C5255;cursor:pointer}.pb-ob .ob-skip:hover{color:#001A24;text-decoration:underline}
+.pb-ob .ob-back,.pb-ob .ob-next{height:48px;padding:0 22px;border-radius:6px;font-size:16px;font-weight:500;cursor:pointer}
+.pb-ob .ob-back{border:1.5px solid #001A24;background:#fff;color:#001A24}
+.pb-ob .ob-next{border:0;background:#001A24;color:#fff}.pb-ob .ob-next.go{background:#00B9FF;color:#001A24}
+.pb-ob .ob-back[hidden]{display:none}
+.pb-ob .ob-x{position:absolute;top:14px;right:14px;z-index:2;width:36px;height:36px;display:grid;place-items:center;border:0;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}.pb-ob .ob-x:hover{background:rgba(255,255,255,.26)}
+@media(max-width:600px){.pb-ob .ob-body{padding:20px 20px 22px}.pb-ob h2{font-size:22px}.pb-ob .ob-tx{font-size:15px}}
+@media (prefers-reduced-motion:reduce){.pb-ob[open]{animation:none}.pb-ob .ob-bar i::after,.pb-ob .ob-media video{transition:none}}
 </style>
 </head>
 <body class="subpage pb-app">
@@ -54,12 +77,7 @@ html body .pb-main .bd-head::after{content:none!important;display:none!important
 <header class="pb-bar"><a class="brand" href="index.html"><img src="assets/beautifulai-logo-color.svg?v=ds2" alt="Beautiful.ai"><span>Brand guidelines</span></a><a class="back" href="05-art-direction.html" target="_blank" rel="noopener">Imagery rules<span class="material-symbols-outlined" aria-hidden="true">open_in_new</span></a></header>
 <section class="pb-hero">
   <div style="grid-column:1/-1"><h1>Image prompt builder</h1><p class="lede">Make on-brand images of professionals and their ideas in a few picks. The builder writes every prompt to our imagery rules, so each image shows the professional and the idea in their best light.</p></div>
-  <ol class="pb-steps">
-    <li><b>Choose your hero</b><span>A pro, our product or our slides. Or let Surprise me pick for you.</span></li>
-    <li><b>Choose the scene</b><span>Set the person, place, framing and light, then copy the prompt into ChatGPT or Figma.</span></li>
-    <li><b>Check and upscale</b><span>Look at the image at 200%, fix any small tells, then upscale it.</span></li>
-    <li><b>Place your screens</b><span>If the scene has a blank screen or slide, run the second prompt to place your real work.</span></li>
-  </ol>
+  <button type="button" class="pb-how" id="pbHow"><span class="material-symbols-outlined" aria-hidden="true">play_circle</span>How it works</button>
 </section>
 <main class="pb-main" id="photography">
     
@@ -141,6 +159,36 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
   requestAnimationFrame(f);
 })();
 </script>
+<dialog class="pb-ob" id="pbOb" aria-labelledby="obT">
+  <div class="ob-media">
+    <video data-i="0" src="assets/pb-step-1-hero.mp4" poster="assets/pb-step-1-hero-poster.jpg" muted loop playsinline preload="auto" aria-hidden="true"></video>
+    <video data-i="1" src="assets/pb-step-2-scene.mp4" poster="assets/pb-step-2-scene-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video data-i="2" src="assets/pb-step-3-check.mp4" poster="assets/pb-step-3-check-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <video data-i="3" src="assets/pb-step-4-place.mp4" poster="assets/pb-step-4-place-poster.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
+    <button type="button" class="ob-x" aria-label="Close"><span class="material-symbols-outlined" aria-hidden="true">close</span></button>
+  </div>
+  <div class="ob-body">
+    <div class="ob-prog"><div class="ob-bar" aria-hidden="true"><i></i><i></i><i></i><i></i></div><span class="ob-count" aria-live="polite"></span></div>
+    <h2 id="obT"></h2>
+    <p class="ob-tx"></p>
+    <div class="ob-act"><button type="button" class="ob-skip">Skip</button><span class="sp"></span><button type="button" class="ob-back">Back</button><button type="button" class="ob-next">Next</button></div>
+  </div>
+</dialog>
+<script>(function(){var d=document.getElementById("pbOb"),how=document.getElementById("pbHow");if(!d||!d.showModal)return;
+var STEPS=[["Choose your hero","A pro, our product or our slides."],["Choose the scene","Pick the details, then copy the prompt into ChatGPT or Figma."],["Check and upscale","Look at 200%. Fix small tells, then upscale."],["Place your screens","Attach your slide and run the second prompt."]];
+var V=[].slice.call(d.querySelectorAll("video")),bars=[].slice.call(d.querySelectorAll(".ob-bar i")),cnt=d.querySelector(".ob-count"),T=d.querySelector("h2"),X=d.querySelector(".ob-tx"),back=d.querySelector(".ob-back"),next=d.querySelector(".ob-next"),i=0,rm=matchMedia("(prefers-reduced-motion: reduce)").matches,KEY="bai-pb-onboarded";
+function set(n){i=n;T.textContent=STEPS[i][0];X.textContent=STEPS[i][1];cnt.textContent=(i+1)+" of 4";bars.forEach(function(b,j){b.classList.toggle("done",j<=i)});back.hidden=i===0;var last=i===3;next.textContent=last?"Start building":"Next";next.classList.toggle("go",last);
+V.forEach(function(v,j){var on=j===i;v.classList.toggle("on",on);if(on){if(v.preload==="none")v.preload="auto";v.currentTime=0;if(!rm){var p=v.play();if(p&&p.catch)p.catch(function(){})}}else v.pause();if(j===i+1&&v.preload==="none")v.preload="auto"})}
+function done(){try{localStorage.setItem(KEY,"1")}catch(e){}V.forEach(function(v){v.pause()});d.close()}
+function open(){set(0);d.showModal();next.focus()}
+next.addEventListener("click",function(){i<3?set(i+1):done()});back.addEventListener("click",function(){if(i>0)set(i-1)});
+d.querySelector(".ob-skip").addEventListener("click",done);d.querySelector(".ob-x").addEventListener("click",done);
+d.addEventListener("cancel",function(e){e.preventDefault();done()});
+d.addEventListener("click",function(e){if(e.target===d)done()});
+d.addEventListener("keydown",function(e){if(e.key==="ArrowRight"&&i<3)set(i+1);if(e.key==="ArrowLeft"&&i>0)set(i-1)});
+if(how)how.addEventListener("click",open);
+var seen=false;try{seen=localStorage.getItem(KEY)==="1"}catch(e){}
+if(!seen)setTimeout(open,400)})();</script>
 <script>window.COPY_EDITS = /*EDITMODE-BEGIN*/{
   "A|0|Imagery rulesopen_in_new": "Back to Imagery\u003cspan class=\"material-symbols-outlined\" aria-hidden=\"true\">open_in_new\u003c\/span>",
   "P|0|Make on-brand images of professionals and their ideas in a few picks. The builder writes every prompt to our imagery rules, so each image shows the professional and the idea in their best light.": "Start with on-brand images."
