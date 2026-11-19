@@ -140,8 +140,9 @@
       ['style','Moment',['Candid','Portrait','Detail','Video call'],'Professional'],
       ['shot','Framing',Object.keys(AD.SHOTS),'Professional','frame'],
       ['pshot','Framing',Object.keys(AD.PSHOTS),'Product','frame'],
-      ['prop','Props',['Prop','No prop'],'Professional'],
-      ['light','Light',['Mixed','Sun','Soft','Backlit'],'Professional Product'],
+      ['prop','Props',['Prop','No prop','Laptop to chest','Laptop at side'],'Professional'],
+      ['light','Light',['Mixed','Sun','Soft','Backlit','Low-key'],'Professional Product'],
+      ['wear','Wardrobe',['Brand color','Neutral'],'Professional Product'],
       ['float','Floating slides?',['No','Slides'],'Professional'],
       ['panels','How many?',[1,6],'Professional','range'],
       ['copy','Space for copy?',['None','Yes'],'all']
