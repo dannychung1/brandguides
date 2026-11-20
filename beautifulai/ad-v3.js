@@ -269,16 +269,16 @@
   /* ── brand graphic space (section 8) ── */
   var GFX_LIGHT={Side:'a soft clear azure blue glow (#00B9FF) from the left and a soft rose pink glow (#DB2475) from the right',Halo:'a soft azure and rose glow behind the panel, so it reads as lit from behind',Corner:'a soft azure glow rising from the bottom-left corner and a soft rose glow from the top-right corner, the panel floating in the dark between them'};
   function gfx(sel,kind){
-    var light=keep('gfxL',function(){return one(['Side','Halo','Corner'])}),dark=sel.ground==='Dark';
+    var light=keep('gfxL',function(){return one(['Side','Halo','Corner'])}),dark=sel.ground==='Dark';var samp=sel.ground==='Sampled'&&/^#[0-9A-F]{6}$/i.test(sel.sampleHex||'');
     var subj=kind==='editor'?'one blank editor window (16:10)':keep('gfxN',function(){return one(['one blank slide (16:9)','several blank slides (16:9) on one single flat plane, in a loose grid, receding together in perspective'])});
     return ['Image: a minimal 3D product render, as if made in Cinema 4D with Redshift or Octane, not a photograph: one hero panel on a seamless studio ground, matte surfaces, soft studio lighting, a soft contact shadow, generous empty space; calm and premium, like a high-end, enterprise-grade tech product launch',
       'Subject: '+v('gfxN',subj)+', floating at a gentle angle, with open space around it for interface callouts added later'+copyBit(sel),
       'Panels: thin, softly rounded corners, a slight edge thickness catching the light; completely blank: a flat, even white surface, all 4 corners of the hero panel visible, nothing overlapping it, no interface, icons or text, ready for real '+(kind==='editor'?'UI':'slides')+' in post',
       'Focus: the hero panel is sharp; panels farther along the plane soften with natural depth of field, never motion-smeared',
-      'Ground: '+v('S:ground',dark?'an even deep Base Blue (#002533) space':'an even Gallery Grey (#F0F3F5) space with a soft floor reflection'),
-      'Light: '+v('gfxL',GFX_LIGHT[light])+', kept apart, never blended into a purple or lavender wash; the panel is the brightest thing in the frame, white at its top edge softening to light grey; soft shadow beneath the panels',
+      samp?'Ground: '+v('S:ground','an even '+(sel.sampleTone==='Dark'?'deep, dark ':'light, airy ')+sel.sampleHex+' space, a '+(sel.sampleTone==='Dark'?'shade':'tint')+' of '+(sel.sampleHand?'the color chosen for the slides':'the slides\u2019 own '+sel.sampleBase)+', with a gentle tonal gradient in the same hue and '+(sel.sampleTone==='Dark'?'a faint':'a soft')+' floor reflection; keep '+sel.sampleHex+' exactly, never shifted toward a mid-tone or another hue'):'Ground: '+v('S:ground',dark?'an even deep Base Blue (#002533) space':'an even Gallery Grey (#F0F3F5) space with a soft floor reflection'),
+      samp?'Light: a soft glow in a lighter tone of '+sel.sampleHex+' from one side and a softer one from the other, in the same hue only, never azure, rose or Base Blue; the panel is the brightest thing in the frame and stands out clearly from the ground, white at its top edge softening to light grey; soft shadow beneath the panels':'Light: '+v('gfxL',GFX_LIGHT[light])+', kept apart, never blended into a purple or lavender wash; the panel is the brightest thing in the frame, white at its top edge softening to light grey; soft shadow beneath the panels',
       'Finish: subtle matte surfaces, fine grain; calm, restrained and premium',
-      'Never include: readable text, numbers, logos, purple gradients, glowing orbs, chromatic fringing, motion blur, lens flare, neon, glossy plastic; no paper, printed pages, printed slides, notebooks, sketches or outlines'];
+      'Never include: readable text, numbers, logos, '+(samp?'':'purple gradients, ')+'glowing orbs, chromatic fringing, motion blur, lens flare, neon, glossy plastic; no paper, printed pages, printed slides, notebooks, sketches or outlines'];
   }
 
   /* ── Our product ── */
@@ -367,7 +367,7 @@
   AD.unset=function(k){delete R[k];if(k==='ramp')delete R.garment;if(k==='time'){delete R.place;delete R.pose;delete R.win}if(k==='place')delete R.pose};
   AD.PSHOTS={'Screen close-up':1,'Over the shoulder':1,'Point of view':1,'Brand graphic space':1};
   AD.LAYOUTS={'Meeting room':1,'Stage':1,'Across the table':1,'Brand graphic space':1};
-  AD.GROUNDS={'Light':1,'Dark':1};
+  AD.GROUNDS={'Light':1,'Dark':1,'Sampled':1};
   AD.ROLES={'Marketing':1,'Sales':1,'Business development':1,'Consultants & analysts':1,'Team leader':1,'C-suite':1};
   AD.SETTINGS={};ALL.forEach(function(k){AD.SETTINGS[k]=1});
   AD.V3=true;

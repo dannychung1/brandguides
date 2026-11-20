@@ -149,7 +149,7 @@
     ];
     FIELDS.forEach(function(fd){if(fd[4]!=='range')sel[fd[0]]=fd[2][0]});
     var FRAME={'Portrait':['Portrait','Soft light, plain wall','portrait'],'Close-up':['Close-up','Face and shoulders','face'],'Medium shot':['Medium','Waist up','person'],'Over the shoulder':['Over the shoulder','Their view, from behind','co_present'],'Point of view':['Point of view','Through their eyes','visibility'],'Lifestyle':['Lifestyle','Screen turned to camera','laptop_chromebook'],'Two-shot':['Two-shot','With a colleague','group'],'Screen close-up':['Close-up','Screen and hands','touch_app'],'Brand graphic space':['Brand graphic','Blank 3D render','deployed_code'],'Wide shot':['Wide','Whole person, room','panorama']};
-    var SHOW={ground:{Light:'Light, Gallery Grey',Dark:'Dark, Base Blue',Sampled:'Sampled from the slides'},copy:{None:'No',Yes:'Yes'},slides:{Attached:'I will attach them',Blank:'Leave blank, add later'},length:{Full:'ChatGPT',Short:'Figma'},facet:{Professional:'A professional',Product:'Our product',Presentation:'Slides'},shot:{Portrait:'Close-up',Working:'At work',Together:'With a colleague',Environmental:'Wide'},light:{'Hard sun':'Bright sun','Soft window':'Window light'},role:{'Consultants & analysts':'Consulting'},layout:{'Fanned deck':'Strip','Stacked deck':'Front stack','Single slide':'Floating single','Fanned':'Strip','Stacked':'Front stack','Floating':'Floating multiple','Flying':'Strip','Exploded':'Front stack'}};
+    var SHOW={ground:{Light:'Light, Gallery Grey',Dark:'Dark, Base Blue',Sampled:'From your slide'},copy:{None:'No',Yes:'Yes'},slides:{Attached:'I will attach them',Blank:'Leave blank, add later'},length:{Full:'ChatGPT',Short:'Figma'},facet:{Professional:'A professional',Product:'Our product',Presentation:'Slides'},shot:{Portrait:'Close-up',Working:'At work',Together:'With a colleague',Environmental:'Wide'},light:{'Hard sun':'Bright sun','Soft window':'Window light'},role:{'Consultants & analysts':'Consulting'},layout:{'Fanned deck':'Strip','Stacked deck':'Front stack','Single slide':'Floating single','Fanned':'Strip','Stacked':'Front stack','Floating':'Floating multiple','Flying':'Strip','Exploded':'Front stack'}};
     function lab(k,v){var t=(SHOW[k]&&SHOW[k][v])||v;return t.charAt(0).toUpperCase()+t.slice(1)}
     var form=bd.querySelector('.bd-form'),out=bd.querySelector('.bd-out pre'),note=bd.querySelector('.bd-note');
     var HERO=[['Professional','A pro'],['Product','Our product'],['Presentation','Our slides']];
@@ -230,63 +230,54 @@
       }
       form.appendChild(row);return row;
     });
+    /* ── slide color: drop, paste, browse or eyedrop a slide; we take a tint or shade of its active color ── */
     var sRow=el('div','gv-group bd-row bd-samp');sRow.appendChild(el('span','gv-glabel','Slide color'));
     var sBox=el('div','bd-samp-box'),sIn=document.createElement('input');sIn.type='file';sIn.accept='image/*';sIn.hidden=true;
-    var sAdd=el('button','gv-chip bd-samp-add','<span class="material-symbols-outlined" aria-hidden="true">add_photo_alternate</span><span>Add a slide</span>');sAdd.type='button';
-    var sFig=el('div','bd-samp-fig'),sCv=document.createElement('canvas');sCv.className='bd-samp-cv';sCv.setAttribute('aria-label','Your slide. Click any spot to sample its color.');sFig.hidden=true;sFig.appendChild(sCv);
-    var sOut=el('div','bd-samp-out'),sSw=el('span','bd-samp-sw'),sTx=el('span','bd-samp-tx');sOut.appendChild(sSw);sOut.appendChild(sTx);sOut.hidden=true;
-    var sHelp=el('p','bd-samp-help','We pick a background color that goes with your slide.');
-    var sTop=el('div','bd-samp-top');sTop.appendChild(sAdd);sTop.appendChild(sHelp);sBox.appendChild(sTop);sBox.appendChild(sIn);sBox.appendChild(sFig);sBox.appendChild(sOut);sRow.appendChild(sBox);
+    var sZone=el('button','bd-sz','<span class="material-symbols-outlined" aria-hidden="true">add_photo_alternate</span><span class="bd-sz-t">Drop, paste or browse a slide</span><span class="bd-sz-k">⌘V to paste</span>');sZone.type='button';
+    var sFig=el('div','bd-samp-fig'),sCv=document.createElement('canvas');sCv.className='bd-samp-cv';sCv.setAttribute('aria-label','Your slide. Click any spot to use its color.');sFig.hidden=true;sFig.appendChild(sCv);
+    var sX=el('button','bd-samp-x','<span class="material-symbols-outlined" aria-hidden="true">close</span>');sX.type='button';sX.setAttribute('aria-label','Remove this slide');sFig.appendChild(sX);
+    var sOut=el('div','bd-samp-out is-empty');
+    var sNat=document.createElement('input');sNat.type='color';sNat.className='bd-samp-nat';sNat.setAttribute('aria-label','Adjust the background color');
+    var sHx=el('span','bd-samp-hx','');
+    var sTone=el('div','gv-chips bd-samp-tone');['Light','Dark'].forEach(function(t){var b=el('button','gv-chip',t);b.type='button';b.dataset.v=t;b.addEventListener('click',function(){sToneUser=true;sel.sampleTone=t;tone()});sTone.appendChild(b)});
+    var sDrop=null;if(window.EyeDropper){sDrop=el('button','bd-samp-eye','<span class="material-symbols-outlined" aria-hidden="true">colorize</span><span class="bd-samp-eye-t">Pick from screen</span>');sDrop.type='button';sDrop.title='Pick a color from anywhere on your screen';sDrop.setAttribute('aria-label','Pick a color from anywhere on your screen');}
+    var sHint=el('p','bd-samp-help','Click the slide to use a different color.');sHint.hidden=true;
+    sOut.appendChild(sNat);sOut.appendChild(sHx);sOut.appendChild(sTone);if(sDrop)sOut.appendChild(sDrop);
+    sBox.appendChild(sZone);sBox.appendChild(sFig);sBox.appendChild(sIn);sBox.appendChild(sOut);sBox.appendChild(sHint);sRow.appendChild(sBox);
     var gRow=rows.filter(function(r){return r._fd[0]==='ground'})[0];form.insertBefore(sRow,gRow.nextSibling);
     function lin(c){c/=255;return c<=0.04045?c/12.92:Math.pow((c+0.055)/1.055,2.4)}
     function lum(r,g,b){return 0.2126*lin(r)+0.7152*lin(g)+0.0722*lin(b)}
-    var L_BB=lum(0,37,51),L_GG=lum(240,243,245);
-    function okC(L){return (L+0.05)/(L_BB+0.05)>=3&&(L_GG+0.05)/(L+0.05)>=3}
     function toHsl(r,g,b){r/=255;g/=255;b/=255;var mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2,h=0,s=0,d=mx-mn;if(d){s=d/(1-Math.abs(2*l-1));h=mx===r?((g-b)/d)%6:mx===g?(b-r)/d+2:(r-g)/d+4;h*=60;if(h<0)h+=360}return[h,s,l]}
-    function toRgb(h,s,l){var c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2,p=h<60?[c,x,0]:h<120?[x,c,0]:h<180?[0,c,x]:h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];return p.map(function(v){return Math.round((v+m)*255)})}
+    function toRgb(h,s,l){var c=(1-Math.abs(2*l-1))*s,x=c*(1-Math.abs((h/60)%2-1)),m=l-c/2,p=h<60?[c,x,0]:h<120?[x,c,0]:h<180?[0,c,x]:h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];return p.map(function(v){return Math.max(0,Math.min(255,Math.round((v+m)*255)))})}
     function hex(p){return '#'+p.map(function(v){return ('0'+v.toString(16)).slice(-2)}).join('').toUpperCase()}
-    function fitC(p){if(okC(lum(p[0],p[1],p[2])))return p;var q=toHsl(p[0],p[1],p[2]),best=null,bd=9;for(var i=0;i<=200;i++){var l=i/200,c=toRgb(q[0],q[1],l);if(okC(lum(c[0],c[1],c[2]))&&Math.abs(l-q[2])<bd){bd=Math.abs(l-q[2]);best=c}}return best||p}
     function cr(a,b){return (Math.max(a,b)+0.05)/(Math.min(a,b)+0.05)}
-    var sEdge=null,sMode='HSL',sCur=null;
-    function edgeColor(){var x=sCv.getContext('2d'),w=sCv.width,h=sCv.height,s=[0,0,0],n=0;[x.getImageData(0,0,w,3),x.getImageData(0,h-3,w,3),x.getImageData(0,0,3,h),x.getImageData(w-3,0,3,h)].forEach(function(im){for(var k=0;k<im.data.length;k+=4){s[0]+=im.data[k];s[1]+=im.data[k+1];s[2]+=im.data[k+2];n++}});return s.map(function(v){return Math.round(v/n)})}
-    function pickAnalog(p){var q=toHsl(p[0],p[1],p[2]),sat=Math.max(q[1],0.35),Le=sEdge?lum(sEdge[0],sEdge[1],sEdge[2]):lum(p[0],p[1],p[2]),best=null,MIN=1.2;
-      [30,-30].forEach(function(d){var hh=(q[0]+d+360)%360;[[0.8,-1],[0.2,1]].forEach(function(t){var c=null;for(var s=0;s<=10;s++){var l=t[0]+t[1]*s*0.01,x=toRgb(hh,sat,l),L=lum(x[0],x[1],x[2]);c=x;if(cr(L,L_BB)>=MIN&&cr(L,L_GG)>=MIN)break}var L2=lum(c[0],c[1],c[2]),ok=cr(L2,L_BB)>=MIN&&cr(L2,L_GG)>=MIN,sc=(ok?100:0)+cr(L2,Le);if(!best||sc>best.sc)best={c:c,sc:sc}})});
-      return best.c}
-    function setSample(p,how){sel.sampleBase=hex(p);sBaseRGB=p;sBaseHow=how;sHow=how;applyColor(pickAnalog(p),true)}
-    var sHow='',sBaseRGB=null,sBaseHow='';
-    function applyColor(c,fromPick){sel.sampleHand=!fromPick;sCur=c;var hx=hex(c),L=lum(c[0],c[1],c[2]);sel.sampleHex=hx;sSw.style.background=hx;
-      var e=sEdge?cr(L,lum(sEdge[0],sEdge[1],sEdge[2])):null,bb=cr(L,L_BB),gg=cr(L,L_GG);
-      sTx.innerHTML='<strong>'+hx+'</strong> Your background color. Click the swatch to change it.';sNat.value=hx.toLowerCase();sOut.hidden=false;render()}
-    var sEd=el('div','bd-pick'),sCk=el('div','bd-cks');sEd.hidden=true;
-    var sModes=el('div','gv-chips bd-pick-modes');['HSL','RGB'].forEach(function(m){var b=el('button','gv-chip'+(m===sMode?' is-on':''),m);b.type='button';b.setAttribute('aria-pressed',m===sMode);b.addEventListener('click',function(){sMode=m;[].forEach.call(sModes.children,function(x){var on=x===b;x.classList.toggle('is-on',on);x.setAttribute('aria-pressed',on)});syncEd()});sModes.appendChild(b)});
-    var sHex=document.createElement('input');sHex.type='text';sHex.className='bd-pick-hex';sHex.setAttribute('aria-label','Hex');sHex.maxLength=7;
-    var sCh=[0,1,2].map(function(k){var w=el('label','bd-pick-ch'),n=el('span','bd-pick-n',''),r=document.createElement('input'),v=document.createElement('input');r.type='range';v.type='number';r.className='bd-pick-r';v.className='bd-pick-v';w.appendChild(n);w.appendChild(r);w.appendChild(v);
-      function go(src){var val=+src.value;r.value=val;v.value=val;fromEd()}r.addEventListener('input',function(){go(r)});v.addEventListener('change',function(){go(v)});return {w:w,n:n,r:r,v:v}});
-    var sTop=el('div','bd-pick-top');sTop.appendChild(sModes);sTop.appendChild(sHex);sEd.appendChild(sTop);sCh.forEach(function(c){sEd.appendChild(c.w)});
-    function syncEd(){if(!sCur)return;sHex.value=hex(sCur);var q=toHsl(sCur[0],sCur[1],sCur[2]),vals=sMode==='HSL'?[Math.round(q[0]),Math.round(q[1]*100),Math.round(q[2]*100)]:sCur,lab=sMode==='HSL'?['H','S','L']:['R','G','B'],mx=sMode==='HSL'?[359,100,100]:[255,255,255];
-      sCh.forEach(function(c,k){c.n.textContent=lab[k];c.r.min=c.v.min=0;c.r.max=c.v.max=mx[k];c.r.value=c.v.value=vals[k];c.r.setAttribute('aria-label',lab[k]);c.v.setAttribute('aria-label',lab[k])})}
-    function fromEd(){var v=sCh.map(function(c){return Math.max(0,Math.min(+c.r.max,+c.v.value||0))}),c=sMode==='HSL'?toRgb(v[0]%360,v[1]/100,v[2]/100):v.map(Math.round);applyEdit(c)}
-    function applyEdit(c){sCur=c;var keep=sMode;applyColor(c,false);sMode=keep}
-    var sNat=document.createElement('input');sNat.type='color';sNat.className='bd-samp-nat';sNat.setAttribute('aria-label','Change the background color');sOut.insertBefore(sNat,sSw);sSw.hidden=true;sNat.addEventListener('input',function(){var n=parseInt(sNat.value.slice(1),16);applyColor([n>>16&255,n>>8&255,n&255],false)});
-    sHex.addEventListener('change',function(){var m=/^#?([0-9a-f]{6})$/i.exec(sHex.value.trim());if(!m){syncEd();return}var n=parseInt(m[1],16);applyEdit([n>>16&255,n>>8&255,n&255])});
-    function dominant(){var x=sCv.getContext('2d'),w=sCv.width,h=sCv.height,d=x.getImageData(0,0,w,h).data,B={},top=null;
-      for(var pass=0;pass<2&&!top;pass++){B={};for(var i=0;i<d.length;i+=4){var r=d[i],gg=d[i+1],b=d[i+2],q=toHsl(r,gg,b);if(!pass&&(q[1]<0.18||q[2]>0.93||q[2]<0.07))continue;var k=(r>>4)+'.'+(gg>>4)+'.'+(b>>4),o=B[k]||(B[k]={n:0,r:0,g:0,b:0});o.n++;o.r+=r;o.g+=gg;o.b+=b;if(!top||o.n>top.n)top=o}if(top&&!pass&&top.n<w*h*0.01)top=null}
-      return top?[Math.round(top.r/top.n),Math.round(top.g/top.n),Math.round(top.b/top.n)]:[128,128,128]}
-    function loadSlide(file){if(!file||!/^image\//.test(file.type))return;var img=new Image(),u=URL.createObjectURL(file);img.onload=function(){var w=Math.min(480,img.naturalWidth),h=Math.round(w*img.naturalHeight/img.naturalWidth);sCv.width=w;sCv.height=h;var cx=sCv.getContext('2d');cx.clearRect(0,0,w,h);cx.drawImage(img,0,0,w,h);URL.revokeObjectURL(u);sFig.hidden=false;sAdd.querySelector('span:last-child').textContent='Change slide';sEdge=edgeColor();setSample(dominant(),'main color of your slide')};img.src=u}
-    sAdd.addEventListener('click',function(){sIn.click()});
+    var sBase=null,sSlideL=null,sToneUser=false;
+    /* the active color: the most saturated color family on the slide (data, photo or headline), never its white, grey or black canvas */
+    function accent(){var x=sCv.getContext('2d'),w=sCv.width,h=sCv.height,d=x.getImageData(0,0,w,h).data,B=[],tot=0,Lsum=0,n=0;for(var k=0;k<24;k++)B.push({w:0,r:0,g:0,b:0});
+      for(var i=0;i<d.length;i+=16){var r=d[i],g=d[i+1],b=d[i+2],q=toHsl(r,g,b);Lsum+=lum(r,g,b);n++;if(q[1]<0.25||q[2]>0.9||q[2]<0.1)continue;var wt=q[1]*q[1]*(1-Math.abs(q[2]-0.5)),o=B[Math.floor(q[0]/15)%24];o.w+=wt;o.r+=r*wt;o.g+=g*wt;o.b+=b*wt;tot+=wt}
+      sSlideL=n?Lsum/n:0.5;var top=B.reduce(function(a,c){return c.w>a.w?c:a});
+      if(!top.w||top.w<tot*0.02&&tot<n*0.002){return null}
+      return [Math.round(top.r/top.w),Math.round(top.g/top.w),Math.round(top.b/top.w)]}
+    function toneOf(p,t){var q=toHsl(p[0],p[1],p[2]);if(q[1]<0.08)return toRgb(q[0],0,t==='Light'?0.86:0.14);return t==='Light'?toRgb(q[0],Math.min(0.95,Math.max(q[1],0.6)),0.74):toRgb(q[0],Math.min(0.75,Math.max(q[1],0.45)),0.18)}
+    function bestTone(p){var L=sSlideL==null||sFig.hidden?1:sSlideL;var a=toneOf(p,'Light'),b=toneOf(p,'Dark');return cr(lum(a[0],a[1],a[2]),L)>=cr(lum(b[0],b[1],b[2]),L)?'Light':'Dark'}
+    function tone(){if(!sBase)return;if(!sToneUser)sel.sampleTone=bestTone(sBase);var c=toneOf(sBase,sel.sampleTone);applyColor(c,true)}
+    function applyColor(c,auto){var hx=hex(c);sel.sampleHex=hx;sel.sampleBase=sBase?hex(sBase):hx;sel.sampleHand=!auto;sNat.value=hx.toLowerCase();sHx.textContent=hx;sOut.classList.remove('is-empty');
+      [].forEach.call(sTone.children,function(b){var on=b.dataset.v===sel.sampleTone;b.classList.toggle('is-on',on&&auto);b.setAttribute('aria-pressed',on&&auto)});render()}
+    function setBase(p){sBase=p;tone()}
+    function loadSlide(file){if(!file||!/^image\//.test(file.type))return;var img=new Image(),u=URL.createObjectURL(file);img.onload=function(){var w=Math.min(640,img.naturalWidth),h=Math.round(w*img.naturalHeight/img.naturalWidth);sCv.width=w;sCv.height=h;var cx=sCv.getContext('2d');cx.clearRect(0,0,w,h);cx.drawImage(img,0,0,w,h);URL.revokeObjectURL(u);sZone.hidden=true;sFig.hidden=false;sHint.hidden=false;sToneUser=false;var a=accent();setBase(a||[128,128,128])};img.src=u}
+    sZone.addEventListener('click',function(){sIn.click()});
     sIn.addEventListener('change',function(){loadSlide(sIn.files[0]);sIn.value=''});
-    sBox.addEventListener('dragover',function(e){e.preventDefault();sBox.classList.add('is-drag')});
-    sBox.addEventListener('dragleave',function(){sBox.classList.remove('is-drag')});
-    sBox.addEventListener('drop',function(e){e.preventDefault();sBox.classList.remove('is-drag');loadSlide(e.dataTransfer.files[0])});
+    [sZone,sFig].forEach(function(z){z.addEventListener('dragover',function(e){e.preventDefault();sBox.classList.add('is-drag')});z.addEventListener('dragleave',function(){sBox.classList.remove('is-drag')});z.addEventListener('drop',function(e){e.preventDefault();sBox.classList.remove('is-drag');loadSlide(e.dataTransfer.files[0])})});
     document.addEventListener('paste',function(e){if(sRow.hidden)return;var it=[].slice.call((e.clipboardData||{}).items||[]).filter(function(i){return i.type.indexOf('image')===0})[0];if(it){e.preventDefault();loadSlide(it.getAsFile())}});
-    var sX=el('button','bd-samp-x','<span class="material-symbols-outlined" aria-hidden="true">close</span>');sX.type='button';sX.setAttribute('aria-label','Remove this slide');sFig.appendChild(sX);
-    sX.addEventListener('click',function(){sFig.hidden=true;sOut.hidden=true;sEdge=null;sBaseRGB=null;sCur=null;delete sel.sampleHex;delete sel.sampleBase;sel.sampleHand=false;sAdd.querySelector('span:last-child').textContent='Add a slide';render();sAdd.focus()});
-    window.__bdResetSample=function(){if(sBaseRGB){sEdge=edgeColor();setSample(sBaseRGB,sBaseHow)}};
-    sCv.addEventListener('click',function(e){var r=sCv.getBoundingClientRect(),px=Math.floor((e.clientX-r.left)*sCv.width/r.width),py=Math.floor((e.clientY-r.top)*sCv.height/r.height),x=sCv.getContext('2d'),d=x.getImageData(Math.max(0,px-2),Math.max(0,py-2),5,5).data,s=[0,0,0],n=0;for(var i=0;i<d.length;i+=4){s[0]+=d[i];s[1]+=d[i+1];s[2]+=d[i+2];n++}setSample(s.map(function(v){return Math.round(v/n)}),'color you picked')});
+    sX.addEventListener('click',function(){sFig.hidden=true;sZone.hidden=false;sOut.classList.add('is-empty');sHint.hidden=true;sBase=null;sSlideL=null;delete sel.sampleHex;delete sel.sampleBase;sel.sampleHand=false;render();sZone.focus()});
+    sNat.addEventListener('input',function(){var n=parseInt(sNat.value.slice(1),16);applyColor([n>>16&255,n>>8&255,n&255],false)});
+    if(sDrop)sDrop.addEventListener('click',function(){new window.EyeDropper().open().then(function(r){var n=parseInt(r.sRGBHex.slice(1),16);setBase([n>>16&255,n>>8&255,n&255])}).catch(function(){})});
+    window.__bdResetSample=function(){if(!sFig.hidden){sToneUser=false;setBase(accent()||[128,128,128])}};
+    sCv.addEventListener('click',function(e){var r=sCv.getBoundingClientRect(),px=Math.floor((e.clientX-r.left)*sCv.width/r.width),py=Math.floor((e.clientY-r.top)*sCv.height/r.height),x=sCv.getContext('2d'),d=x.getImageData(Math.max(0,px-2),Math.max(0,py-2),5,5).data,s=[0,0,0],n=0;for(var i=0;i<d.length;i+=4){s[0]+=d[i];s[1]+=d[i+1];s[2]+=d[i+2];n++}setBase(s.map(function(v){return Math.round(v/n)}))});
     function render(){
       rows.forEach(function(r){r.hidden=!(r._show==='all'||r._show.split(' ').indexOf(sel.facet)>-1)});var flOn=sel.facet==='Professional'&&sel.float!=='No',NOFL={};if(NOFL[sel.shot])sel.shot='Medium shot';rows.forEach(function(r){if(r._fd[0]==='panels'){r.hidden=!flOn;r._range.value=sel.panels;r._rout.textContent=sel.panels;r._rout.textContent=sel.panels+(sel.float==='UI'?(sel.panels>1?' panels':' panel'):(sel.panels>1?' slides':' slide'))}});if(flOn&&sel.copy!=='None')sel.copy='None';rows.forEach(function(r){if(r._fd[0]!=='copy')return;if(flOn&&sel.facet==='Professional')r.hidden=true;r._chips.querySelectorAll('.gv-chip').forEach(function(c){var on=c.dataset.v===sel.copy;c.classList.toggle('is-on',on);c.setAttribute('aria-pressed',on)})});rows.forEach(function(r){if(r._fd[0]!=='shot')return;r._chips.querySelectorAll('.gv-chip').forEach(function(c){c.style.display=NOFL[c.dataset.v]?'none':'';var on=c.dataset.v===sel.shot;c.classList.toggle('is-on',on);c.setAttribute('aria-pressed',on)})});
       if(sel.style==='Detail'&&sel.float!=='No')sel.float='No';rows.forEach(function(r){var k=r._fd[0];if(k==='ground')r.hidden=!((sel.facet==='Product'&&sel.pshot==='Brand graphic space')||(sel.facet==='Presentation'&&sel.layout==='Brand graphic space'));if(k==='light'&&sel.facet==='Product'&&sel.pshot==='Brand graphic space')r.hidden=true;if(sel.facet==='Professional'&&sel.style==='Detail'&&(k==='float'||k==='panels'||k==='prop'))r.hidden=true;if(k==='float'&&r._chips)r._chips.querySelectorAll('.gv-chip').forEach(function(c){var on=c.dataset.v===sel.float;c.classList.toggle('is-on',on);c.setAttribute('aria-pressed',on)})});
-      if(typeof sRow!=='undefined')sRow.hidden=!(sel.facet==='Presentation'&&sel.ground==='Sampled');
+      if(typeof sRow!=='undefined')sRow.hidden=!(sel.ground==='Sampled'&&((sel.facet==='Presentation'&&sel.layout==='Brand graphic space')||(sel.facet==='Product'&&sel.pshot==='Brand graphic space')));
       var t=AD.build(sel.facet,sel,sel.length==='Short'?'Short':'GPT Image');
       var one=false;if(one){var PL='Slides: use the attached images, our real slides, as the slide faces, 1 per face, in the order attached, with the first on the front face. Use only as many faces as there are slides. Apply each slide with only a perspective transform, pinned to its face\u2019s 4 corners and kept exactly 16:9. Never redraw, stretch, squeeze or crop a slide, and keep every word, number, chart and photo identical.';var t0=t;t=t.replace(/Every slide face is plain white and evenly lit, ready for real slides to be placed in post\.?/,PL);if(t===t0)t=t+'\n'+PL;t=t.replace(/,? ?blank white slide faces?/gi,' slide faces').replace(/Never include: writing, words, letters, numbers or logos anywhere in the frame\.?/,'Never add writing, words, letters, numbers or logos anywhere outside the attached slides.')}
       paintVars(t);setEdited(false);showCount(t);

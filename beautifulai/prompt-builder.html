@@ -117,6 +117,30 @@ html body .pb-main .bd-go.swap-l{animation:goL .45s var(--ease-standard)}
 @keyframes goR{0%{padding-left:0;padding-right:72px;color:transparent}100%{padding-left:18px;padding-right:18px}}
 @keyframes goL{0%{padding-left:72px;padding-right:0;color:transparent}100%{padding-left:18px;padding-right:18px}}
 @media (prefers-reduced-motion:reduce){html body .pb-main .bd-dest::before,html body .pb-main .bd-bar-acts .bd-btn{transition:none}html body .pb-main .bd-go.swap-r,html body .pb-main .bd-go.swap-l{animation:none}}
+.bd .bd-samp-box{padding:0!important;border:0!important;background:none!important;gap:var(--space-3,12px)!important;width:100%;max-width:400px}
+.bd .bd-sz{aspect-ratio:16/9;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:16px;border:1px dashed var(--opacity-white-30,rgba(255,255,255,.3));border-radius:var(--radius-m,8px);background:var(--opacity-white-5,rgba(255,255,255,.05));color:var(--color-white);font:inherit;cursor:pointer;transition:border-color .2s var(--ease-standard),background .2s var(--ease-standard)}
+.bd .bd-sz:hover,.bd .bd-samp-box.is-drag .bd-sz{border-color:var(--color-blue);background:var(--opacity-white-10,rgba(255,255,255,.1))}
+.bd .bd-sz:focus-visible{outline:2px solid var(--color-blue-light);outline-offset:2px}
+.bd .bd-sz .material-symbols-outlined{font-size:28px;color:var(--color-blue)}
+.bd .bd-sz-t{font-size:var(--text-body-small-size,14px);font-weight:600}
+.bd .bd-sz-k{font-size:12px;color:var(--color-neutral-lighter)}
+.bd .bd-sz[hidden]{display:none}
+.bd .bd-samp-fig{aspect-ratio:16/9;width:100%;border-radius:var(--radius-m,8px);overflow:hidden;background:var(--opacity-white-5,rgba(255,255,255,.05))}
+.bd .bd-samp-box.is-drag .bd-samp-fig{outline:2px solid var(--color-blue);outline-offset:2px}
+.bd .bd-samp-cv{width:100%!important;height:100%!important;max-height:none!important;object-fit:contain;cursor:crosshair}
+.bd .bd-samp-out{display:flex;flex-wrap:nowrap;align-items:center;gap:var(--space-3,12px)}
+.bd .bd-samp-hx{font-family:var(--font-mono,ui-monospace,monospace);font-size:var(--text-body-small-size,14px);min-width:7ch}
+.bd .bd-samp-tone{display:flex;gap:6px;margin-left:auto}
+.bd .bd-samp-eye{flex:none;display:grid;place-items:center;width:40px;height:40px;padding:0;border:1px solid var(--opacity-white-30,rgba(255,255,255,.3));border-radius:var(--radius-s,6px);background:none;color:var(--color-white);cursor:pointer}
+.bd .bd-samp-eye:hover{border-color:var(--color-blue)}
+.bd .bd-samp-eye:focus-visible{outline:2px solid var(--color-blue-light);outline-offset:2px}
+.bd .bd-samp-eye .material-symbols-outlined{font-size:20px}
+.bd .bd-samp-help[hidden]{display:none}
+.bd .bd-samp-out.is-empty>:not(.bd-samp-eye){display:none}
+.bd .bd-samp-out.is-empty:not(:has(.bd-samp-eye)){display:none}
+.bd .bd-samp-eye-t{display:none}
+.bd .bd-samp-out.is-empty .bd-samp-eye{width:auto;height:36px;padding:0 12px;gap:8px;display:inline-flex;align-items:center;font:inherit;font-size:var(--text-body-small-size,14px)}
+.bd .bd-samp-out.is-empty .bd-samp-eye-t{display:inline}
 </style>
 </head>
 <body class="subpage pb-app">
@@ -156,8 +180,8 @@ Keep every word, number, chart and photo identical.</pre></div></div></div></div
 </main>
 
 <script src="ad-data.js?v=269"></script>
-<script src="ad-v3.js?v=21"></script>
-<script src="ad-gallery.js?v=236"></script>
+<script src="ad-v3.js?v=22"></script>
+<script src="ad-gallery.js?v=237"></script>
 <script src="copy-block.js?v=131"></script>
 <script src="site-reveal.js?v=1"></script>
 <script>
